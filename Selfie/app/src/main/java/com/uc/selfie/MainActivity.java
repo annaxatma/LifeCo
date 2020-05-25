@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
             else{
                 image.setImageURI(data.getData());
             }
+            image_uri=null;
 
         }
     }
