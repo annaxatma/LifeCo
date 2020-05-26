@@ -28,7 +28,7 @@
             />
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/email"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -36,7 +36,7 @@
             app:met_floatingLabel="normal"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/password"
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -45,7 +45,7 @@
             android:inputType="textEmailAddress"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/username"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"

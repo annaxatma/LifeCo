@@ -7,6 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -66,6 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register(final String username, String email, String password){
+        Log.d("coba", email);
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -79,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                     HashMap<String, String> hashMap = new HashMap<>();
                     hashMap.put("id", userid);
                     hashMap.put("username", username);
-                    hashMap.put("imageURL", "default");
+                    hashMap.put("imageURl", "default");
 
                     reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
