@@ -12,4 +12,12 @@
     <string name="menu_darurat">Darurat</string>
     <string name="menu_sejarah">Sejarah</string>
     <string name="menu_akun">Akun</string>
+    <string name="quote">Kekayaan manusia yang terbesar adalah sehat walafiat</string>
+    <string name="login_toolbar">Login</string>
+    <string name="user_email">Email</string>
+    <string name="user_password">Password</string>
+    <string name="btnLogin">Login</string>
+    <string name="msg_no_akun">Tidak mempunyai akun?</string>
+    <string name="daftar_akun">Daftar Sekarang</string>
+    <string name="regis_toolbar">Daftar Akun</string>
 </resources>
