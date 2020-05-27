@@ -7,17 +7,22 @@
     tools:context=".RegistrationActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:id="@+id/scrollViewRegis"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/regisToolbar"
-                android:layout_width="409dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="?attr/colorPrimary"
                 android:minHeight="?attr/actionBarSize"
@@ -27,6 +32,376 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:title="@string/regis_toolbar"
                 app:titleTextColor="#FFFFFF" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="@drawable/ic_camera_alt_black_24dp"
+                app:backgroundTint="#D3D3D3"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintEnd_toEndOf="@+id/imageView2"
+                app:layout_constraintHorizontal_bias="0.91"
+                app:layout_constraintStart_toEndOf="@+id/imageView2" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNameRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView2">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNamaRegis" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpEmailRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpNameRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpNameRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpNameRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpEmailRegis" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpPasswordRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpEmailRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpEmailRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpEmailRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpPasswordRegis" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/textJenisKelamin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/textGender"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpPasswordRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpPasswordRegis" />
+
+            <TextView
+                android:id="@+id/textGolDarah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/textGolDarah"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textJenisKelamin"
+                app:layout_constraintTop_toBottomOf="@+id/textJenisKelamin" />
+
+            <Spinner
+                android:id="@+id/spinnerJenisKelamin"
+                android:layout_width="200dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textJenisKelamin"
+                app:layout_constraintEnd_toEndOf="@+id/inpPasswordRegis"
+                app:layout_constraintTop_toTopOf="@+id/textJenisKelamin" />
+
+            <Spinner
+                android:id="@+id/spinnerGolDarah"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:popupBackground="@drawable/primary_button"
+                app:layout_constraintBottom_toBottomOf="@+id/textGolDarah"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerJenisKelamin"
+                app:layout_constraintTop_toTopOf="@+id/textGolDarah" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpAlamatRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerGolDarah"
+                app:layout_constraintStart_toStartOf="@+id/textGolDarah"
+                app:layout_constraintTop_toBottomOf="@+id/textGolDarah">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpAlamatRegis" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNoHP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpAlamatRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpAlamatRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpAlamatRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNoHPRegis" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="date"
+                app:layout_constraintBottom_toBottomOf="@+id/textTglLahir"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoHP"
+                app:layout_constraintTop_toTopOf="@+id/textTglLahir" />
+
+            <TextView
+                android:id="@+id/textTglLahir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/textTglLahirRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpNoHP"
+                app:layout_constraintTop_toBottomOf="@+id/inpNoHP" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNoBPJSRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/editText"
+                app:layout_constraintStart_toStartOf="@+id/textTglLahir"
+                app:layout_constraintTop_toBottomOf="@+id/editText">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNoBPJSRegis" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNoKTPRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoBPJSRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpNoBPJSRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpNoBPJSRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNoKTPRegis" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="152dp"
+                android:layout_height="142dp"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/ic_account_circle_orange_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/regisToolbar" />
+
+            <EditText
+                android:id="@+id/inpPenyakitSendiriRegis"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoKTPRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpNoKTPRegis"
+                app:layout_constraintTop_toBottomOf="@+id/textPenyakitSendiriRegis" />
+
+            <TextView
+                android:id="@+id/textPenyakitSendiriRegis"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                android:text="@string/inpPenyakitSendiriRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpNoKTPRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpNoKTPRegis" />
+
+            <TextView
+                android:id="@+id/textPenyakitKeluargaRegis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpPenyakitKeluargaRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpPenyakitSendiriRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpPenyakitSendiriRegis" />
+
+            <EditText
+                android:id="@+id/inpPenyakitKeluargaRegis"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoKTPRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpNoKTPRegis"
+                app:layout_constraintTop_toBottomOf="@+id/textPenyakitKeluargaRegis" />
+
+            <TextView
+                android:id="@+id/textKeluhanUtamaRegis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpKeluhanUtamaRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpPenyakitKeluargaRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpPenyakitKeluargaRegis" />
+
+            <EditText
+                android:id="@+id/inpKeluhanUtamaRegis"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpPenyakitKeluargaRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpPenyakitSendiriRegis"
+                app:layout_constraintTop_toBottomOf="@+id/textKeluhanUtamaRegis" />
+
+
+            <TextView
+                android:id="@+id/textObatRegis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpObatRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpKeluhanUtamaRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpKeluhanUtamaRegis" />
+
+
+            <EditText
+                android:id="@+id/inpObatRegis"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpKeluhanUtamaRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpKeluhanUtamaRegis"
+                app:layout_constraintTop_toBottomOf="@id/textObatRegis" />
+
+            <TextView
+                android:id="@+id/textAlergiObatRegis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpAlergiObatRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textPenyakitKeluargaRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpObatRegis" />
+
+            <EditText
+                android:id="@+id/inpAlergiObatRegis"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpObatRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpKeluhanUtamaRegis"
+                app:layout_constraintTop_toBottomOf="@id/textAlergiObatRegis" />
+
+            <TextView
+                android:id="@+id/textAlergiMakananRegis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpAlergiMakananRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/inpAlergiObatRegis"
+                app:layout_constraintTop_toBottomOf="@id/inpAlergiObatRegis" />
+
+            <EditText
+                android:id="@+id/inpAlergiMakananRegis"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpAlergiObatRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpAlergiObatRegis"
+                app:layout_constraintTop_toBottomOf="@id/textAlergiMakananRegis" />
+
+            <Button
+                android:id="@+id/btnDaftarAkun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/primary_button"
+                android:text="@string/dftrAkunRegis"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/inpAlergiMakananRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpAlergiMakananRegis"
+                app:layout_constraintTop_toBottomOf="@id/inpGulaDarah" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpTekananDarahRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpAlergiMakananRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpAlergiObatRegis"
+                app:layout_constraintTop_toBottomOf="@id/inpAlergiMakananRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpTekananDarahRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpGulaDarah"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@id/inpTekananDarahRegis"
+                app:layout_constraintStart_toStartOf="@id/inpTekananDarahRegis"
+                app:layout_constraintTop_toBottomOf="@id/inpTekananDarahRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpGulaDarahRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

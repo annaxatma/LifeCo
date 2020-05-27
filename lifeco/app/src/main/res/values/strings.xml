@@ -20,4 +20,25 @@
     <string name="msg_no_akun">Tidak mempunyai akun?</string>
     <string name="daftar_akun">Daftar Sekarang</string>
     <string name="regis_toolbar">Daftar Akun</string>
+    <string name="inpNamaRegis">Nama</string>
+    <string name="inpEmailRegis">Email</string>
+    <string name="inpPasswordRegis">Password</string>
+    <string name="radiobutton_lakilaki">Laki-laki</string>
+    <string name="radiobutton_perempuan">Perempuan</string>
+    <string name="textGender">Jenis Kelamin</string>
+    <string name="textGolDarah">Golongan Darah</string>
+    <string name="inpAlamatRegis">Alamat</string>
+    <string name="inpNoHPRegis">No. HP</string>
+    <string name="textTglLahirRegis">Tanggal Lahir</string>
+    <string name="inpNoBPJSRegis">No. BPJS</string>
+    <string name="inpNoKTPRegis">No. KTP</string>
+    <string name="dftrAkunRegis">Daftar Akun</string>
+    <string name="inpPenyakitSendiriRegis">Riwayat Penyakit Sendiri</string>
+    <string name="inpPenyakitKeluargaRegis">Riwayat Penyakit Keluarga</string>
+    <string name="inpKeluhanUtamaRegis">Keluhan Utama</string>
+    <string name="inpObatRegis">Obat-obatan yang telah dikonsumsi</string>
+    <string name="inpAlergiObatRegis">Alergi obat-obatan</string>
+    <string name="inpAlergiMakananRegis">Alergi Makanan</string>
+    <string name="inpTekananDarahRegis">Tekanan Darah</string>
+    <string name="inpGulaDarahRegis">Gula Darah</string>
 </resources>
