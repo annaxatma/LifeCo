@@ -8,6 +8,7 @@
     tools:context=".MainActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints">
@@ -18,23 +19,21 @@
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-            app:popupTheme="@style/MenuStyle"
-            >
+            app:popupTheme="@style/MenuStyle">
 
             <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
                 android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:id="@+id/profile_image" />
+                android:layout_height="30dp" />
 
             <TextView
+                android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/uername"
+                android:layout_marginStart="25dp"
                 android:layout_marginLeft="25dp"
                 android:textColor="#fff"
-                android:textStyle="bold"
-                android:layout_marginStart="25dp"
-                />
+                android:textStyle="bold" />
 
 
         </androidx.appcompat.widget.Toolbar>

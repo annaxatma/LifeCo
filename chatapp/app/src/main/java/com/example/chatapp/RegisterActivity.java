@@ -67,7 +67,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register(final String username, String email, String password){
-        Log.d("coba", email);
+
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -81,7 +81,7 @@ public class RegisterActivity extends AppCompatActivity {
                     HashMap<String, String> hashMap = new HashMap<>();
                     hashMap.put("id", userid);
                     hashMap.put("username", username);
-                    hashMap.put("imageURl", "default");
+                    hashMap.put("imageURL", "default");
 
                     reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

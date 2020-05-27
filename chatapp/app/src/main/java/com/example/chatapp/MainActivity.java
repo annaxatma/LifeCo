@@ -11,7 +11,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.chatapp.Model.User;
+import com.example.chatapp.Model.Users;
+import com.google.android.material.appbar.AppBarLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -27,15 +28,20 @@ public class MainActivity extends AppCompatActivity {
     CircleImageView profile_image;
     TextView username;
 
+    AppBarLayout appBarLayout;
+
     FirebaseUser firebaseUser;
     DatabaseReference reference;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        appBarLayout = findViewById(R.id.appbarlayout);
+
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
 
@@ -48,12 +54,12 @@ public class MainActivity extends AppCompatActivity {
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                username.setText(user.getUsername());
-                if (user.getImageURL().equals("default")){
+                Users users = dataSnapshot.getValue(Users.class);
+                username.setText(users.getUsername());
+                if (users.getImageURL().equalsIgnoreCase("default")) {
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{
-                    Glide.with(MainActivity.this).load(user.getImageURL()).into(profile_image);
+                    Glide.with(MainActivity.this).load(users.getImageURL()).into(profile_image);
                 }
             }
 
