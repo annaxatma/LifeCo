@@ -41,4 +41,20 @@
     <string name="inpAlergiMakananRegis">Alergi Makanan</string>
     <string name="inpTekananDarahRegis">Tekanan Darah</string>
     <string name="inpGulaDarahRegis">Gula Darah</string>
+    <string name="inpNoAsuransiRegis">No. Asuransi</string>
+    <string name="inpTanggalFormatRegis">yyyy/mm/dd</string>
+
+
+    <string-array name="inpJenisKelaminGroup">
+        <item>Perempuan</item>
+        <item>Laki-laki</item>
+    </string-array>
+
+    <string-array name="inpGolDarahGroup">
+        <item>A</item>
+        <item>B</item>
+        <item>AB</item>
+        <item>O</item>
+    </string-array>
+
 </resources>
