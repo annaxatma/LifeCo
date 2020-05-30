@@ -25,6 +25,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import cz.msebera.android.httpclient.Header;
 
@@ -35,7 +36,7 @@ public class RegistrationActivity extends AppCompatActivity {
     TextInputLayout inpNama, inpEmail, inpPassword, inpAlamat, inpNoHP, inpNoBPJS, inpNoKTP, inpTekananDarah, inpGulaDarah, inpNoAsuransi;
     EditText inpPenyakitSendiri, inpPenyakitKeluarga, inpKeluhanUtama, inpObat, inpAlergiObat, inpAlergiMakanan, inpTanggalLahir;
 
-    String userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userGolDarah, userJenisKelamin, userNoAsuransi;
+    String userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userGolDarah, userJenisKelamin, userNoAsuransi, userId;
 
 
     @Override
@@ -72,7 +73,6 @@ public class RegistrationActivity extends AppCompatActivity {
         inpAlergiObat = findViewById(R.id.inpAlergiObatRegis);
         inpAlergiMakanan = findViewById(R.id.inpAlergiMakananRegis);
         inpNoAsuransi = findViewById(R.id.inpNoAsuransiRegis);
-
         btnDaftarAkun = findViewById(R.id.btnDaftarAkun);
         btnDaftarAkun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,17 +96,40 @@ public class RegistrationActivity extends AppCompatActivity {
                 userAlergiMakanan = inpAlergiMakanan.getText().toString().trim();
                 userTanggalLahir = inpTanggalLahir.getText().toString().trim();
                 userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
-                String activityType = "DaftarAkun";
 
-                BackgroundWorker backgroundWorker = new BackgroundWorker(v.getContext());
-                backgroundWorker.execute(activityType,userNama,userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi);
+                if(userNama.equals("") && userEmail.equals("") && userPassword.equals("") && userAlamat.equals("") && userNoHP.equals("") && userNoBPJS.equals("") && userNoKTP.equals("") && userTekananDarah.equals("") && userGulaDarah.equals("") && userGolDarah.equals("") && userJenisKelamin.equals("") && userPenyakitSendiri.equals("") && userPenyakitKeluarga.equals("") && userKeluhanUtama.equals("") && userObat.equals("") && userAlergiObat.equals("") && userAlergiMakanan.equals("")  && userTanggalLahir.equals("") && userNoAsuransi.equals("")){
+                    btnDaftarAkun.setEnabled(false);
+                } else {
+                    btnDaftarAkun.setEnabled(true);
+                    String activityType = "DaftarAkun";
 
-                Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
-                startActivity(intent);
+                    userId = generateUserID();
+                    Log.d("UserID", userId);
+
+                    BackgroundWorker backgroundWorker = new BackgroundWorker(v.getContext());
+                    backgroundWorker.execute(activityType,userNama,userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi, userId);
+
+                    Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
     }
+
+
+    private static final String ALLOWED_CHARACTERS ="0123456789qwertyuiopasdfghjklzxcvbnm";
+
+    private static String generateUserID()
+    {
+        final Random random=new Random();
+        final StringBuilder sb=new StringBuilder(15);
+        for(int i=0;i<15;++i)
+            sb.append(ALLOWED_CHARACTERS.charAt(random.nextInt(ALLOWED_CHARACTERS.length())));
+        return sb.toString();
+    }
+
 
 
 

@@ -38,7 +38,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
 
         if(activity_type.equals("DaftarAkun")){
             try {
-                String userId = "1";
+
                 String userNama = params[1];
                 String userEmail = params[2];
                 String userPassword = params[3];
@@ -58,6 +58,7 @@ public class BackgroundWorker extends AsyncTask<String, Void, String> {
                 String userAlergiMakanan = params[17];
                 String userTanggalLahir = params[18];
                 String userNoAsuransi = params[19];
+                String userId = params[20];
 
                 URL url = new URL(insertUserInfo_url);
                 HttpURLConnection httpURLConnection = (HttpURLConnection)url.openConnection();
