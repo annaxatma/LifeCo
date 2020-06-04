@@ -6,14 +6,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.LifeCo.fragments.AccountFragment;
 import com.example.LifeCo.fragments.HistoryFragment;
 import com.example.LifeCo.fragments.HomeFragment;
 import com.example.lifeco.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -76,5 +79,13 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView.setSelectedItemId(R.id.menu_home); /*mulai dimana saat run aplikasi */
 //        Fragment fragment = new HomeFragment();
 //        loadFragment(fragment);
+    }
+
+    public void logout(View view) {
+        FirebaseAuth.getInstance().signOut();
+        Intent intent = new Intent(MainActivity.this, SplashScreenActivity.class);
+        startActivity(intent);
+        finish();
+
     }
 }

@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
         <activity android:name="com.example.LifeCo.activities.RegistrationActivity"></activity>
         <activity android:name="com.example.LifeCo.activities.LoginActivity" />
-        <activity android:name=".activities.DetailActivity" />
+        <activity android:name="com.example.LifeCo.activities.DetailActivity" />
         <activity android:name="com.example.LifeCo.activities.MainActivity" />
         <activity android:name="com.example.LifeCo.activities.SplashScreenActivity">
             <intent-filter>

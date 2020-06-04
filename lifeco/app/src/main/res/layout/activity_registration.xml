@@ -7,7 +7,6 @@
     tools:context=".RegistrationActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollViewRegis"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fillViewport="true"
@@ -34,7 +33,6 @@
                 app:titleTextColor="#FFFFFF" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
