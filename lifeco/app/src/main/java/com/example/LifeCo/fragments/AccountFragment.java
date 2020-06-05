@@ -6,6 +6,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.util.EventLog;
 import android.view.LayoutInflater;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.lifeco.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -28,6 +31,7 @@ public class AccountFragment extends Fragment {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userId;
+    FloatingActionButton btnEditAkun;
 
 
     @Override
@@ -87,6 +91,19 @@ public class AccountFragment extends Fragment {
                 alergimakanan.setText(documentSnapshot.getString("alergiMakanan"));
                 tekanandarah.setText(documentSnapshot.getString("tekananDarah"));
                 guladarah.setText(documentSnapshot.getString("gulaDarah"));
+            }
+        });
+
+        btnEditAkun = view.findViewById(R.id.btnEditProfile);
+        btnEditAkun.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new EditAkunFragment();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.frame_main, fragment);
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
     }
