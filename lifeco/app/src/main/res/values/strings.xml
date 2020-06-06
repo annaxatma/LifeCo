@@ -16,7 +16,7 @@
     <string name="msg_no_akun">Tidak mempunyai akun?</string>
     <string name="daftar_akun">Daftar Sekarang</string>
     <string name="regis_toolbar">Daftar Akun</string>
-    <string name="inpNamaRegis">Nama</string>
+    <string name="inpNamaRegis">Nama Lengkap</string>
     <string name="inpEmailRegis">Email</string>
     <string name="inpPasswordRegis">Password</string>
     <string name="textGender">Jenis Kelamin</string>
@@ -41,6 +41,8 @@
     <string name="txtInformasiPersonal">Informasi Personal</string>
     <string name="toolbarProfilAkun">Profil Akun</string>
     <string name="btnUpdateAkun">Update Akun</string>
+    <string name="btnChat">Chat</string>
+    <string name="inpUsernameRegis">Username</string>
 
 
     <string-array name="inpJenisKelaminGroup">

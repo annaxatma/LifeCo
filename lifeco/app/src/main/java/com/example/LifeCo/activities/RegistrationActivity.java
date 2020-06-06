@@ -43,6 +43,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     String userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userGolDarah, userJenisKelamin, userNoAsuransi, userId;
     String userID;
+    String status, search, imageURL;
     FirebaseAuth fAuth;
     DatabaseReference reference;
     FirebaseFirestore fStore;
@@ -300,6 +301,9 @@ public class RegistrationActivity extends AppCompatActivity {
                     user.put("alergiMakanan", alergiMakanan);
                     user.put("tanggalLahir", tanggalLahir);
                     user.put("noAsuransi", noAsuransi);
+                    user.put("imageURL", imageURL);
+                    user.put("status", status);
+                    user.put("search", search);
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

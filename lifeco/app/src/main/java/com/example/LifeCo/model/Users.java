@@ -1,7 +1,9 @@
 package com.example.LifeCo.model;
 
 public class Users {
+    private String Id;
     private String nama;
+    private String username;
     private String email;
     private String password;
     private String alamat;
@@ -20,8 +22,46 @@ public class Users {
     private String alergiMakanan;
     private String tanggalLahir;
     private String noAsuransi;
+    private String imageURL;
+    private String status;
+    private String search;
 
     public Users() {
+    }
+
+    public Users(String id, String nama, String username, String email, String password, String alamat, String noHP, String noBPJS, String noKTP, String tekananDarah, String gulaDarah, String golDarah, String jenisKelamin, String penyakitSendiri, String penyakitKeluarga, String keluhanUtama, String obat, String alergiObat, String alergiMakanan, String tanggalLahir, String noAsuransi, String imageURL, String status, String search) {
+        Id = id;
+        this.nama = nama;
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.alamat = alamat;
+        this.noHP = noHP;
+        this.noBPJS = noBPJS;
+        this.noKTP = noKTP;
+        this.tekananDarah = tekananDarah;
+        this.gulaDarah = gulaDarah;
+        this.golDarah = golDarah;
+        this.jenisKelamin = jenisKelamin;
+        this.penyakitSendiri = penyakitSendiri;
+        this.penyakitKeluarga = penyakitKeluarga;
+        this.keluhanUtama = keluhanUtama;
+        this.obat = obat;
+        this.alergiObat = alergiObat;
+        this.alergiMakanan = alergiMakanan;
+        this.tanggalLahir = tanggalLahir;
+        this.noAsuransi = noAsuransi;
+        this.imageURL = imageURL;
+        this.status = status;
+        this.search = search;
+    }
+
+    public String getId() {
+        return Id;
+    }
+
+    public void setId(String id) {
+        Id = id;
     }
 
     public String getNama() {
@@ -30,6 +70,14 @@ public class Users {
 
     public void setNama(String nama) {
         this.nama = nama;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String id) {
+        this.username = username;
     }
 
     public String getEmail() {
@@ -174,5 +222,29 @@ public class Users {
 
     public void setNoAsuransi(String noAsuransi) {
         this.noAsuransi = noAsuransi;
+    }
+
+    public String getImageURL() {
+        return imageURL;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getSearch() {
+        return search;
+    }
+
+    public void setSearch(String search) {
+        this.search = search;
     }
 }
