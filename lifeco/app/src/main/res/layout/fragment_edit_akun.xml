@@ -99,7 +99,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inpEmailRegis" />
+                    android:hint="@string/inpEmailRegis"
+                    android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -114,7 +115,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inpPasswordRegis" />
+                    android:hint="@string/inpPasswordRegis"
+                    android:inputType="textWebPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Spinner
@@ -160,7 +162,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inpNoHPRegis" />
+                    android:hint="@string/inpNoHPRegis"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -176,7 +179,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inpNoBPJSRegis" />
+                    android:hint="@string/inpNoBPJSRegis"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -191,7 +195,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inpNoKTPRegis" />
+                    android:hint="@string/inpNoKTPRegis"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -206,7 +211,8 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inpNoAsuransiRegis" />
+                    android:hint="@string/inpNoAsuransiRegis"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <EditText
