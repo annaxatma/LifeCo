@@ -1,22 +1,22 @@
 package com.example.LifeCo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
+        import androidx.annotation.NonNull;
+        import androidx.appcompat.app.AppCompatActivity;
+        import androidx.appcompat.widget.Toolbar;
+        import androidx.fragment.app.Fragment;
+        import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
+        import android.content.Intent;
+        import android.os.Bundle;
+        import android.view.MenuItem;
+        import android.view.View;
 
-import com.example.LifeCo.fragments.AccountFragment;
-import com.example.LifeCo.fragments.HistoryFragment;
-import com.example.LifeCo.fragments.HomeFragment;
-import com.example.lifeco.R;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
+        import com.example.LifeCo.fragments.AccountFragment;
+        import com.example.LifeCo.fragments.HistoryFragment;
+        import com.example.LifeCo.fragments.HomeFragment;
+        import com.example.lifeco.R;
+        import com.google.android.material.bottomnavigation.BottomNavigationView;
+        import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 

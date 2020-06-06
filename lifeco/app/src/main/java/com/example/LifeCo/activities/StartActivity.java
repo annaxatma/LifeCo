@@ -24,7 +24,7 @@ public class StartActivity extends AppCompatActivity {
 
         //check if user is null
         if (firebaseUser != null){
-            Intent intent = new Intent(StartActivity.this, MainActivity.class);
+            Intent intent = new Intent(StartActivity.this, ChatMainActivity.class);
             startActivity(intent);
             finish();
         }
