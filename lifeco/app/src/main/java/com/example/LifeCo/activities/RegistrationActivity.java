@@ -26,6 +26,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -38,10 +39,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
     Button btnDaftarAkun;
     Spinner spinnerGolDarah, spinnerJenisKelamin;
-    TextInputLayout inpNama, inpEmail, inpPassword, inpAlamat, inpNoHP, inpNoBPJS, inpNoKTP, inpTekananDarah, inpGulaDarah, inpNoAsuransi;
+    TextInputLayout inpNama, inpEmail, inpPassword, inpAlamat, inpNoHP, inpNoBPJS, inpNoKTP, inpTekananDarah, inpGulaDarah, inpNoAsuransi, inpUsername;
     EditText inpPenyakitSendiri, inpPenyakitKeluarga, inpKeluhanUtama, inpObat, inpAlergiObat, inpAlergiMakanan, inpTanggalLahir;
 
-    String userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userGolDarah, userJenisKelamin, userNoAsuransi, userId;
+
+    String userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userGolDarah, userJenisKelamin, userNoAsuransi, userUsername;
     String userID;
     String status, search, imageURL;
     FirebaseAuth fAuth;
@@ -85,6 +87,8 @@ public class RegistrationActivity extends AppCompatActivity {
         inpAlergiMakanan = findViewById(R.id.inpAlergiMakananRegis);
         inpNoAsuransi = findViewById(R.id.inpNoAsuransiRegis);
         btnDaftarAkun = findViewById(R.id.btnDaftarAkun);
+        inpUsername = findViewById(R.id.inpUsernameRegis);
+
 
         users = new Users();
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
@@ -115,6 +119,8 @@ public class RegistrationActivity extends AppCompatActivity {
                 userAlergiMakanan = inpAlergiMakanan.getText().toString().trim();
                 userTanggalLahir = inpTanggalLahir.getText().toString().trim();
                 userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
+                userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
+                userUsername = inpUsername.getEditText().getText().toString().trim();
 
 //                register(userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi);
 //
@@ -233,6 +239,10 @@ public class RegistrationActivity extends AppCompatActivity {
                     inpNoAsuransi.setError("Silahkan isi nomor asuransi Anda.");
                     return;
                 }
+                if(TextUtils.isEmpty(userUsername)){
+                    inpUsername.setError("Silahkan isi username Anda.");
+                    return;
+                }
 
                 if(userPassword.length() < 6){
                     Toast.makeText(RegistrationActivity.this, "Password must be at least 6 characters!", Toast.LENGTH_SHORT).show();
@@ -262,7 +272,7 @@ public class RegistrationActivity extends AppCompatActivity {
 //
 //                    reference.push().setValue(users);
 
-                    register(userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi);
+                    register(userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi, userUsername);
                 }
 
 
@@ -271,7 +281,7 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
     }
-    private void register(final String nama, final String email, final String password, final String alamat, final String noHP, final String noBPJS, final String noKTP, final String tekananDarah, final String gulaDarah, final String golDarah, final String jenisKelamin, final String penyakitSendiri, final String penyakitKeluarga, final String keluhanUtama, final String obat, final String alergiObat, final String alergiMakanan, final String tanggalLahir, final String noAsuransi) {
+    private void register(final String nama, final String email, final String password, final String alamat, final String noHP, final String noBPJS, final String noKTP, final String tekananDarah, final String gulaDarah, final String golDarah, final String jenisKelamin, final String penyakitSendiri, final String penyakitKeluarga, final String keluhanUtama, final String obat, final String alergiObat, final String alergiMakanan, final String tanggalLahir, final String noAsuransi, final String username) {
 
         fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -283,6 +293,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     Map<String, Object> user = new HashMap<>();
                     user.put("nama", nama);
+                    user.put("username", username);
                     user.put("email", email);
                     user.put("password", password);
                     user.put("alamat", alamat);
@@ -316,6 +327,28 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
 
+                    FirebaseUser firebaseUser = fAuth.getCurrentUser();
+                    assert firebaseUser != null;
+                    final String userid = firebaseUser.getUid();
+
+                    reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+
+                    HashMap<String, String> hashMap = new HashMap<>();
+                    hashMap.put("id", userid);
+
+                    hashMap.put("username", username);
+                    hashMap.put("imageURL", "default");
+                    hashMap.put("search", username.toLowerCase());
+
+                    reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()){
+                                Log.d("New User - Realtime","onSuccess: New User Registered for " + userid);
+                            }
+                        }
+                    });
+
                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -328,5 +361,41 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
     }
+
+//    private void registerRealtime(final String username, String email, String password){
+//        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                if (task.isSuccessful()){
+//                    FirebaseUser firebaseUser = fAuth.getCurrentUser();
+//                    assert firebaseUser != null;
+//                    final String userid = firebaseUser.getUid();
+//
+//                    reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+//
+//                    HashMap<String, String> hashMap = new HashMap<>();
+//                    hashMap.put("id", userid);
+//                    hashMap.put("username", username);
+//                    hashMap.put("imageURL", "default");
+//                    hashMap.put("search", username.toLowerCase());
+//
+//                    reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()){
+//                                Log.d("New User - Realtime","onSuccess: New User Registered for " + userid);
+//                                Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+//                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//                                startActivity(intent);
+//                                finish();
+//                            }
+//                        }
+//                    });
+//                }else{
+//                    Toast.makeText(RegistrationActivity.this, "You can't register with this email or password", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
+//    }
 
 }

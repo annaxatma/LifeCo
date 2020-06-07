@@ -55,13 +55,13 @@ public class ChatMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_chat_main);
 
         appBarLayout = findViewById(R.id.appbarlayout);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Hi");
+        getSupportActionBar().setTitle("Lifeco Live Chat");
 
         profile_image = findViewById(R.id.profile_image);
         username = findViewById(R.id.username);

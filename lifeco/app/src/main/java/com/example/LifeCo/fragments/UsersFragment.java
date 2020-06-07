@@ -3,6 +3,7 @@ package com.example.LifeCo.fragments;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +50,7 @@ public class UsersFragment extends Fragment {
 
         userAdapter = new UserAdapter(getContext(), mUsers, false);
         recyclerView.setAdapter(userAdapter);
+        Log.d("Check","userAdapter");
 
 
         readUsers();
@@ -110,8 +112,8 @@ public class UsersFragment extends Fragment {
     private void readUsers() {
 
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("Firebase User", "Firebase User: "+ firebaseUser.getUid());
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
-
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -121,6 +123,7 @@ public class UsersFragment extends Fragment {
                         Users users = snapshot.getValue(Users.class);
                         assert users != null;
                         assert firebaseUser != null;
+                        Log.d("Id", "Current user id: " + users.getId());
                         if (!users.getId().equals(firebaseUser.getUid())) {
                             mUsers.add(users);
                         }
