@@ -333,12 +333,11 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
-                    HashMap<String, String> hashMap = new HashMap<>();
-                    hashMap.put("id", userid);
-                    hashMap.put("username", username);
-                    hashMap.put("imageURL", "default");
-                    hashMap.put("search", username.toLowerCase());
-
+//                    HashMap<String, String> hashMap = new HashMap<>();
+//                    hashMap.put("id", userid);
+//                    hashMap.put("username", username);
+//                    hashMap.put("imageURL", "default");
+//                    hashMap.put("search", username.toLowerCase());
 
                     Users users = new Users();
                     users.setId(userid);
