@@ -335,7 +335,6 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     HashMap<String, String> hashMap = new HashMap<>();
                     hashMap.put("id", userid);
-
                     hashMap.put("username", username);
                     hashMap.put("imageURL", "default");
                     hashMap.put("search", username.toLowerCase());
