@@ -364,7 +364,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     users.setNoAsuransi(noAsuransi);
                     users.setImageURL("default");
                     users.setStatus(status);
-                    users.setSearch(search.toLowerCase());
+                    users.setSearch(search);
 
                     reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
