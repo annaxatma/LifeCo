@@ -312,7 +312,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     user.put("alergiMakanan", alergiMakanan);
                     user.put("tanggalLahir", tanggalLahir);
                     user.put("noAsuransi", noAsuransi);
-                    user.put("imageURL", imageURL);
+                    user.put("imageURL", "default");
                     user.put("status", status);
                     user.put("search", search);
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -339,7 +339,34 @@ public class RegistrationActivity extends AppCompatActivity {
                     hashMap.put("imageURL", "default");
                     hashMap.put("search", username.toLowerCase());
 
-                    reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                    Users users = new Users();
+                    users.setId(userid);
+                    users.setNama(nama);
+                    users.setUsername(username);
+                    users.setEmail(email);
+                    users.setPassword(password);
+                    users.setAlamat(alamat);
+                    users.setNoHP(noHP);
+                    users.setNoBPJS(noBPJS);
+                    users.setNoKTP(noKTP);
+                    users.setTekananDarah(tekananDarah);
+                    users.setGulaDarah(gulaDarah);
+                    users.setGolDarah(golDarah);
+                    users.setJenisKelamin(jenisKelamin);
+                    users.setPenyakitSendiri(penyakitSendiri);
+                    users.setPenyakitKeluarga(penyakitKeluarga);
+                    users.setKeluhanUtama(keluhanUtama);
+                    users.setObat(obat);
+                    users.setAlergiObat(alergiObat);
+                    users.setAlergiMakanan(alergiMakanan);
+                    users.setTanggalLahir(tanggalLahir);
+                    users.setNoAsuransi(noAsuransi);
+                    users.setImageURL("default");
+                    users.setStatus(status);
+                    users.setSearch(search);
+
+                    reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){

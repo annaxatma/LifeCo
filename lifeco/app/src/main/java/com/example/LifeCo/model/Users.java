@@ -1,7 +1,7 @@
 package com.example.LifeCo.model;
 
 public class Users {
-    private String Id;
+    private String id;
     private String nama;
     private String username;
     private String email;
@@ -30,7 +30,7 @@ public class Users {
     }
 
     public Users(String id, String nama, String username, String email, String password, String alamat, String noHP, String noBPJS, String noKTP, String tekananDarah, String gulaDarah, String golDarah, String jenisKelamin, String penyakitSendiri, String penyakitKeluarga, String keluhanUtama, String obat, String alergiObat, String alergiMakanan, String tanggalLahir, String noAsuransi, String imageURL, String status, String search) {
-        Id = id;
+        this.id = id;
         this.nama = nama;
         this.username = username;
         this.email = email;
@@ -57,11 +57,11 @@ public class Users {
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getNama() {
@@ -76,7 +76,7 @@ public class Users {
         return username;
     }
 
-    public void setUsername(String id) {
+    public void setUsername(String username) {
         this.username = username;
     }
 

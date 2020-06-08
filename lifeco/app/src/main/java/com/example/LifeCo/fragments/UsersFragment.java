@@ -123,7 +123,6 @@ public class UsersFragment extends Fragment {
                         Users users = snapshot.getValue(Users.class);
                         assert users != null;
                         assert firebaseUser != null;
-                        Log.d("Id", "Current user id: " + users.getId());
                         if (!users.getId().equals(firebaseUser.getUid())) {
                             mUsers.add(users);
                         }
