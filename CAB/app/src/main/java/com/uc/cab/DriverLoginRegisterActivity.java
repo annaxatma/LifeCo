@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -89,6 +90,8 @@ public class DriverLoginRegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 Toast.makeText(DriverLoginRegisterActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 loadingbar.dismiss();
+                                Intent driverIntent = new Intent(DriverLoginRegisterActivity.this,DriversMapActivity.class);
+                                startActivity(driverIntent);
                             }else{
                                 Toast.makeText(DriverLoginRegisterActivity.this, "Login Failed, Try Again Pls", Toast.LENGTH_SHORT).show();
                                 loadingbar.dismiss();
@@ -117,6 +120,8 @@ public class DriverLoginRegisterActivity extends AppCompatActivity {
                             if (task.isSuccessful()){
                                 Toast.makeText(DriverLoginRegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 loadingbar.dismiss();
+                                Intent driverIntent = new Intent(DriverLoginRegisterActivity.this,DriversMapActivity.class);
+                                startActivity(driverIntent);
                             }else{
                                 Toast.makeText(DriverLoginRegisterActivity.this, "Registration Failed, Try Again Pls", Toast.LENGTH_SHORT).show();
                                 loadingbar.dismiss();

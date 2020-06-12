@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CAB</string>
+    <string name="title_activity_drivers_map">Map</string>
+    <string name="title_activity_passenger_maps">Map</string>
 </resources>

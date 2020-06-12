@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -90,6 +91,8 @@ public class PassengerLoginRegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(PassengerLoginRegisterActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                Intent PassengerIntent = new Intent(PassengerLoginRegisterActivity.this,PassengerMapsActivity.class);
+                                startActivity(PassengerIntent);
                                 loadingbar.dismiss();
                             }else{
                                 Toast.makeText(PassengerLoginRegisterActivity.this, "Login Failed, Try Again Pls", Toast.LENGTH_SHORT).show();
@@ -117,6 +120,8 @@ public class PassengerLoginRegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
                                 Toast.makeText(PassengerLoginRegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                                Intent PassengerIntent = new Intent(PassengerLoginRegisterActivity.this,PassengerMapsActivity.class);
+                                startActivity(PassengerIntent);
                                 loadingbar.dismiss();
                             }else{
                                 Toast.makeText(PassengerLoginRegisterActivity.this, "Registration Failed, Try Again Pls", Toast.LENGTH_SHORT).show();
