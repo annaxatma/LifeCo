@@ -1,14 +1,267 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.LifeCo.fragments.AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/myRectangleView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/rectangle"
+                app:layout_constraintBottom_toBottomOf="@+id/imgProfilePicture"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imgProfilePicture"
+                android:layout_width="128dp"
+                android:layout_height="134dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_account_circle_orange_24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtNama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:text="Sobek Glaedr"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imgProfilePicture"
+                app:layout_constraintTop_toTopOf="@+id/imgProfilePicture" />
+
+            <View
+                android:id="@+id/horizontalLine"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="8dp"
+                android:background="#424242"
+                app:layout_constraintEnd_toEndOf="@+id/txtEmail"
+                app:layout_constraintStart_toStartOf="@+id/txtNama"
+                app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+
+            <View
+                android:id="@+id/horizontalLine2"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="8dp"
+                android:background="#424242"
+                app:layout_constraintEnd_toEndOf="@+id/txtInformasiPersonal"
+                app:layout_constraintStart_toStartOf="@+id/txtInformasiPersonal"
+                app:layout_constraintTop_toBottomOf="@+id/txtInformasiPersonal" />
+
+            <TextView
+                android:id="@+id/txtEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="sobekglaedr@gmail.com"
+                app:layout_constraintStart_toStartOf="@+id/txtNama"
+                app:layout_constraintTop_toBottomOf="@+id/txtNama" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="@drawable/ic_settings_black_24dp"
+                app:backgroundTint="#00FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtJenisKelamin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Perempuan"
+                app:layout_constraintStart_toStartOf="@+id/horizontalLine"
+                app:layout_constraintTop_toBottomOf="@id/horizontalLine" />
+
+            <TextView
+                android:id="@+id/txtGolDarah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="A"
+                app:layout_constraintBottom_toBottomOf="@+id/txtJenisKelamin"
+                app:layout_constraintEnd_toEndOf="@+id/horizontalLine"
+                app:layout_constraintTop_toTopOf="@+id/txtJenisKelamin" />
+
+            <Button
+                android:id="@+id/btnLogOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/primary_button"
+                android:onClick="logout"
+                android:text="@string/btnLogOut"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtGulaDarah" />
+
+            <TextView
+                android:id="@+id/txtInformasiPersonal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/txtInformasiPersonal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/myRectangleView" />
+
+            <TextView
+                android:id="@+id/txtAlamat"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:text="Perum. Gadang Cahaya Raya b20, Gadang, Sukun, Malang, Jawa Timur"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/txtInformasiPersonal"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalLine2" />
+
+            <TextView
+                android:id="@+id/txtNoHP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="081333365560"
+                app:layout_constraintStart_toStartOf="@+id/txtAlamat"
+                app:layout_constraintTop_toBottomOf="@+id/txtAlamat" />
+
+            <TextView
+                android:id="@+id/txtTanggalLahir"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="2001/08/20"
+                app:layout_constraintStart_toStartOf="@+id/txtNoHP"
+                app:layout_constraintTop_toBottomOf="@+id/txtNoHP" />
+
+            <TextView
+                android:id="@+id/txtNoBPJS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="0123456789"
+                app:layout_constraintStart_toStartOf="@+id/txtTanggalLahir"
+                app:layout_constraintTop_toBottomOf="@+id/txtTanggalLahir" />
+
+            <TextView
+                android:id="@+id/txtNoKTP"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="0123456789"
+                app:layout_constraintStart_toStartOf="@+id/txtNoBPJS"
+                app:layout_constraintTop_toBottomOf="@+id/txtNoBPJS" />
+
+            <TextView
+                android:id="@+id/txtNoAsuransi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="0123456789"
+                app:layout_constraintStart_toStartOf="@+id/txtNoKTP"
+                app:layout_constraintTop_toBottomOf="@+id/txtNoKTP" />
+
+            <TextView
+                android:id="@+id/txtPenyakitSendiri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Maag"
+                app:layout_constraintStart_toStartOf="@+id/txtNoAsuransi"
+                app:layout_constraintTop_toBottomOf="@+id/txtNoAsuransi" />
+
+            <TextView
+                android:id="@+id/txtPenyakitKeluarga"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Diabetes"
+                app:layout_constraintStart_toStartOf="@+id/txtPenyakitSendiri"
+                app:layout_constraintTop_toBottomOf="@+id/txtPenyakitSendiri" />
+
+            <TextView
+                android:id="@+id/txtKeluhanUtama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Migraine"
+                app:layout_constraintStart_toStartOf="@+id/txtPenyakitKeluarga"
+                app:layout_constraintTop_toBottomOf="@+id/txtPenyakitKeluarga" />
+
+            <TextView
+                android:id="@+id/txtObat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Panadol"
+                app:layout_constraintStart_toStartOf="@+id/txtKeluhanUtama"
+                app:layout_constraintTop_toBottomOf="@+id/txtKeluhanUtama" />
+
+            <TextView
+                android:id="@+id/txtAlergiObat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tidak Ada"
+                app:layout_constraintStart_toStartOf="@+id/txtObat"
+                app:layout_constraintTop_toBottomOf="@+id/txtObat" />
+
+            <TextView
+                android:id="@+id/txtAlergiMakanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Tidak Ada"
+                app:layout_constraintStart_toStartOf="@+id/txtAlergiObat"
+                app:layout_constraintTop_toBottomOf="@+id/txtAlergiObat" />
+
+            <TextView
+                android:id="@+id/txtTekananDarah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="123"
+                app:layout_constraintStart_toStartOf="@+id/txtAlergiMakanan"
+                app:layout_constraintTop_toBottomOf="@+id/txtAlergiMakanan" />
+
+            <TextView
+                android:id="@+id/txtGulaDarah"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="123"
+                app:layout_constraintStart_toStartOf="@+id/txtTekananDarah"
+                app:layout_constraintTop_toBottomOf="@+id/txtTekananDarah" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

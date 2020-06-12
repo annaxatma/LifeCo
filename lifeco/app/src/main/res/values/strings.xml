@@ -1,14 +1,10 @@
 <resources>
-    <string name="app_name">CobaNavFragment</string>
     <string name="menu_home">Home</string>
     <string name="menu_history">History</string>
     <string name="menu_account">Account</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="student_id">01</string>
-    <string name="student_name">Name</string>
-    <string name="student_email">Email</string>
     <string name="menu_darurat">Darurat</string>
     <string name="menu_sejarah">Sejarah</string>
     <string name="menu_akun">Akun</string>
@@ -20,11 +16,9 @@
     <string name="msg_no_akun">Tidak mempunyai akun?</string>
     <string name="daftar_akun">Daftar Sekarang</string>
     <string name="regis_toolbar">Daftar Akun</string>
-    <string name="inpNamaRegis">Nama</string>
+    <string name="inpNamaRegis">Nama Lengkap</string>
     <string name="inpEmailRegis">Email</string>
     <string name="inpPasswordRegis">Password</string>
-    <string name="radiobutton_lakilaki">Laki-laki</string>
-    <string name="radiobutton_perempuan">Perempuan</string>
     <string name="textGender">Jenis Kelamin</string>
     <string name="textGolDarah">Golongan Darah</string>
     <string name="inpAlamatRegis">Alamat</string>
@@ -43,6 +37,12 @@
     <string name="inpGulaDarahRegis">Gula Darah</string>
     <string name="inpNoAsuransiRegis">No. Asuransi</string>
     <string name="inpTanggalFormatRegis">yyyy/mm/dd</string>
+    <string name="btnLogOut">Log Out</string>
+    <string name="txtInformasiPersonal">Informasi Personal</string>
+    <string name="toolbarProfilAkun">Profil Akun</string>
+    <string name="btnUpdateAkun">Update Akun</string>
+    <string name="btnChat">Chat</string>
+    <string name="inpUsernameRegis">Username</string>
 
 
     <string-array name="inpJenisKelaminGroup">

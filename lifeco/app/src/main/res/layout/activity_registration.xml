@@ -7,7 +7,6 @@
     tools:context=".RegistrationActivity">
 
     <androidx.core.widget.NestedScrollView
-        android:id="@+id/scrollViewRegis"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:fillViewport="true"
@@ -34,7 +33,6 @@
                 app:titleTextColor="#FFFFFF" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/floatingActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clickable="true"
@@ -50,9 +48,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView2">
 
@@ -70,7 +68,7 @@
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/inpNameRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpNameRegis"
-                app:layout_constraintTop_toBottomOf="@+id/inpNameRegis">
+                app:layout_constraintTop_toBottomOf="@+id/inpUsernameRegis">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -422,6 +420,22 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/inpNoAsuransiRegis"
                     android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpUsernameRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpEmailRegis"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/inpEmailRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpNameRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpUsernameRegis" />
             </com.google.android.material.textfield.TextInputLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>

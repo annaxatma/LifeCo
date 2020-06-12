@@ -82,6 +82,7 @@ public class RegisterActivity extends AppCompatActivity {
                     hashMap.put("id", userid);
                     hashMap.put("username", username);
                     hashMap.put("imageURL", "default");
+                    hashMap.put("search", username.toLowerCase());
 
                     reference.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -99,4 +100,5 @@ public class RegisterActivity extends AppCompatActivity {
                 }
         }
     });
-}}
+}
+}

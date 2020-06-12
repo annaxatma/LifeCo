@@ -2,6 +2,7 @@ package com.example.chatapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +17,12 @@ import com.example.chatapp.MessageActivity;
 import com.example.chatapp.Model.Chat;
 import com.example.chatapp.Model.Users;
 import com.example.chatapp.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.List;
 
@@ -52,15 +56,32 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final MessageAdapter.ViewHolder holder, int position) {
 
         Chat chat = mChat.get(position);
+
         holder.show_message.setText(chat.getMessage());
 
         if (imageurl.equals("default")){
             holder.profile_image.setImageResource(R.mipmap.ic_launcher);
         }else{
-            Glide.with(mContext).load(imageurl).into(holder.profile_image);
+            StorageReference sr = FirebaseStorage.getInstance().getReference().child("" + imageurl);
+            sr.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(mContext).asBitmap().load(uri.toString()).error(R.mipmap.ic_launcher).into(holder.profile_image);
+                }
+            });
+        }
+
+        if (position == mChat.size() - 1){
+            if (chat.isIsseen()){
+                holder.txt_seen.setText("Seen");
+            }else{
+                holder.txt_seen.setText("Delivered");
+            }
+        }else{
+            holder.txt_seen.setVisibility(View.GONE);
         }
 
     }
@@ -75,11 +96,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         public TextView show_message;
         public ImageView profile_image;
 
+        public TextView txt_seen;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
+            txt_seen = itemView.findViewById(R.id.txt_seen);
 
         }
     }

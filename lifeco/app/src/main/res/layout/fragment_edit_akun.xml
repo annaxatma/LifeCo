@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frameLayout2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EditAkunFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textTglLahirEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:hint="@string/inpTanggalFormatRegis"
+                android:text="@string/textTglLahirRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpNoHPEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpNoHPEdit" />
+
+            <TextView
+                android:id="@+id/textGolDarahEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/textGolDarah"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/textJenisKelaminEdit"
+                app:layout_constraintTop_toBottomOf="@+id/textJenisKelaminEdit" />
+
+            <TextView
+                android:id="@+id/textJenisKelaminEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/textGender"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpPasswordEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpPasswordEdit" />
+
+            <ImageView
+                android:id="@+id/imgProfilePicEdit"
+                android:layout_width="128dp"
+                android:layout_height="149dp"
+                android:src="@drawable/ic_account_circle_orange_24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnProfilePicEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:src="@drawable/ic_camera_alt_black_24dp"
+                app:backgroundTint="#E6E6E6"
+                app:layout_constraintBottom_toBottomOf="@+id/imgProfilePicEdit"
+                app:layout_constraintEnd_toEndOf="@+id/imgProfilePicEdit"
+                app:layout_constraintStart_toEndOf="@+id/imgProfilePicEdit" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNamaEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imgProfilePicEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNamaRegis" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpEmailEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpNamaEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpEmailRegis"
+                    android:inputType="textEmailAddress" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpPasswordEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpEmailEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpEmailEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpEmailEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpPasswordRegis"
+                    android:inputType="textWebPassword" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:id="@+id/spinnerJenisKelaminEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/textJenisKelaminEdit"
+                app:layout_constraintEnd_toEndOf="@+id/inpPasswordEdit"
+                app:layout_constraintTop_toTopOf="@+id/textJenisKelaminEdit" />
+
+            <Spinner
+                android:id="@+id/spinnerGolDarahEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/textGolDarahEdit"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerJenisKelaminEdit"
+                app:layout_constraintTop_toTopOf="@+id/textGolDarahEdit" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpAlamatEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/spinnerGolDarahEdit"
+                app:layout_constraintStart_toStartOf="@+id/textGolDarahEdit"
+                app:layout_constraintTop_toBottomOf="@+id/textGolDarahEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpAlamatRegis" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNoHPEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpAlamatEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpAlamatEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpAlamatEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNoHPRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNoBPJSEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpTanggalLahirEdit"
+                app:layout_constraintStart_toStartOf="@+id/textTglLahirEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpTanggalLahirEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNoBPJSRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNoKTPEdit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoBPJSEdit"
+                app:layout_constraintStart_toStartOf="@+id/textTglLahirEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpNoBPJSEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNoKTPRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNoAsuransiEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoKTPEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNoKTPEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpNoKTPEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNoAsuransiRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <EditText
+                android:id="@+id/inpPenyakitSendiriEdit"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/textPenyakitSendiriEdit" />
+
+            <TextView
+                android:id="@+id/textPenyakitSendiriEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpPenyakitSendiriRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@id/inpNoAsuransiEdit"
+                app:layout_constraintTop_toBottomOf="@id/inpNoAsuransiEdit" />
+
+            <TextView
+                android:id="@+id/textPenyakitKeluargaEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_weight="1"
+                android:text="@string/inpPenyakitKeluargaRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpPenyakitSendiriEdit" />
+
+            <EditText
+                android:id="@+id/inpPenyakitKeluargaEdit"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/textPenyakitKeluargaEdit" />
+
+            <TextView
+                android:id="@+id/textKeluhanUtamaEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpKeluhanUtamaRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpPenyakitKeluargaEdit" />
+
+            <EditText
+                android:id="@+id/inpKeluhanUtamaEdit"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/textKeluhanUtamaEdit" />
+
+            <TextView
+                android:id="@+id/textObatEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpObatRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpKeluhanUtamaEdit" />
+
+            <EditText
+                android:id="@+id/inpObatEdit"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/textObatEdit" />
+
+            <TextView
+                android:id="@+id/textAlergiObatEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpAlergiObatRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpObatEdit" />
+
+            <EditText
+                android:id="@+id/inpAlergiObatEdit"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/textAlergiObatEdit" />
+
+            <TextView
+                android:id="@+id/textAlergiMakananEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/inpAlergiMakananRegis"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpAlergiObatEdit" />
+
+            <EditText
+                android:id="@+id/inpAlergiMakananEdit"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/textAlergiMakananEdit" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpTekananDarahEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpAlergiMakananEdit"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpTekananDarahRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpGulaDarahEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/inpNamaEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNamaEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpTekananDarahEdit">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpGulaDarahRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btnUpdateAkun"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/primary_button"
+                android:text="@string/btnUpdateAkun"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoBPJSEdit"
+                app:layout_constraintStart_toStartOf="@+id/inpNoBPJSEdit"
+                app:layout_constraintTop_toBottomOf="@+id/inpGulaDarahEdit" />
+
+            <EditText
+                android:id="@+id/inpTanggalLahirEdit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/inpTanggalFormatRegis"
+                android:inputType="date"
+                app:layout_constraintBottom_toBottomOf="@+id/textTglLahirEdit"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoHPEdit"
+                app:layout_constraintTop_toTopOf="@+id/textTglLahirEdit" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
