@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class PassengerLoginRegisterActivity extends AppCompatActivity {
     Button PassengerLoginButton,PassengerRegisterButton;
@@ -24,6 +26,9 @@ public class PassengerLoginRegisterActivity extends AppCompatActivity {
     EditText PassengerEmail, PassengerPass;
     ProgressDialog loadingbar;
     FirebaseAuth mAuth;
+
+    private DatabaseReference PassengerDatabaseRef;
+    private String OnlinePassengerID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +41,6 @@ public class PassengerLoginRegisterActivity extends AppCompatActivity {
         PassengerEmail = findViewById(R.id.passenger_email_login);
         PassengerPass = findViewById(R.id.passenger_password_login);
         loadingbar = new ProgressDialog(this);
-
         mAuth = FirebaseAuth.getInstance();
 
         PassengerRegisterButton.setVisibility(View.INVISIBLE);
@@ -90,9 +94,9 @@ public class PassengerLoginRegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
-                                Toast.makeText(PassengerLoginRegisterActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 Intent PassengerIntent = new Intent(PassengerLoginRegisterActivity.this,PassengerMapsActivity.class);
                                 startActivity(PassengerIntent);
+                                Toast.makeText(PassengerLoginRegisterActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 loadingbar.dismiss();
                             }else{
                                 Toast.makeText(PassengerLoginRegisterActivity.this, "Login Failed, Try Again Pls", Toast.LENGTH_SHORT).show();
@@ -119,6 +123,10 @@ public class PassengerLoginRegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()){
+                                OnlinePassengerID = mAuth.getCurrentUser().getUid();
+                                PassengerDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Passengers").child(OnlinePassengerID);
+                                PassengerDatabaseRef.setValue(true);
+
                                 Toast.makeText(PassengerLoginRegisterActivity.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
                                 Intent PassengerIntent = new Intent(PassengerLoginRegisterActivity.this,PassengerMapsActivity.class);
                                 startActivity(PassengerIntent);
