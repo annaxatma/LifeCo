@@ -70,7 +70,7 @@ public class AccountFragment extends Fragment {
         userId = fAuth.getCurrentUser().getUid();
 
         DocumentReference documentReference = fStore.collection("Users").document(userId);
-        documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
                 nama.setText(documentSnapshot.getString("nama"));
