@@ -43,6 +43,7 @@
     <string name="btnUpdateAkun">Update Akun</string>
     <string name="btnChat">Chat</string>
     <string name="inpUsernameRegis">Username</string>
+    <string name="actPanggil">Melakukan pemanggilan darurat</string>
 
 
     <string-array name="inpJenisKelaminGroup">
