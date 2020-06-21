@@ -30,7 +30,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -41,6 +43,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+import java.util.Map;
 
 public class DriversMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener {
 
@@ -55,7 +58,9 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private Boolean currentLogoutDriverStatus = false;
     private DatabaseReference AssignedPassengerRef, AssignedPassengerPickupRef;
     private String DriverID, PassengerID = "";
-
+    String userID;
+    private Marker PickUpLocationMarker;
+    private ValueEventListener AssignedPassengerPickUpListener;
     //    Questions
 //    1. How to maintain personal zoom
 //    2. Accuracy isnt as goodd as gojek
@@ -64,7 +69,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         super.onCreate(savedInstanceState);
         Log.println(Log.INFO,"CREATION","MAP STARTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         setContentView(R.layout.activity_drivers_map);
-
+        userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         DriverID = mAuth.getCurrentUser().getUid();
@@ -96,8 +101,16 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()){
                     PassengerID = dataSnapshot.getValue().toString();
-
                     GetAssignedPassengerPickUpLocation();
+                }
+                else{
+                    PassengerID = "";
+                    if (PickUpLocationMarker!=null){
+                        PickUpLocationMarker.remove();
+                    }
+                    if (AssignedPassengerPickUpListener!=null){
+                        AssignedPassengerPickupRef.removeEventListener(AssignedPassengerPickUpListener);
+                    }
                 }
             }
 
@@ -110,10 +123,10 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
     private void GetAssignedPassengerPickUpLocation() {
         AssignedPassengerPickupRef = FirebaseDatabase.getInstance().getReference().child("Passenger Request").child(PassengerID).child("l");
-        AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
+        AssignedPassengerPickUpListener = AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists() && !PassengerID.equals("")){
                     List<Object> passengerLocationMap = (List<Object>) dataSnapshot.getValue();
                     double LocationLat = 0;
                     double LocationLong = 0;
@@ -127,7 +140,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
                     LatLng PassengerLatLng = new LatLng(LocationLat,LocationLong);
 
-                    mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location"));
+                    PickUpLocationMarker = mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
 
                 }
             }
@@ -221,7 +234,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             Log.println(Log.INFO,"LATLNG VALUE", String.valueOf(latLng));
 
-            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
+//            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
             DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
             GeoFire geoFireAvailability= new GeoFire(DriverAvailabilityRef);
 
@@ -230,7 +243,17 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
             switch (PassengerID){
                 case "":
-                    geoFireWorking.removeLocation(userID);
+                    geoFireWorking.removeLocation(userID, new GeoFire.CompletionListener() {
+                        @Override
+                        public void onComplete(String key, DatabaseError error) {
+                            if (error != null) {
+                                System.err.println("There was an error saving the location to GeoFire: " + error);
+                            } else {
+                                System.out.println("Location saved on server successfully!");
+                            }
+                        }
+                    });
+
                     geoFireAvailability.setLocation(userID, new GeoLocation(location.getLatitude(), location.getLongitude()), new GeoFire.CompletionListener() {
                         @Override
                         public void onComplete(String key, DatabaseError error) {
@@ -244,7 +267,16 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
                     break;
                 default:
-                    geoFireAvailability.removeLocation(userID);
+                    geoFireAvailability.removeLocation(userID, new GeoFire.CompletionListener() {
+                        @Override
+                        public void onComplete(String key, DatabaseError error) {
+                            if (error != null) {
+                                System.err.println("There was an error saving the location to GeoFire: " + error);
+                            } else {
+                                System.out.println("Location saved on server successfully!");
+                            }
+                        }
+                    });
                     geoFireWorking.setLocation(userID, new GeoLocation(location.getLatitude(), location.getLongitude()), new GeoFire.CompletionListener() {
                         @Override
                         public void onComplete(String key, DatabaseError error) {
@@ -303,7 +335,6 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void DisconnectTheDriver() {
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
 
         GeoFire geoFire= new GeoFire(DriverAvailabilityRef);

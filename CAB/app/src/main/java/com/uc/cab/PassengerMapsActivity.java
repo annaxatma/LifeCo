@@ -27,6 +27,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -56,11 +57,14 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private DatabaseReference DriverAvailableRef;
     private DatabaseReference DriverRef;
     private DatabaseReference DriverLocationRef;
+    private ValueEventListener driverLocationRefListener;
     private LatLng PassengerPickupLocation;
     private int radius = 1;
     private boolean driverFound = false;
     private String DriverFoundID;
-    private Marker DriverMarker;
+    private Marker DriverMarker, PickupMarker;
+    private boolean requestbol = false;
+    GeoQuery geoQuery;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,22 +96,58 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
-                geoFire.setLocation(passengerID, new GeoLocation( lastLocation.getLatitude(),lastLocation.getLongitude()), new GeoFire.CompletionListener() {
-                    @Override
-                    public void onComplete(String key, DatabaseError error) {
-                        if (error != null) {
-                            System.err.println("There was an error saving the location to GeoFire: " + error);
-                        } else {
-                            System.out.println("Location saved on server successfully!");
-                        }
-                    }
-                });
-                PassengerPickupLocation = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
-                mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer"));
+                if (requestbol){
+                    requestbol = false;
+                    geoQuery.removeAllListeners();
+                    DriverLocationRef.removeEventListener(driverLocationRefListener);
 
-                callBtn.setText("Getting an Ambulance....");
-                GetClosestDriverCab();
+                    if (DriverFoundID !=null){
+                        DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverFoundID);
+                        DriverRef.setValue(true);
+                        DriverFoundID = null;
+                    }
+                    driverFound = false;
+                    radius=1;
+
+                    GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+                    geoFire.removeLocation(passengerID, new GeoFire.CompletionListener() {
+                        @Override
+                        public void onComplete(String key, DatabaseError error) {
+                            if (error != null) {
+                                System.err.println("There was an error removing the location to GeoFire: " + error);
+                            } else {
+                                System.out.println("Location removed on server successfully!");
+                            }
+                        }
+                    });
+
+                    if (PickupMarker != null){
+                        PickupMarker.remove();
+                    }
+                    callBtn.setText("I'M DYING 4 REAL");
+
+                }
+                else{
+                    requestbol = true;
+
+                    GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+                    geoFire.setLocation(passengerID, new GeoLocation( lastLocation.getLatitude(),lastLocation.getLongitude()), new GeoFire.CompletionListener() {
+                        @Override
+                        public void onComplete(String key, DatabaseError error) {
+                            if (error != null) {
+                                System.err.println("There was an error saving the location to GeoFire: " + error);
+                            } else {
+                                System.out.println("Location saved on server successfully!");
+                            }
+                        }
+                    });
+                    PassengerPickupLocation = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
+                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
+
+                    callBtn.setText("Getting an Ambulance....");
+                    GetClosestDriverCab();
+                }
+
             }
 
         });
@@ -115,13 +155,12 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 
     private void GetClosestDriverCab() {
         GeoFire geoFire = new GeoFire(DriverAvailableRef);
-        GeoQuery geoQuery = geoFire.queryAtLocation(new GeoLocation(PassengerPickupLocation.latitude,PassengerPickupLocation.longitude),radius);
+        geoQuery = geoFire.queryAtLocation(new GeoLocation(PassengerPickupLocation.latitude,PassengerPickupLocation.longitude),radius);
         geoQuery.removeAllListeners();
-
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
             @Override
             public void onKeyEntered(String key, GeoLocation location) {
-                if (!driverFound){
+                if (!driverFound && requestbol){
                     driverFound = true;
                     DriverFoundID = key;
                     
@@ -148,7 +187,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             @Override
             public void onGeoQueryReady() {
                 if (!driverFound){
-                    radius = radius + 1;
+                    radius++;
                     GetClosestDriverCab();
                 }
             }
@@ -159,12 +198,12 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             }
         });
     }
-
     private void GettingDriverLocation() {
-        DriverLocationRef.child(DriverFoundID).child("l").addValueEventListener(new ValueEventListener() {
+        DriverLocationRef.child(DriverFoundID).child("l");
+        driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists() && requestbol){
                     List<Object> driverLocationMap = (List<Object>)dataSnapshot.getValue();
                     double LocationLat = 0;
                     double LocationLong = 0;
@@ -181,6 +220,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     if (DriverMarker!=null){
                         DriverMarker.remove();
                     }
+                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
 
                     Location location1 = new Location("");
                     location1.setLatitude(PassengerPickupLocation.latitude);
@@ -191,9 +231,15 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     location2.setLongitude(DriverLatLng.longitude);
 
                     float Distance = location1.distanceTo(location2);
-                    callBtn.setText("Driver is " + String.valueOf(Distance) +  "km Away");
+                    if (Distance<75){
+//                        callBtn.setText("Your Driver is here");
+                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "km Away");
 
-                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance"));
+                    }
+                    else{
+                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "km Away");
+                    }
+
 
                 }
             }
@@ -244,6 +290,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         locationRequest = new LocationRequest();
         locationRequest.setInterval(1000);
         locationRequest.setFastestInterval(1000);
+
         Log.println(Log.INFO,"MAP SHIFTING","MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
@@ -271,8 +318,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     public void onLocationChanged(Location location) {
         lastLocation = location;
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,16));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
         Log.println(Log.INFO,"LATLNG VALUE", String.valueOf(latLng));
 
 //        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
