@@ -33,7 +33,10 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 
@@ -231,6 +234,7 @@ public class EditAkunFragment extends Fragment {
             @Override
             public void onSuccess(Void aVoid) {
                 Log.e("Update Success", "OnSuccess: Successfully updated data ->" + userId);
+                updateHistory();
                 Fragment fragment = new AccountFragment();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -244,6 +248,34 @@ public class EditAkunFragment extends Fragment {
                 Log.e("Failed to Update", "OnFailure: ", e);
             }
         });
+    }
+
+    public void updateHistory(){
+
+        String aktivitas = "Merubah informasi akun";
+        String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String waktu = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        DocumentReference docRef = FirebaseFirestore.getInstance().collection("History").document(userId);
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("Aktivitas", aktivitas);
+        map.put("Tanggal", tanggal);
+        map.put("Waktu", waktu);
+
+        docRef.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Log.e("Insert to History", "OnSuccess: Successfully inserted data to History->" + userId);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Log.e("Failed to Insert", "OnFailure: ", e);
+            }
+        });
+
+
     }
 }
 

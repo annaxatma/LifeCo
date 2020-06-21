@@ -3,60 +3,35 @@ package com.example.LifeCo.fragments;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.LifeCo.model.History;
 import com.example.lifeco.R;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
+import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HistoryFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
+    private FirebaseFirestore firebaseFirestore;
+    private RecyclerView rvHistory;
+    private FirestoreRecyclerAdapter adapter;
 
     public HistoryFragment() {
         // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HistoryFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HistoryFragment newInstance(String param1, String param2) {
-        HistoryFragment fragment = new HistoryFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -66,4 +41,60 @@ public class HistoryFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_history, container, false);
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        firebaseFirestore = FirebaseFirestore.getInstance();
+        rvHistory = view.findViewById(R.id.rv_history);
+
+        Query query = firebaseFirestore.collection("History");
+        FirestoreRecyclerOptions<History> options = new FirestoreRecyclerOptions.Builder<History>().setQuery(query, History.class).build();
+
+        adapter = new FirestoreRecyclerAdapter<History, HistoryViewHolder>(options) {
+            @NonNull
+            @Override
+            public HistoryViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardhistory, parent, false);
+                return new HistoryViewHolder(view);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull HistoryViewHolder holder, int position, @NonNull History model) {
+                holder.Aktivitas.setText(model.getAktivitas());
+                holder.Tanggal.setText(model.getTanggal());
+                holder.Waktu.setText(model.getWaktu());
+            }
+        };
+
+        rvHistory.setHasFixedSize(true);
+        rvHistory.setLayoutManager(new LinearLayoutManager(getContext()));
+        rvHistory.setAdapter(adapter);
+
+    }
+
+    private class HistoryViewHolder extends RecyclerView.ViewHolder{
+
+        private TextView Aktivitas, Tanggal, Waktu;
+
+        public HistoryViewHolder(@NonNull View itemView) {
+            super(itemView);
+
+            Aktivitas = itemView.findViewById(R.id.textAktivitas);
+            Tanggal = itemView.findViewById(R.id.textTanggal);
+            Waktu = itemView.findViewById(R.id.textJam);
+        }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
 }
