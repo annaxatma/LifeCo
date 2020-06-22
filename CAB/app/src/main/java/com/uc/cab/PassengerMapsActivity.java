@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -42,11 +43,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PassengerMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener, RoutingListener {
 
@@ -73,7 +76,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     GeoQuery geoQuery;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
-
+    //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -209,21 +212,30 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         });
     }
     private void GettingDriverLocation() {
-        DriverLocationRef.child(DriverFoundID).child("l");
+        DriverLocationRef = DriverLocationRef.child(DriverFoundID).child("l");
+        Log.println(Log.INFO,"THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
         driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists() && requestbol){
-                    List<Object> driverLocationMap = (List<Object>)dataSnapshot.getValue();
+                if (dataSnapshot.exists()){
+//                    GenericTypeIndicator <List<Object>> driverLocIndicator  = new GenericTypeIndicator<List<Object>>() {
+//                    };
+                    List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
+//                    HashMap <String,Object> driverLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
+//                    List<Object> driverLocationMap = new ArrayList<Object>(driverLocHMap.values());
                     double LocationLat = 0;
                     double LocationLong = 0;
                     callBtn.setText("Driver Found");
 
+
                     if (driverLocationMap.get(0) != null){
                         LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
+                        Log.println(Log.INFO," IS THE latitude oF DRI", driverLocationMap.get(0).toString());
+//                        {g=qw8nsmhqg3, l=[-7.2662892, 112.692749]}
                     }
                     if (driverLocationMap.get(1) != null){
                         LocationLong = Double.parseDouble(driverLocationMap.get(1).toString());
+                        Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
                     }
 
                     LatLng DriverLatLng = new LatLng(LocationLat,LocationLong);

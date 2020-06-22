@@ -47,9 +47,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.GenericTypeIndicator;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,12 +115,16 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
     private void GetAssignedRequest() {
         AssignedPassengerRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverID).child("CustomerRideID");
+        Log.println(Log.ERROR,"THIS IS THE ID of PASSS", "GOING TO EXECUTE OT");
+
         AssignedPassengerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                 if (dataSnapshot.exists()){
                     PassengerID = dataSnapshot.getValue().toString();
                     GetAssignedPassengerPickUpLocation();
+                    Log.println(Log.ERROR,"THIS IS THE ID of PASSS", PassengerID);
                 }
                 else{
                     erasePolylines();
@@ -140,12 +146,16 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void GetAssignedPassengerPickUpLocation() {
-        AssignedPassengerPickupRef = FirebaseDatabase.getInstance().getReference().child("Passenger Request").child(PassengerID).child("l");
+        AssignedPassengerPickupRef = FirebaseDatabase.getInstance().getReference().child("Pick Up Request").child(PassengerID).child("l");
         AssignedPassengerPickUpListener = AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists() && !PassengerID.equals("")){
+//                    GenericTypeIndicator<List<Object>> passengerLocIndicator  = new GenericTypeIndicator<List<Object>>() {
+//                    };
                     List<Object> passengerLocationMap = (List<Object>) dataSnapshot.getValue();
+//                    HashMap<String,Object> passengerLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
+//                    List<Object> passengerLocationMap = new ArrayList<Object>(passengerLocHMap.values());
                     double LocationLat = 0;
                     double LocationLong = 0;
 
