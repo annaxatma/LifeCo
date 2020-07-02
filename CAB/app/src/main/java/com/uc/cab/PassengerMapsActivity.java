@@ -51,7 +51,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PassengerMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener, RoutingListener {
+public class PassengerMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener, RoutingListener, TaskLoadedCallback {
 
     private GoogleMap mMap;
     GoogleApiClient googleApiClient;
@@ -74,8 +74,11 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private Marker DriverMarker, PickupMarker;
     private boolean requestbol = false;
     GeoQuery geoQuery;
+    private Polyline currentPolyline;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
+    private String destination;
+
     //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -251,7 +254,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     Location location2 = new Location("");
                     location2.setLatitude(DriverLatLng.latitude);
                     location2.setLongitude(DriverLatLng.longitude);
-
+                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
                     float Distance = location1.distanceTo(location2);
                     if (Distance<75){
 //                        callBtn.setText("Your Driver is here");
@@ -273,6 +277,21 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 
             }
         });
+    }
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+        return url;
     }
 
     private void LogoutPassenger() {
@@ -469,5 +488,15 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             line.remove();
         }
         polylines.clear();
+    }
+
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null){
+            currentPolyline.remove();
+        }
+        else{
+            currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+        }
     }
 }

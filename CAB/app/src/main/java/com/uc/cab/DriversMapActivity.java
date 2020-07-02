@@ -73,10 +73,10 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private ValueEventListener AssignedPassengerPickUpListener;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
-
-    //    Questions
-//    1. How to maintain personal zoom
-//    2. Accuracy isnt as goodd as gojek
+    //PROBLEMS
+//    1. Polylines not working
+//    2. Logout not deleting data in database
+//    3. Driver has API error (Can be found in discord)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
