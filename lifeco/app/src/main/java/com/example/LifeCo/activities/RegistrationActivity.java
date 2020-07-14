@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.LifeCo.model.History;
 import com.example.LifeCo.model.Users;
 import com.example.lifeco.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -29,10 +30,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
@@ -49,6 +54,7 @@ public class RegistrationActivity extends AppCompatActivity {
     FirebaseAuth fAuth;
     DatabaseReference reference;
     FirebaseFirestore fStore;
+    CollectionReference histRef;
 
     Users users;
 
@@ -373,7 +379,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             }
                         }
                     });
-
+                    buatAkun();
                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -422,5 +428,23 @@ public class RegistrationActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
+
+    public void buatAkun(){
+
+        FirebaseUser firebaseUser = fAuth.getCurrentUser();
+        assert firebaseUser != null;
+        final String userid = firebaseUser.getUid();
+
+        String aktivitas = "Mendaftarkan akun";
+        String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+        String waktu = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+
+        History history = new History(aktivitas, tanggal, waktu);
+
+        histRef = fStore.collection("Users");
+
+        histRef.document(userid).collection("History").add(history);
+
+    }
 
 }

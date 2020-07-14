@@ -55,8 +55,6 @@ public class HistoryFragment extends Fragment {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         rvHistory = view.findViewById(R.id.rv_history);
-        Users users = new Users();
-        userId = users.getId();
         String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
         histRef = firebaseFirestore.collection("Users");
 
