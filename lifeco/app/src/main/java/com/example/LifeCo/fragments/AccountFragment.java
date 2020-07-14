@@ -69,6 +69,7 @@ public class AccountFragment extends Fragment {
 
         userId = fAuth.getCurrentUser().getUid();
 
+
         DocumentReference documentReference = fStore.collection("Users").document(userId);
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override

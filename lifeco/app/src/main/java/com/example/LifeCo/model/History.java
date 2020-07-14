@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class History{
+    private String UserID;
     private String Aktivitas;
     private String Tanggal;
     private String Waktu;

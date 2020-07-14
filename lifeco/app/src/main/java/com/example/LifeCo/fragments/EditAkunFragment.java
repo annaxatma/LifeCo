@@ -1,6 +1,7 @@
 package com.example.LifeCo.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -20,13 +21,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.example.LifeCo.activities.MainActivity;
+import com.example.LifeCo.activities.RegistrationActivity;
+import com.example.LifeCo.model.History;
+import com.example.LifeCo.model.Users;
 import com.example.lifeco.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -49,12 +57,13 @@ public class EditAkunFragment extends Fragment {
     Toolbar toolbar;
     Button btnUpdateAkun;
 
-    String userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userGolDarah, userJenisKelamin, userNoAsuransi;
+    String userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userGolDarah, userJenisKelamin, userNoAsuransi, userUsername;
 
     FirebaseAuth fAuth;
     DatabaseReference reference;
     FirebaseFirestore fStore;
     String userId;
+    CollectionReference histRef;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,73 +139,90 @@ public class EditAkunFragment extends Fragment {
                 userTanggalLahir = inpTanggalLahir.getText().toString().trim();
                 userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
                 userId = fAuth.getCurrentUser().getUid();
-                DocumentReference documentReference = fStore.collection("Users").document(userId);
-                documentReference.addSnapshotListener(getActivity(), new EventListener<DocumentSnapshot>() {
-                    @Override
-                    public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
 
-                        if(userNama == null){
-                            userNama = documentSnapshot.getString("nama");
-                        }
-                        if(userEmail.equalsIgnoreCase("")){
-                            userEmail = documentSnapshot.getString("email");
-                        }
-                        if(userPassword == null){
-                            userPassword = documentSnapshot.getString("password");
-                        }
-                        if(userAlamat == null){
-                            userAlamat = documentSnapshot.getString("alamat");
-                        }
-                        if(userNoHP == null){
-                            userNoHP = documentSnapshot.getString("noHP");
-                        }
-                        if(userNoBPJS == null){
-                            userNoBPJS = documentSnapshot.getString("noBPJS");
-                        }
-                        if(userNoKTP == null){
-                            userNoKTP = documentSnapshot.getString("noKTP");
-                        }
-                        if(userTekananDarah == null){
-                            userTekananDarah = documentSnapshot.getString("tekananDarah");
-                        }
-                        if(userGulaDarah == null){
-                            userGulaDarah = documentSnapshot.getString("gulaDarah");
-                        }
-                        if(userGolDarah == null){
-                            userGolDarah = documentSnapshot.getString("golDarah");
-                        }
-                        if(userJenisKelamin == null){
-                            userJenisKelamin = documentSnapshot.getString("jenisKelamin");
-                        }
-                        if(userPenyakitSendiri == null){
-                            userPenyakitSendiri = documentSnapshot.getString("penyakitSendiri");
-                        }
-                        if(userPenyakitKeluarga == null){
-                            userPenyakitKeluarga = documentSnapshot.getString("penyakitKeluarga");
-                        }
-                        if(userKeluhanUtama == null){
-                            userKeluhanUtama = documentSnapshot.getString("keluhanUtama");
-                        }
-                        if(userObat == null){
-                            userObat = documentSnapshot.getString("obat");
-                        }
-                        if(userAlergiObat == null){
-                            userAlergiObat = documentSnapshot.getString("alergiObat");
-                        }
-                        if(userAlergiMakanan == null){
-                            userAlergiMakanan = documentSnapshot.getString("alergiMakanan");
-                        }
-                        if(userTanggalLahir == null){
-                            userTanggalLahir = documentSnapshot.getString("tanggalLahir");
-                        }
-                        if(userNoAsuransi == null){
-                            userNoAsuransi = documentSnapshot.getString("noAsuransi");
-                        }
+                Users users = new Users();
+                users.setId(userId);
+
+                DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(userId);
+                Map<String, Object> map = new HashMap<>();
+
+                if(userNama != null){
+                    map.put("nama", userNama);
+                }
+                if(userEmail != null){
+                    map.put("email", userEmail);
+                }
+                if(userPassword != null){
+                    map.put("password", userPassword);
+                }
+                if(userAlamat != null){
+                    map.put("alamat", userAlamat);
+                }
+                if(userNoHP != null){
+                    map.put("noHP", userNoHP);
+                }
+                if(userNoBPJS != null){
+                    map.put("noBPJS", userNoBPJS);
+                }
+                if(userNoKTP != null){
+                    map.put("noKTP", userNoKTP);
+                }
+                if(userTekananDarah != null){
+                    map.put("tekananDarah", userTekananDarah);
+                }
+                if(userGulaDarah != null){
+                    map.put("gulaDarah", userGulaDarah);
+                }
+                if(userGolDarah != null){
+                    map.put("golDarah", userGolDarah);
+                }
+                if(userJenisKelamin != null){
+                    map.put("jenisKelamin", userJenisKelamin);
+                }
+                if(userPenyakitSendiri != null){
+                    map.put("penyakitSendiri", userPenyakitSendiri);
+                }
+                if(userPenyakitKeluarga != null){
+                    map.put("penyakitKeluarga", userPenyakitKeluarga);
+                }
+                if(userKeluhanUtama != null){
+                    map.put("keluhanUtama", userKeluhanUtama);
+                }
+                if(userObat != null){
+                    map.put("obat", userObat);
+                }
+                if(userAlergiObat != null){
+                    map.put("alergiObat", userAlergiObat);
+                }
+                if(userAlergiMakanan != null){
+                    map.put("alergiMakanan", userAlergiMakanan);
+                }
+                if(userTanggalLahir != null){
+                    map.put("tanggalLahir", userTanggalLahir);
+                }
+                if(userNoAsuransi != null){
+                    map.put("noAsuransi", userNoAsuransi);
+                }
+
+                docRef.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.e("Update Success", "OnSuccess: Successfully updated data ->" + userId);
+                        updateHistory();
+                        Fragment fragment = new AccountFragment();
+                        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                        fragmentTransaction.replace(R.id.frame_main, fragment);
+                        fragmentTransaction.addToBackStack(null);
+                        fragmentTransaction.commit();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.e("Failed to Update", "OnFailure: ", e);
                     }
                 });
 
-                updateDocument();
-
 
 
             }
@@ -204,77 +230,18 @@ public class EditAkunFragment extends Fragment {
 
     }
 
-    public void updateDocument(){
-
-        DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(userId);
-
-        Map<String, Object> map = new HashMap<>();
-
-        map.put("nama", userNama);
-        map.put("email", userEmail);
-        map.put("password", userPassword);
-        map.put("alamat", userAlamat);
-        map.put("noHP", userNoHP);
-        map.put("noBPJS", userNoBPJS);
-        map.put("noKTP", userNoKTP);
-        map.put("tekananDarah", userTekananDarah);
-        map.put("gulaDarah", userGulaDarah);
-        map.put("golDarah", userGolDarah);
-        map.put("jenisKelamin", userJenisKelamin);
-        map.put("penyakitSendiri", userPenyakitSendiri);
-        map.put("penyakitKeluarga", userPenyakitKeluarga);
-        map.put("keluhanUtama", userKeluhanUtama);
-        map.put("obat", userObat);
-        map.put("alergiObat", userAlergiObat);
-        map.put("alergiMakanan", userAlergiMakanan);
-        map.put("tanggalLahir", userTanggalLahir);
-        map.put("noAsuransi", userNoAsuransi);
-
-        docRef.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.e("Update Success", "OnSuccess: Successfully updated data ->" + userId);
-                updateHistory();
-                Fragment fragment = new AccountFragment();
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.frame_main, fragment);
-                fragmentTransaction.addToBackStack(null);
-                fragmentTransaction.commit();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("Failed to Update", "OnFailure: ", e);
-            }
-        });
-    }
 
     public void updateHistory(){
 
-        String aktivitas = "Merubah informasi akun";
+        String aktivitas = "Mengubah informasi akun";
         String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
         String waktu = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
 
-        DocumentReference docRef = FirebaseFirestore.getInstance().collection("History").document(userId);
-        Map<String, Object> map = new HashMap<>();
+        History history = new History(aktivitas, tanggal, waktu);
 
-        map.put("Aktivitas", aktivitas);
-        map.put("Tanggal", tanggal);
-        map.put("Waktu", waktu);
+        histRef = fStore.collection("Users");
 
-        docRef.update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                Log.e("Insert to History", "OnSuccess: Successfully inserted data to History->" + userId);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Log.e("Failed to Insert", "OnFailure: ", e);
-            }
-        });
-
+        histRef.document(userId).collection("History").add(history);
 
     }
 }

@@ -9,15 +9,19 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.LifeCo.model.History;
+import com.example.LifeCo.model.Users;
 import com.example.lifeco.R;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -29,6 +33,10 @@ public class HistoryFragment extends Fragment {
     private FirebaseFirestore firebaseFirestore;
     private RecyclerView rvHistory;
     private FirestoreRecyclerAdapter adapter;
+    private FirebaseAuth fAuth;
+    String userId;
+    CollectionReference histRef;
+
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -47,8 +55,13 @@ public class HistoryFragment extends Fragment {
 
         firebaseFirestore = FirebaseFirestore.getInstance();
         rvHistory = view.findViewById(R.id.rv_history);
+        Users users = new Users();
+        userId = users.getId();
+        String currentuser = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        histRef = firebaseFirestore.collection("Users");
 
-        Query query = firebaseFirestore.collection("History");
+        Query query = histRef.document(currentuser).collection("History");
+
         FirestoreRecyclerOptions<History> options = new FirestoreRecyclerOptions.Builder<History>().setQuery(query, History.class).build();
 
         adapter = new FirestoreRecyclerAdapter<History, HistoryViewHolder>(options) {
