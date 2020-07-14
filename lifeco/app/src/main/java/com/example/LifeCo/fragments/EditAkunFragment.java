@@ -20,6 +20,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.LifeCo.activities.MainActivity;
 import com.example.LifeCo.activities.RegistrationActivity;
@@ -146,61 +147,63 @@ public class EditAkunFragment extends Fragment {
                 DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(userId);
                 Map<String, Object> map = new HashMap<>();
 
-                if(userNama != null){
+                if(userNama.length() != 0){
                     map.put("nama", userNama);
                 }
-                if(userEmail != null){
+                if(userEmail.length() != 0){
                     map.put("email", userEmail);
                 }
-                if(userPassword != null){
+                if(userPassword.length() != 0){
                     map.put("password", userPassword);
                 }
-                if(userAlamat != null){
+                if(userAlamat.length() != 0){
+                    Toast.makeText(getActivity(),userAlamat ,
+                            Toast.LENGTH_LONG).show();
                     map.put("alamat", userAlamat);
                 }
-                if(userNoHP != null){
+                if(userNoHP.length() != 0){
                     map.put("noHP", userNoHP);
                 }
-                if(userNoBPJS != null){
+                if(userNoBPJS.length() != 0){
                     map.put("noBPJS", userNoBPJS);
                 }
-                if(userNoKTP != null){
+                if(userNoKTP.length() != 0){
                     map.put("noKTP", userNoKTP);
                 }
-                if(userTekananDarah != null){
+                if(userTekananDarah.length() != 0){
                     map.put("tekananDarah", userTekananDarah);
                 }
-                if(userGulaDarah != null){
+                if(userGulaDarah.length() != 0){
                     map.put("gulaDarah", userGulaDarah);
                 }
-                if(userGolDarah != null){
+                if(userGolDarah.length() != 0){
                     map.put("golDarah", userGolDarah);
                 }
-                if(userJenisKelamin != null){
+                if(userJenisKelamin.length() != 0){
                     map.put("jenisKelamin", userJenisKelamin);
                 }
-                if(userPenyakitSendiri != null){
+                if(userPenyakitSendiri.length() != 0){
                     map.put("penyakitSendiri", userPenyakitSendiri);
                 }
-                if(userPenyakitKeluarga != null){
+                if(userPenyakitKeluarga.length() != 0){
                     map.put("penyakitKeluarga", userPenyakitKeluarga);
                 }
-                if(userKeluhanUtama != null){
+                if(userKeluhanUtama.length() != 0){
                     map.put("keluhanUtama", userKeluhanUtama);
                 }
-                if(userObat != null){
+                if(userObat.length() != 0){
                     map.put("obat", userObat);
                 }
-                if(userAlergiObat != null){
+                if(userAlergiObat.length() != 0){
                     map.put("alergiObat", userAlergiObat);
                 }
-                if(userAlergiMakanan != null){
+                if(userAlergiMakanan.length() != 0){
                     map.put("alergiMakanan", userAlergiMakanan);
                 }
-                if(userTanggalLahir != null){
+                if(userTanggalLahir.length() != 0){
                     map.put("tanggalLahir", userTanggalLahir);
                 }
-                if(userNoAsuransi != null){
+                if(userNoAsuransi.length() != 0){
                     map.put("noAsuransi", userNoAsuransi);
                 }
 

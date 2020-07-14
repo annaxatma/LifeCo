@@ -392,7 +392,6 @@ public class RegistrationActivity extends AppCompatActivity {
         });
 
     }
-
 //    private void registerRealtime(final String username, String email, String password){
 //        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 //            @Override
