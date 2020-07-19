@@ -58,6 +58,10 @@ public class RegistrationActivity extends AppCompatActivity {
 
     Users users;
 
+//    private DatabaseReference PassengerDatabaseRef;
+//    private String OnlinePassengerID;
+//    private DatabaseReference DriverDatabaseRef;
+//    private String OnlineDriverID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -297,6 +301,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     userID = fAuth.getCurrentUser().getUid();
                     DocumentReference documentReference = fStore.collection("Users").document(userID);
 
+
+
                     Map<String, Object> user = new HashMap<>();
                     user.put("nama", nama);
                     user.put("username", username);
@@ -444,6 +450,13 @@ public class RegistrationActivity extends AppCompatActivity {
 
         histRef.document(userid).collection("History").add(history);
 
+//        OnlinePassengerID = fAuth.getCurrentUser().getUid();
+//        PassengerDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Passengers").child(OnlinePassengerID);
+//        PassengerDatabaseRef.setValue(true);
+//
+//        OnlineDriverID = fAuth.getCurrentUser().getUid();
+//        DriverDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(OnlineDriverID);
+//        DriverDatabaseRef.setValue(true);
     }
 
 }
