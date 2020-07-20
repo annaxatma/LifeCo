@@ -55,7 +55,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DriversMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener, RoutingListener {
+public class DriversMapActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener,RoutingListener, TaskLoadedCallback  {
 
     private GoogleMap mMap;
 
@@ -69,10 +69,12 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private DatabaseReference AssignedPassengerRef, AssignedPassengerPickupRef;
     private String DriverID, PassengerID = "";
     String userID;
-    private Marker PickUpLocationMarker;
+    private Marker PickUpLocationMarker,DriverLocationMarker;
     private ValueEventListener AssignedPassengerPickUpListener;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
+    private Polyline currentPolyline;
+
     //PROBLEMS
 //    1. Polylines not working
 //    2. Logout not deleting data in database
@@ -169,8 +171,15 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     LatLng PassengerLatLng = new LatLng(LocationLat,LocationLong);
 
                     PickUpLocationMarker = mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
-
-                    getRoutetoMarker(PassengerLatLng);
+                    if (DriverLocationMarker!=null){
+                        DriverLocationMarker.remove();
+                    }
+                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
+                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
+                    //this one has problems with the class
+//                    getRoutetoMarker(PassengerLatLng);
+                    //this one has error about API Key
                 }
             }
 
@@ -179,6 +188,21 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
             }
         });
+    }
+    private String getUrl(LatLng origin, LatLng dest, String directionMode) {
+        // Origin of route
+        String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
+        // Destination of route
+        String str_dest = "destination=" + dest.latitude + "," + dest.longitude;
+        // Mode
+        String mode = "mode=" + directionMode;
+        // Building the parameters to the web service
+        String parameters = str_origin + "&" + str_dest + "&" + mode;
+        // Output format
+        String output = "json";
+        // Building the url to the web service
+        String url = "https://maps.googleapis.com/maps/api/directions/" + output + "?" + parameters + "&key=" + getString(R.string.google_maps_key);
+        return url;
     }
 
     private void getRoutetoMarker(LatLng passengerLatLng) {
@@ -241,6 +265,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         locationRequest = new LocationRequest();
         locationRequest.setInterval(1000);
         locationRequest.setFastestInterval(1000);
+
         Log.println(Log.INFO,"MAP SHIFTING","MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
@@ -292,7 +317,6 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                             }
                         }
                     });
-
                     geoFireAvailability.setLocation(userID, new GeoLocation(location.getLatitude(), location.getLongitude()), new GeoFire.CompletionListener() {
                         @Override
                         public void onComplete(String key, DatabaseError error) {
@@ -303,8 +327,8 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                             }
                         }
                     });
-
                     break;
+
                 default:
                     geoFireAvailability.removeLocation(userID, new GeoFire.CompletionListener() {
                         @Override
@@ -360,6 +384,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
     @Override
     protected void onStop() {
+        //when the this page is exited, SUPPOSEDLY HERE IS WHERE YOU PUT THE DELETE
         super.onStop();
 
         if (!currentLogoutDriverStatus){
@@ -441,5 +466,15 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
             line.remove();
         }
         polylines.clear();
+    }
+
+    @Override
+    public void onTaskDone(Object... values) {
+        if (currentPolyline != null){
+            currentPolyline.remove();
+        }
+        else{
+            currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
+        }
     }
 }

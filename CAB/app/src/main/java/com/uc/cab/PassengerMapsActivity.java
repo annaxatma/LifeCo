@@ -259,11 +259,11 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     float Distance = location1.distanceTo(location2);
                     if (Distance<75){
 //                        callBtn.setText("Your Driver is here");
-                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "km Away");
+                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
 
                     }
                     else{
-                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "km Away");
+                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
                     }
 
 
@@ -364,7 +364,18 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
         Log.println(Log.INFO,"LATLNG VALUE", String.valueOf(latLng));
-
+        DatabaseReference PassengerOnlineRef = FirebaseDatabase.getInstance().getReference().child("Passenger Online");
+        GeoFire geoFireOnline= new GeoFire(PassengerOnlineRef);
+        geoFireOnline.setLocation(passengerID, new GeoLocation(location.getLatitude(), location.getLongitude()), new GeoFire.CompletionListener() {
+            @Override
+            public void onComplete(String key, DatabaseError error) {
+                if (error != null) {
+                    System.err.println("There was an error saving the location to GeoFire: " + error);
+                } else {
+                    System.out.println("Location saved on server successfully!");
+                }
+            }
+        });
 //        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
 //        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Passengers");
 //
