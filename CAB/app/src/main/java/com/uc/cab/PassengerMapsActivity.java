@@ -78,6 +78,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private String destination;
+    private LatLng DriverLatLng;
 
     //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
@@ -241,11 +242,11 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                         Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
                     }
 
-                    LatLng DriverLatLng = new LatLng(LocationLat,LocationLong);
-                    if (DriverMarker!=null){
-                        DriverMarker.remove();
-                    }
-                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+                     DriverLatLng = new LatLng(LocationLat,LocationLong);
+//                    if (DriverMarker!=null){
+//                        DriverMarker.remove();
+//                    }
+//                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
 
                     Location location1 = new Location("");
                     location1.setLatitude(PassengerPickupLocation.latitude);
@@ -254,8 +255,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     Location location2 = new Location("");
                     location2.setLatitude(DriverLatLng.latitude);
                     location2.setLongitude(DriverLatLng.longitude);
-                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
-                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+//                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+//                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
                     float Distance = location1.distanceTo(location2);
                     if (Distance<75){
 //                        callBtn.setText("Your Driver is here");
@@ -268,7 +269,6 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 
 
                 }else{
-                    erasePolylines();
                 }
             }
 
@@ -376,6 +376,13 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                 }
             }
         });
+        if (DriverMarker!=null){
+            DriverMarker.remove();
+        }
+        DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+        String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+        new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+
 //        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
 //        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Passengers");
 //
@@ -494,12 +501,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     public void onRoutingCancelled() {
 
     }
-    private void erasePolylines(){
-        for (Polyline line : polylines){
-            line.remove();
-        }
-        polylines.clear();
-    }
+
 
     @Override
     public void onTaskDone(Object... values) {

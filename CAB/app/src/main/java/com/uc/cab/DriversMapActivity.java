@@ -129,7 +129,6 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     Log.println(Log.ERROR,"THIS IS THE ID of PASSS", PassengerID);
                 }
                 else{
-                    erasePolylines();
                     PassengerID = "";
                     if (PickUpLocationMarker!=null){
                         PickUpLocationMarker.remove();
@@ -171,12 +170,12 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     LatLng PassengerLatLng = new LatLng(LocationLat,LocationLong);
 
                     PickUpLocationMarker = mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
-                    if (DriverLocationMarker!=null){
-                        DriverLocationMarker.remove();
-                    }
-                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
-                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
-                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
+//                    if (DriverLocationMarker!=null){
+//                        DriverLocationMarker.remove();
+//                    }
+//                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+//                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
+//                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
                     //this one has problems with the class
 //                    getRoutetoMarker(PassengerLatLng);
                     //this one has error about API Key
@@ -352,6 +351,12 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     });
                     break;
             }
+            if (DriverLocationMarker!=null){
+                DriverLocationMarker.remove();
+            }
+            DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+            String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
+            new FetchURL(DriversMapActivity.this).execute(url, "driving");
         }
 
     }
@@ -461,12 +466,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
     }
 
-    private void erasePolylines(){
-        for (Polyline line : polylines){
-            line.remove();
-        }
-        polylines.clear();
-    }
+
 
     @Override
     public void onTaskDone(Object... values) {
