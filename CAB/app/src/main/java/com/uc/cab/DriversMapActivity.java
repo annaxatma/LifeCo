@@ -75,6 +75,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private Polyline currentPolyline;
     private boolean connect =  false;
+    private SupportMapFragment mapFragment;
     //PROBLEMS
 //    1. Polylines not working
 //    2. Logout not deleting data in database
@@ -93,7 +94,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         settingsBtn = findViewById(R.id.drivermap_settings_button);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         settingsBtn.setOnClickListener(new View.OnClickListener() {
@@ -358,6 +359,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                 DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
                 String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
                 new FetchURL(DriversMapActivity.this).execute(url, "driving");
+                mapFragment.getMapAsync(DriversMapActivity.this);
             }
 
         }

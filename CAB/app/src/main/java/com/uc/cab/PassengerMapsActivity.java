@@ -80,7 +80,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private String destination;
     private LatLng DriverLatLng;
     private boolean connect = false;
-
+    private SupportMapFragment mapFragment;
     //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,7 +94,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         polylines = new ArrayList<>();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -188,7 +188,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     DriverRef.updateChildren(driverMap);
                     
                     GettingDriverLocation();
-                    connect = true;
+
                     callBtn.setText("Initializing Ambulance Location");
                 }
             }
@@ -245,6 +245,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     }
 
                      DriverLatLng = new LatLng(LocationLat,LocationLong);
+                    connect = true;
 //                    if (DriverMarker!=null){
 //                        DriverMarker.remove();
 //                    }
@@ -313,6 +314,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
@@ -378,12 +380,16 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                 }
             }
         });
-        if (DriverMarker!=null){
-            DriverMarker.remove();
+        if(connect == true){
+            if (DriverMarker!=null){
+                DriverMarker.remove();
+            }
+            DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+            String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+            new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+            mapFragment.getMapAsync(PassengerMapsActivity.this);
         }
-        DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
-        String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
-        new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+
 
 //        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
 //        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Passengers");
