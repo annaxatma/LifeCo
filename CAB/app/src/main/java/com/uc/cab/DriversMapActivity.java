@@ -74,7 +74,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private Polyline currentPolyline;
-
+    private boolean connect =  false;
     //PROBLEMS
 //    1. Polylines not working
 //    2. Logout not deleting data in database
@@ -168,7 +168,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     }
 
                     LatLng PassengerLatLng = new LatLng(LocationLat,LocationLong);
-
+                    connect = true;
                     PickUpLocationMarker = mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
 //                    if (DriverLocationMarker!=null){
 //                        DriverLocationMarker.remove();
@@ -351,12 +351,15 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     });
                     break;
             }
-            if (DriverLocationMarker!=null){
-                DriverLocationMarker.remove();
+            if (connect == true){
+                if (DriverLocationMarker!=null){
+                    DriverLocationMarker.remove();
+                }
+                DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+                String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
+                new FetchURL(DriversMapActivity.this).execute(url, "driving");
             }
-            DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
-            String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
-            new FetchURL(DriversMapActivity.this).execute(url, "driving");
+
         }
 
     }

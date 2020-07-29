@@ -79,6 +79,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private String destination;
     private LatLng DriverLatLng;
+    private boolean connect = false;
 
     //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
@@ -187,6 +188,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     DriverRef.updateChildren(driverMap);
                     
                     GettingDriverLocation();
+                    connect = true;
                     callBtn.setText("Initializing Ambulance Location");
                 }
             }
