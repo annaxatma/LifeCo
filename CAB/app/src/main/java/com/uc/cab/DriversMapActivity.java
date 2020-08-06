@@ -33,6 +33,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -75,7 +76,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private Polyline currentPolyline;
     private boolean connect =  false;
-    private SupportMapFragment mapFragment;
+    private MapFragment mapFragment;
     //PROBLEMS
 //    1. Polylines not working
 //    2. Logout not deleting data in database
@@ -94,7 +95,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         settingsBtn = findViewById(R.id.drivermap_settings_button);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-         mapFragment = (SupportMapFragment) getSupportFragmentManager()
+         mapFragment = (MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         settingsBtn.setOnClickListener(new View.OnClickListener() {
@@ -359,7 +360,47 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                 DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
                 String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
                 new FetchURL(DriversMapActivity.this).execute(url, "driving");
-                mapFragment.getMapAsync(DriversMapActivity.this);
+//                mapFragment.getMapAsync(DriversMapActivity.this);
+
+//                AssignedPassengerPickUpListener = AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
+//                    @Override
+//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                        if (dataSnapshot.exists() && !PassengerID.equals("")){
+////                    GenericTypeIndicator<List<Object>> passengerLocIndicator  = new GenericTypeIndicator<List<Object>>() {
+////                    };
+//                            List<Object> passengerLocationMap = (List<Object>) dataSnapshot.getValue();
+////                    HashMap<String,Object> passengerLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
+////                    List<Object> passengerLocationMap = new ArrayList<Object>(passengerLocHMap.values());
+//                            double LocationLat = 0;
+//                            double LocationLong = 0;
+//
+//                            if (passengerLocationMap.get(0) != null){
+//                                LocationLat = Double.parseDouble(passengerLocationMap.get(0).toString());
+//                            }
+//                            if (passengerLocationMap.get(1) != null){
+//                                LocationLong = Double.parseDouble(passengerLocationMap.get(1).toString());
+//                            }
+//
+//                            LatLng PassengerLatLng = new LatLng(LocationLat,LocationLong);
+//                            connect = true;
+//                            PickUpLocationMarker = mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
+//                    if (DriverLocationMarker!=null){
+//                        DriverLocationMarker.remove();
+//                    }
+//                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+//                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
+//                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
+//                            //this one has problems with the class
+////                    getRoutetoMarker(PassengerLatLng);
+//                            //this one has error about API Key
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                    }
+//                });
             }
 
         }
