@@ -82,7 +82,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private String destination;
     private LatLng DriverLatLng;
     private boolean connect = false;
-    private MapFragment mapFragment;
+    private SupportMapFragment mapFragment;
     //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +99,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
         }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-         mapFragment = (MapFragment) getFragmentManager()
+         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 

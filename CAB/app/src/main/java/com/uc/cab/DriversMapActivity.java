@@ -76,7 +76,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private Polyline currentPolyline;
     private boolean connect =  false;
-    private MapFragment mapFragment;
+    private SupportMapFragment mapFragment;
     //PROBLEMS
 //    1. Polylines not working
 //    2. Logout not deleting data in database
@@ -95,7 +95,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         settingsBtn = findViewById(R.id.drivermap_settings_button);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-         mapFragment = (MapFragment) getFragmentManager()
+         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         settingsBtn.setOnClickListener(new View.OnClickListener() {
