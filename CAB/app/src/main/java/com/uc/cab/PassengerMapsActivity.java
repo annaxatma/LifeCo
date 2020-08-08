@@ -266,8 +266,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     Location location2 = new Location("");
                     location2.setLatitude(DriverLatLng.latitude);
                     location2.setLongitude(DriverLatLng.longitude);
-//                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
-//                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
                     float Distance = location1.distanceTo(location2);
                     if (Distance<75){
 //                        callBtn.setText("Your Driver is here");
