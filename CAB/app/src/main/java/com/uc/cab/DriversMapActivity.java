@@ -177,7 +177,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     }
                     DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
                     String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
-//                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
+                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
                     //this one has problems with the class
 //                    getRoutetoMarker(PassengerLatLng);
 //                    TIME TO TRY THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
