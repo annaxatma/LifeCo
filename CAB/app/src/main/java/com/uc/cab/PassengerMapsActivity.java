@@ -254,10 +254,10 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                      DriverLatLng = new LatLng(LocationLat,LocationLong);
                     connect = true;
                     //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
-//                    if (DriverMarker!=null){
-//                        DriverMarker.remove();
-//                    }
-//                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+                    if (DriverMarker!=null){
+                        DriverMarker.remove();
+                    }
+                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
 
                     Location location1 = new Location("");
                     location1.setLatitude(PassengerPickupLocation.latitude);
@@ -266,8 +266,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     Location location2 = new Location("");
                     location2.setLatitude(DriverLatLng.latitude);
                     location2.setLongitude(DriverLatLng.longitude);
-//                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
-//                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
                     float Distance = location1.distanceTo(location2);
                     if (Distance<75){
 //                        callBtn.setText("Your Driver is here");
@@ -389,13 +389,13 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                 }
             }
         });
-        if(connect == true){
-            if (DriverMarker!=null){
-                DriverMarker.remove();
-            }
-            DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
-            String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
-            new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+//        if(connect == true){
+//            if (DriverMarker!=null){
+//                DriverMarker.remove();
+//            }
+//            DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+//            String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+//            new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
 //            mapFragment.getMapAsync(PassengerMapsActivity.this);
 
 //            driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
@@ -461,7 +461,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 //
 //                }
 //            });
-        }
+//        }
 
 
 //        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
