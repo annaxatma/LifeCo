@@ -176,11 +176,12 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                         DriverLocationMarker.remove();
                     }
                     DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+                    //THIS ONE WORKS, BUT IT ONLY LASTS LIKE A FEW SECONDS THEN IT DISAPEARS.
                     String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
                     new FetchURL(DriversMapActivity.this).execute(url, "driving");
                     //this one has problems with the class
 //                    getRoutetoMarker(PassengerLatLng);
-//                    TIME TO TRY THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+//                   DOESNT WORK, STILL ASKING FOR API??????
                     //this one has error about API Key
                 }
             }
@@ -354,6 +355,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     });
                     break;
             }
+            //UNCHECK THIS IF LOCATION OF MARKER ISN'T UPDATING!!!!!!!!!!!!!!!MONDAY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //            if (connect == true){
 //                if (DriverLocationMarker!=null){
 //                    DriverLocationMarker.remove();
@@ -519,8 +521,8 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     public void onTaskDone(Object... values) {
         if (currentPolyline != null){
             currentPolyline.remove();
-        }
-        else{
+//        }
+//        else{
             currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
         }
     }
