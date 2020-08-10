@@ -12,8 +12,10 @@
         android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -42,11 +44,13 @@
                 android:id="@+id/txtNama"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="32dp"
+                android:layout_marginEnd="8dp"
                 android:text="Sobek Glaedr"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="@+id/myRectangleView"
+                app:layout_constraintHorizontal_bias="0.092"
                 app:layout_constraintStart_toEndOf="@+id/imgProfilePicture"
                 app:layout_constraintTop_toTopOf="@+id/imgProfilePicture" />
 
@@ -111,7 +115,6 @@
                 android:id="@+id/btnLogOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/primary_button"
@@ -120,13 +123,13 @@
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtGulaDarah" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
             <TextView
                 android:id="@+id/txtInformasiPersonal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:text="@string/txtInformasiPersonal"
                 android:textSize="18sp"
@@ -138,129 +141,270 @@
                 android:id="@+id/txtAlamat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="32dp"
                 android:text="Perum. Gadang Cahaya Raya b20, Gadang, Sukun, Malang, Jawa Timur"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView3"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/txtInformasiPersonal"
-                app:layout_constraintTop_toBottomOf="@+id/horizontalLine2" />
+                app:layout_constraintStart_toEndOf="@+id/imageView3"
+                app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
             <TextView
                 android:id="@+id/txtNoHP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="081333365560"
-                app:layout_constraintStart_toStartOf="@+id/txtAlamat"
-                app:layout_constraintTop_toBottomOf="@+id/txtAlamat" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
             <TextView
                 android:id="@+id/txtTanggalLahir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="2001/08/20"
-                app:layout_constraintStart_toStartOf="@+id/txtNoHP"
-                app:layout_constraintTop_toBottomOf="@+id/txtNoHP" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+                app:layout_constraintStart_toEndOf="@+id/imageView5"
+                app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
             <TextView
                 android:id="@+id/txtNoBPJS"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="0123456789"
-                app:layout_constraintStart_toStartOf="@+id/txtTanggalLahir"
-                app:layout_constraintTop_toBottomOf="@+id/txtTanggalLahir" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+                app:layout_constraintStart_toEndOf="@+id/imageView6"
+                app:layout_constraintTop_toTopOf="@+id/imageView6" />
 
             <TextView
                 android:id="@+id/txtNoKTP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="0123456789"
-                app:layout_constraintStart_toStartOf="@+id/txtNoBPJS"
-                app:layout_constraintTop_toBottomOf="@+id/txtNoBPJS" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+                app:layout_constraintStart_toEndOf="@+id/imageView7"
+                app:layout_constraintTop_toTopOf="@+id/imageView7" />
 
             <TextView
                 android:id="@+id/txtNoAsuransi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="0123456789"
-                app:layout_constraintStart_toStartOf="@+id/txtNoKTP"
-                app:layout_constraintTop_toBottomOf="@+id/txtNoKTP" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView8"
+                app:layout_constraintStart_toEndOf="@+id/imageView8"
+                app:layout_constraintTop_toTopOf="@+id/imageView8" />
 
             <TextView
                 android:id="@+id/txtPenyakitSendiri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="Maag"
-                app:layout_constraintStart_toStartOf="@+id/txtNoAsuransi"
-                app:layout_constraintTop_toBottomOf="@+id/txtNoAsuransi" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+                app:layout_constraintStart_toEndOf="@+id/imageView9"
+                app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
             <TextView
                 android:id="@+id/txtPenyakitKeluarga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="Diabetes"
-                app:layout_constraintStart_toStartOf="@+id/txtPenyakitSendiri"
-                app:layout_constraintTop_toBottomOf="@+id/txtPenyakitSendiri" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView10"
+                app:layout_constraintStart_toEndOf="@+id/imageView10"
+                app:layout_constraintTop_toTopOf="@+id/imageView10" />
 
             <TextView
                 android:id="@+id/txtKeluhanUtama"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="Migraine"
-                app:layout_constraintStart_toStartOf="@+id/txtPenyakitKeluarga"
-                app:layout_constraintTop_toBottomOf="@+id/txtPenyakitKeluarga" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+                app:layout_constraintStart_toEndOf="@+id/imageView11"
+                app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
             <TextView
                 android:id="@+id/txtObat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="Panadol"
-                app:layout_constraintStart_toStartOf="@+id/txtKeluhanUtama"
-                app:layout_constraintTop_toBottomOf="@+id/txtKeluhanUtama" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView14"
+                app:layout_constraintStart_toEndOf="@+id/imageView14"
+                app:layout_constraintTop_toTopOf="@+id/imageView14" />
 
             <TextView
                 android:id="@+id/txtAlergiObat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="Tidak Ada"
-                app:layout_constraintStart_toStartOf="@+id/txtObat"
-                app:layout_constraintTop_toBottomOf="@+id/txtObat" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView15"
+                app:layout_constraintStart_toEndOf="@+id/imageView15"
+                app:layout_constraintTop_toTopOf="@+id/imageView15" />
 
             <TextView
                 android:id="@+id/txtAlergiMakanan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="Tidak Ada"
-                app:layout_constraintStart_toStartOf="@+id/txtAlergiObat"
-                app:layout_constraintTop_toBottomOf="@+id/txtAlergiObat" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+                app:layout_constraintStart_toEndOf="@+id/imageView16"
+                app:layout_constraintTop_toTopOf="@+id/imageView16" />
 
             <TextView
                 android:id="@+id/txtTekananDarah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="123"
-                app:layout_constraintStart_toStartOf="@+id/txtAlergiMakanan"
-                app:layout_constraintTop_toBottomOf="@+id/txtAlergiMakanan" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView17"
+                app:layout_constraintStart_toEndOf="@+id/imageView17"
+                app:layout_constraintTop_toTopOf="@+id/imageView17" />
 
             <TextView
                 android:id="@+id/txtGulaDarah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
                 android:text="123"
-                app:layout_constraintStart_toStartOf="@+id/txtTekananDarah"
-                app:layout_constraintTop_toBottomOf="@+id/txtTekananDarah" />
+                app:layout_constraintBottom_toBottomOf="@+id/imageView18"
+                app:layout_constraintStart_toEndOf="@+id/imageView18"
+                app:layout_constraintTop_toTopOf="@+id/imageView18" />
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="39dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_home_24"
+                app:layout_constraintStart_toStartOf="@+id/txtInformasiPersonal"
+                app:layout_constraintTop_toBottomOf="@+id/horizontalLine2" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="40dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_call_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView3"
+                app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+            <ImageView
+                android:id="@+id/imageView5"
+                android:layout_width="43dp"
+                android:layout_height="33dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_cake_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView4"
+                app:layout_constraintTop_toBottomOf="@+id/imageView4" />
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="45dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_credit_card_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView5"
+                app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="45dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_credit_card_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView6"
+                app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+
+            <ImageView
+                android:id="@+id/imageView8"
+                android:layout_width="45dp"
+                android:layout_height="37dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_credit_card_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView7"
+                app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+
+            <ImageView
+                android:id="@+id/imageView9"
+                android:layout_width="42dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_healing_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView8"
+                app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+            <ImageView
+                android:id="@+id/imageView10"
+                android:layout_width="42dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_healing_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView9"
+                app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+
+            <ImageView
+                android:id="@+id/imageView11"
+                android:layout_width="42dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_healing_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView10"
+                app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+            <ImageView
+                android:id="@+id/imageView15"
+                android:layout_width="42dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_healing_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView14"
+                app:layout_constraintTop_toBottomOf="@+id/imageView14" />
+
+            <ImageView
+                android:id="@+id/imageView14"
+                android:layout_width="40dp"
+                android:layout_height="36dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_mood_bad_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView11"
+                app:layout_constraintTop_toBottomOf="@+id/imageView11" />
+
+            <ImageView
+                android:id="@+id/imageView16"
+                android:layout_width="40dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_fastfood_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView14"
+                app:layout_constraintTop_toBottomOf="@+id/imageView15" />
+
+            <ImageView
+                android:id="@+id/imageView17"
+                android:layout_width="38dp"
+                android:layout_height="46dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_baseline_accessibility_24"
+                app:layout_constraintStart_toStartOf="@+id/imageView16"
+                app:layout_constraintTop_toBottomOf="@+id/imageView16" />
+
+            <ImageView
+                android:id="@+id/imageView18"
+                android:layout_width="38dp"
+                android:layout_height="46dp"
+                android:layout_marginStart="32dp"
+                android:src="@drawable/ic_baseline_accessibility_24"
+                app:layout_constraintStart_toEndOf="@+id/txtTekananDarah"
+                app:layout_constraintTop_toTopOf="@+id/imageView17" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

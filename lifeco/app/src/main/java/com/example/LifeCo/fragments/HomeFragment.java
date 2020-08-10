@@ -18,15 +18,10 @@ import android.widget.Button;
 import com.example.LifeCo.activities.ChatMainActivity;
 import com.example.lifeco.R;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HistoryFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
 
     Button chatApp;
+    Button callAmb;
 
     public HomeFragment() {
         // Required empty public constructor
