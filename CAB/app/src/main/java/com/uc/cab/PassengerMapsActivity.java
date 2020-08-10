@@ -257,6 +257,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     if (DriverMarker!=null){
                         DriverMarker.remove();
                     }
+
                     DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
 
                     Location location1 = new Location("");
@@ -267,7 +268,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     location2.setLatitude(DriverLatLng.latitude);
                     location2.setLongitude(DriverLatLng.longitude);
                     String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
-                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+                    new  FetchURL(PassengerMapsActivity.this).execute(url, "driving");
                     float Distance = location1.distanceTo(location2);
                     if (Distance<75){
 //                        callBtn.setText("Your Driver is here");
@@ -344,8 +345,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(1000);
+        locationRequest.setInterval(3000);
+        locationRequest.setFastestInterval(3000);
 
         Log.println(Log.INFO,"MAP SHIFTING","MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
