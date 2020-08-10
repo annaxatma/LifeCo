@@ -258,6 +258,9 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                         DriverMarker.remove();
                     }
 
+                    mMap.clear();
+                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
+
                     DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
 
                     Location location1 = new Location("");
