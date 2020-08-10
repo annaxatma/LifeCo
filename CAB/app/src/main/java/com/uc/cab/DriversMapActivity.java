@@ -77,10 +77,10 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private Polyline currentPolyline;
     private boolean connect =  false;
     private SupportMapFragment mapFragment;
-    //PROBLEMS
-//    1. Polylines not working
-//    2. Logout not deleting data in database
-//    3. Driver has API error (Can be found in discord)
+    private DatabaseReference DriverLocationRef;
+    private ValueEventListener driverLocationRefListener;
+    private  LatLng PassengerLatLng;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,7 +93,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         DriverID = mAuth.getCurrentUser().getUid();
         logoutBtn = findViewById(R.id.drivermap_logout_button);
         settingsBtn = findViewById(R.id.drivermap_settings_button);
-
+        DriverLocationRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
          mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -169,20 +169,67 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                         LocationLong = Double.parseDouble(passengerLocationMap.get(1).toString());
                     }
 
-                    LatLng PassengerLatLng = new LatLng(LocationLat,LocationLong);
+                    PassengerLatLng = new LatLng(LocationLat,LocationLong);
                     connect = true;
                     PickUpLocationMarker = mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
-                    if (DriverLocationMarker!=null){
-                        DriverLocationMarker.remove();
-                    }
-                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
-                    //THIS ONE WORKS, BUT IT ONLY LASTS LIKE A FEW SECONDS THEN IT DISAPEARS.
-                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
-                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
+//                    if (DriverLocationMarker!=null){
+//                        DriverLocationMarker.remove();
+//                    }
+//                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+//                    //THIS ONE WORKS, BUT IT ONLY LASTS LIKE A FEW SECONDS THEN IT DISAPEARS.
+//                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
+//                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
                     //this one has problems with the class
 //                    getRoutetoMarker(PassengerLatLng);
 //                   DOESNT WORK, STILL ASKING FOR API??????
                     //this one has error about API Key
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        DriverLocationRef = DriverLocationRef.child(DriverID).child("l");
+        Log.println(Log.INFO,"THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
+        driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()){
+//                    GenericTypeIndicator <List<Object>> driverLocIndicator  = new GenericTypeIndicator<List<Object>>() {
+//                    };
+                    List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
+//                    HashMap <String,Object> driverLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
+//                    List<Object> driverLocationMap = new ArrayList<Object>(driverLocHMap.values());
+                    double LocationLat = 0;
+                    double LocationLong = 0;
+                    //Get closest driver wrong position
+                    //mapfragment not support DUNZO
+                    // Initialize location
+
+                    if (driverLocationMap.get(0) != null){
+                        LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
+                        Log.println(Log.INFO," IS THE latitude oF DRI", driverLocationMap.get(0).toString());
+//                        {g=qw8nsmhqg3, l=[-7.2662892, 112.692749]}
+                    }
+                    if (driverLocationMap.get(1) != null){
+                        LocationLong = Double.parseDouble(driverLocationMap.get(1).toString());
+                        Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
+                    }
+
+                    LatLng DriverLatLng = new LatLng(LocationLat,LocationLong);
+                    connect = true;
+                    //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
+                    if (DriverLocationMarker!=null){
+                        DriverLocationMarker.remove();
+                    }
+                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+
+                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
+                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
+
+                }else{
                 }
             }
 
@@ -266,8 +313,8 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(1000);
+        locationRequest.setInterval(3000);
+        locationRequest.setFastestInterval(3000);
 
         Log.println(Log.INFO,"MAP SHIFTING","MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
@@ -453,19 +500,18 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void DisconnectTheDriver() {
-        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
-
-        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
-        geoFire.removeLocation(userID, new GeoFire.CompletionListener() {
-            @Override
-            public void onComplete(String key, DatabaseError error) {
-                if (error != null) {
-                    System.err.println("There was an error saving the location to GeoFire: " + error);
-                } else {
-                    System.out.println("DELEETEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED!");
-                }
-            }
-        });
+        FirebaseDatabase.getInstance().getReference().child("Drivers Available").child(userID).removeValue();
+//        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
+//        geoFire.removeLocation(userID, new GeoFire.CompletionListener() {
+//            @Override
+//            public void onComplete(String key, DatabaseError error) {
+//                if (error != null) {
+//                    System.err.println("There was an error saving the location to GeoFire: " + error);
+//                } else {
+//                    System.out.println("DELEETEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED!");
+//                }
+//            }
+//        });
     }
 
     @Override

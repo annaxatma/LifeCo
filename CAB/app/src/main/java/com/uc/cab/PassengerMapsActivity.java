@@ -251,7 +251,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                         Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
                     }
 
-                     DriverLatLng = new LatLng(LocationLat,LocationLong);
+                    DriverLatLng = new LatLng(LocationLat,LocationLong);
                     connect = true;
                     //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
                     if (DriverMarker!=null){
