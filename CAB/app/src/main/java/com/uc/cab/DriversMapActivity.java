@@ -521,8 +521,8 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     public void onTaskDone(Object... values) {
         if (currentPolyline != null){
             currentPolyline.remove();
-//        }
-//        else{
+        }
+        else{
             currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
         }
     }
