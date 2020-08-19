@@ -410,7 +410,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     });
                     break;
             }
-            if (connect == true){
+            if (connect == true){//IF STATE TRUE OR LIKE THIS NOW IT LASTS LOONG
 //                if (state == true){
                     DriverLocationRef = DriverLocationRef.child(DriverID).child("l");
                     Log.println(Log.INFO,"THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
