@@ -77,12 +77,12 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private Polyline currentPolyline;
     private boolean connect =  false;
+    private boolean state = false;
     private SupportMapFragment mapFragment;
-    private DatabaseReference DriverLocationRef;
-    private ValueEventListener driverLocationRefListener;
+    private DatabaseReference DriverLocationRef, OntheJobDriverRef;
+    private ValueEventListener driverLocationRefListener, OntheJobRefListener;
     private  LatLng PassengerLatLng;
     private String url;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +96,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         logoutBtn = findViewById(R.id.drivermap_logout_button);
         settingsBtn = findViewById(R.id.drivermap_settings_button);
         DriverLocationRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
+        OntheJobDriverRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
          mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -362,6 +363,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
             switch (PassengerID){
                 case "":
+                    state = true;
                     geoFireWorking.removeLocation(userID, new GeoFire.CompletionListener() {
                         @Override
                         public void onComplete(String key, DatabaseError error) {
@@ -385,6 +387,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     break;
 
                 default:
+                    state = false;
                     geoFireAvailability.removeLocation(userID, new GeoFire.CompletionListener() {
                         @Override
                         public void onComplete(String key, DatabaseError error) {
@@ -407,56 +410,106 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     });
                     break;
             }
-            //UNCHECK THIS IF LOCATION OF MARKER ISN'T UPDATING!!!!!!!!!!!!!!!MONDAY!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-//            if (connect == true){
-//                if (DriverLocationMarker!=null){
-//                    DriverLocationMarker.remove();
-//                }
-//                DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
-//                String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
-//                new FetchURL(DriversMapActivity.this).execute(url, "driving");
-////                mapFragment.getMapAsync(DriversMapActivity.this);
+            if (connect == true){
+                if (state == true){
+                    DriverLocationRef = DriverLocationRef.child(DriverID).child("l");
+                    Log.println(Log.INFO,"THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
+                    driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                //                    GenericTypeIndicator <List<Object>> driverLocIndicator  = new GenericTypeIndicator<List<Object>>() {
+                                //                    };
+                                List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
+                                //                    HashMap <String,Object> driverLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                                //                    List<Object> driverLocationMap = new ArrayList<Object>(driverLocHMap.values());
+                                double LocationLat = 0;
+                                double LocationLong = 0;
+                                //Get closest driver wrong position
+                                //mapfragment not support DUNZO
+                                // Initialize location
 
-//                AssignedPassengerPickUpListener = AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        if (dataSnapshot.exists() && !PassengerID.equals("")){
-////                    GenericTypeIndicator<List<Object>> passengerLocIndicator  = new GenericTypeIndicator<List<Object>>() {
-////                    };
-//                            List<Object> passengerLocationMap = (List<Object>) dataSnapshot.getValue();
-////                    HashMap<String,Object> passengerLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
-////                    List<Object> passengerLocationMap = new ArrayList<Object>(passengerLocHMap.values());
-//                            double LocationLat = 0;
-//                            double LocationLong = 0;
-//
-//                            if (passengerLocationMap.get(0) != null){
-//                                LocationLat = Double.parseDouble(passengerLocationMap.get(0).toString());
-//                            }
-//                            if (passengerLocationMap.get(1) != null){
-//                                LocationLong = Double.parseDouble(passengerLocationMap.get(1).toString());
-//                            }
-//
-//                            LatLng PassengerLatLng = new LatLng(LocationLat,LocationLong);
-//                            connect = true;
-//                            PickUpLocationMarker = mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
-//                    if (DriverLocationMarker!=null){
-//                        DriverLocationMarker.remove();
-//                    }
-//                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude())).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
-//                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
-//                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
-//                            //this one has problems with the class
-////                    getRoutetoMarker(PassengerLatLng);
-//                            //this one has error about API Key
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//                    }
-//                });
-//            }
+                                if (driverLocationMap.get(0) != null){
+                                    LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
+                                    Log.println(Log.INFO," IS THE latitude oF DRI", driverLocationMap.get(0).toString());
+                                    //                        {g=qw8nsmhqg3, l=[-7.2662892, 112.692749]}
+                                }
+                                if (driverLocationMap.get(1) != null){
+                                    LocationLong = Double.parseDouble(driverLocationMap.get(1).toString());
+                                    Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
+                                }
+
+                                LatLng DriverLatLng = new LatLng(LocationLat,LocationLong);
+                                connect = true;
+                                //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
+                                if (DriverLocationMarker!=null){
+                                    DriverLocationMarker.remove();
+                                }
+                                DriverLocationMarkerOpt = new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground));
+                                DriverLocationMarker = mMap.addMarker(DriverLocationMarkerOpt);
+                                url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
+                                new FetchURL(DriversMapActivity.this).execute(url, "driving");
+
+                            }else{
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else {
+                    OntheJobDriverRef = OntheJobDriverRef.child(DriverID).child("l");
+                    Log.println(Log.INFO,"THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
+                    OntheJobRefListener = OntheJobDriverRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()){
+                                //                    GenericTypeIndicator <List<Object>> driverLocIndicator  = new GenericTypeIndicator<List<Object>>() {
+                                //                    };
+                                List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
+                                //                    HashMap <String,Object> driverLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                                //                    List<Object> driverLocationMap = new ArrayList<Object>(driverLocHMap.values());
+                                double LocationLat = 0;
+                                double LocationLong = 0;
+                                //Get closest driver wrong position
+                                //mapfragment not support DUNZO
+                                // Initialize location
+
+                                if (driverLocationMap.get(0) != null){
+                                    LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
+                                    Log.println(Log.INFO," IS THE latitude oF DRI", driverLocationMap.get(0).toString());
+                                    //                        {g=qw8nsmhqg3, l=[-7.2662892, 112.692749]}
+                                }
+                                if (driverLocationMap.get(1) != null){
+                                    LocationLong = Double.parseDouble(driverLocationMap.get(1).toString());
+                                    Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
+                                }
+
+                                LatLng DriverLatLng = new LatLng(LocationLat,LocationLong);
+                                connect = true;
+                                //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
+                                if (DriverLocationMarker!=null){
+                                    DriverLocationMarker.remove();
+                                }
+                                DriverLocationMarkerOpt = new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground));
+                                DriverLocationMarker = mMap.addMarker(DriverLocationMarkerOpt);
+                                url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
+                                new FetchURL(DriversMapActivity.this).execute(url, "driving");
+
+                            }else{
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+            }
 
         }
 
