@@ -70,6 +70,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private DatabaseReference AssignedPassengerRef, AssignedPassengerPickupRef;
     private String DriverID, PassengerID = "";
     String userID;
+    private MarkerOptions PickUpLocationMarkerOpt,DriverLocationMarkerOpt;
     private Marker PickUpLocationMarker,DriverLocationMarker;
     private ValueEventListener AssignedPassengerPickUpListener;
     private List<Polyline> polylines;
@@ -80,6 +81,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     private DatabaseReference DriverLocationRef;
     private ValueEventListener driverLocationRefListener;
     private  LatLng PassengerLatLng;
+    private String url;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -171,7 +173,8 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
 
                     PassengerLatLng = new LatLng(LocationLat,LocationLong);
                     connect = true;
-                    PickUpLocationMarker = mMap.addMarker(new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
+                    PickUpLocationMarkerOpt = new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground));
+                    PickUpLocationMarker = mMap.addMarker(PickUpLocationMarkerOpt);
 //                    if (DriverLocationMarker!=null){
 //                        DriverLocationMarker.remove();
 //                    }
@@ -224,9 +227,9 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                     if (DriverLocationMarker!=null){
                         DriverLocationMarker.remove();
                     }
-                    DriverLocationMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
-
-                    String url = getUrl(DriverLocationMarker.getPosition(),PickUpLocationMarker.getPosition(),"driving");
+                    DriverLocationMarkerOpt = new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground));
+                    DriverLocationMarker = mMap.addMarker(DriverLocationMarkerOpt);
+                    url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
                     new FetchURL(DriversMapActivity.this).execute(url, "driving");
 
                 }else{
@@ -287,7 +290,7 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        mMap.clear();
+//        mMap.clear();
         buildGoogleApiClient();
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(DriversMapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},44);
@@ -345,8 +348,9 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         if (getApplicationContext() != null){
             lastLocation = location;
             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+            GetAssignedRequest();
             Log.println(Log.INFO,"LATLNG VALUE", String.valueOf(latLng));
 
 //            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
