@@ -279,8 +279,6 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     else{
                         callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
                     }
-                    mMap.clear();
-
                 }else{
                 }
             }
@@ -329,6 +327,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.clear();
         buildGoogleApiClient();
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(PassengerMapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},44);
