@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FEFCEB"
     tools:context=".RegistrationActivity">
 
     <androidx.core.widget.NestedScrollView
@@ -38,9 +39,8 @@
                 android:clickable="true"
                 android:src="@drawable/ic_camera_alt_black_24dp"
                 app:backgroundTint="#D3D3D3"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                app:layout_constraintBottom_toTopOf="@+id/inpNameRegis"
                 app:layout_constraintEnd_toEndOf="@+id/imageView2"
-                app:layout_constraintHorizontal_bias="0.91"
                 app:layout_constraintStart_toEndOf="@+id/imageView2" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -48,6 +48,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
@@ -216,16 +217,6 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="152dp"
-                android:layout_height="142dp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/ic_account_circle_orange_24dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/regisToolbar" />
-
             <EditText
                 android:id="@+id/inpPenyakitSendiriRegis"
                 android:layout_width="0dp"
@@ -366,7 +357,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/primary_button"
+                android:background="#E56956"
+                android:fontFamily="@font/poppins_bold"
                 android:text="@string/dftrAkunRegis"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -437,6 +429,16 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/inpUsernameRegis" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:src="@drawable/female"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/regisToolbar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

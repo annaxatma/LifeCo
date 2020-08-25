@@ -4,17 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FEFCEB"
     tools:context=".LoginActivity">
-
-    <ImageView
-        android:id="@+id/lifecoIcon"
-        android:layout_width="263dp"
-        android:layout_height="222dp"
-        android:layout_marginTop="72dp"
-        android:src="@drawable/lifeconobg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginToolbar" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/loginToolbar"
@@ -31,12 +22,12 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputEmailLogin"
-        android:layout_width="0dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="@+id/lifecoIcon"
-        app:layout_constraintStart_toStartOf="@+id/lifecoIcon"
-        app:layout_constraintTop_toBottomOf="@+id/lifecoIcon">
+        android:layout_marginTop="24dp"
+        app:layout_constraintEnd_toEndOf="@+id/imageView19"
+        app:layout_constraintStart_toStartOf="@+id/imageView19"
+        app:layout_constraintTop_toBottomOf="@+id/imageView19">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -66,7 +57,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/primary_button"
+        android:background="#E56956"
+        android:fontFamily="@font/poppins_bold"
         android:text="@string/btnLogin"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="@+id/inputPasswordLogin"
@@ -90,7 +82,7 @@
         android:background="#00FFFFFF"
         android:text="@string/daftar_akun"
         android:textAllCaps="false"
-        android:textColor="#FF9800"
+        android:textColor="#E56956"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="@+id/btnLogin"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -105,5 +97,27 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/inputPasswordLogin" />
+
+    <ImageView
+        android:id="@+id/imageView19"
+        android:layout_width="199dp"
+        android:layout_height="227dp"
+        android:layout_marginTop="64dp"
+        android:src="@drawable/lifeco"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginToolbar" />
+
+    <ImageView
+        android:id="@+id/imageView21"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:alpha=".2"
+        android:src="@drawable/bg_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
