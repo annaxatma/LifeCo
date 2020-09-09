@@ -497,9 +497,11 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
                 }
                 DriverLocationMarkerOpt = new MarkerOptions().position(latLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground));
                 DriverLocationMarker = mMap.addMarker(DriverLocationMarkerOpt);
+                if (DriverLocationMarkerOpt!=null &&PickUpLocationMarkerOpt !=null ){
+                    url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
+                    new FetchURL(DriversMapActivity.this).execute(url, "driving");
+                }
 
-                url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
-                new FetchURL(DriversMapActivity.this).execute(url, "driving");
                 }
                 else {
 //                    OntheJobDriverRef = OntheJobDriverRef.child(DriverID).child("l");
