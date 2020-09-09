@@ -39,6 +39,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.libraries.places.api.Places;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -52,6 +53,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PassengerMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener, RoutingListener, TaskLoadedCallback {
+
 
     private GoogleMap mMap;
     GoogleApiClient googleApiClient;
@@ -78,21 +80,26 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private String destination;
-
+    private LatLng DriverLatLng;
+    private boolean connect = false;
+    private SupportMapFragment mapFragment;
     //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_passenger_maps);
         mAuth = FirebaseAuth.getInstance();
+
         passengerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         CustomerDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Pick Up Request");
         DriverAvailableRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
         DriverLocationRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
         polylines = new ArrayList<>();
-
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
+        }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+        mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
@@ -141,6 +148,9 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                         PickupMarker.remove();
                     }
                     callBtn.setText("I'M DYING 4 REAL");
+                    FirebaseDatabase.getInstance().getReference().child("Pick Up Request").child(passengerID).removeValue();
+                    FirebaseDatabase.getInstance().getReference().child("Drivers Working").child(DriverFoundID).removeValue();
+                    //CHECK AGAIN, MAYBE WRONG
 
                 }
                 else{
@@ -158,7 +168,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                         }
                     });
                     PassengerPickupLocation = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
-                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
 
                     callBtn.setText("Getting an Ambulance....");
                     GetClosestDriverCab();
@@ -186,6 +196,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     DriverRef.updateChildren(driverMap);
 
                     GettingDriverLocation();
+
                     callBtn.setText("Initializing Ambulance Location");
                 }
             }
@@ -224,12 +235,10 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 //                    GenericTypeIndicator <List<Object>> driverLocIndicator  = new GenericTypeIndicator<List<Object>>() {
 //                    };
                     List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
-//                    HashMap <String,Object> driverLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
-//                    List<Object> driverLocationMap = new ArrayList<Object>(driverLocHMap.values());
+
                     double LocationLat = 0;
                     double LocationLong = 0;
                     callBtn.setText("Driver Found");
-
 
                     if (driverLocationMap.get(0) != null){
                         LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
@@ -241,11 +250,16 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                         Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
                     }
 
-                    LatLng DriverLatLng = new LatLng(LocationLat,LocationLong);
+                    DriverLatLng = new LatLng(LocationLat,LocationLong);
+                    connect = true;
+                    //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
                     if (DriverMarker!=null){
                         DriverMarker.remove();
                     }
-                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher)));
+
+                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
+
+                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
 
                     Location location1 = new Location("");
                     location1.setLatitude(PassengerPickupLocation.latitude);
@@ -255,20 +269,17 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     location2.setLatitude(DriverLatLng.latitude);
                     location2.setLongitude(DriverLatLng.longitude);
                     String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
-                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
-                    float Distance = location1.distanceTo(location2);
-                    if (Distance<75){
-//                        callBtn.setText("Your Driver is here");
-                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
-
-                    }
-                    else{
-                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
-                    }
-
-
+//                    new  FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+//                    float Distance = location1.distanceTo(location2);
+//                    if (Distance<75){
+////                        callBtn.setText("Your Driver is here");
+//                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
+//
+//                    }
+//                    else{
+//                        callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
+//                    }
                 }else{
-                    erasePolylines();
                 }
             }
 
@@ -310,10 +321,13 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
+     * MAP FRAGMENT, NOT SUPPORT MAP FRAGMENT
      */
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.clear();
         buildGoogleApiClient();
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!= PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(PassengerMapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},44);
@@ -331,9 +345,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         locationRequest = new LocationRequest();
-        locationRequest.setInterval(1000);
-        locationRequest.setFastestInterval(1000);
-
+        locationRequest.setInterval(3000);
+        locationRequest.setFastestInterval(3000);
         Log.println(Log.INFO,"MAP SHIFTING","MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
@@ -364,6 +377,92 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
         Log.println(Log.INFO,"LATLNG VALUE", String.valueOf(latLng));
+        DatabaseReference PassengerOnlineRef = FirebaseDatabase.getInstance().getReference().child("Passenger Online");
+        GeoFire geoFireOnline= new GeoFire(PassengerOnlineRef);
+        geoFireOnline.setLocation(passengerID, new GeoLocation(location.getLatitude(), location.getLongitude()), new GeoFire.CompletionListener() {
+            @Override
+            public void onComplete(String key, DatabaseError error) {
+                if (error != null) {
+                    System.err.println("There was an error saving the location to GeoFire: " + error);
+                } else {
+                    System.out.println("Location saved on server successfully!");
+                }
+            }
+        });
+//        if(connect == true){
+//            if (DriverMarker!=null){
+//                DriverMarker.remove();
+//            }
+//            DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+//            String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+//            new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+//            mapFragment.getMapAsync(PassengerMapsActivity.this);
+
+//            driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    if (dataSnapshot.exists()){
+////                    GenericTypeIndicator <List<Object>> driverLocIndicator  = new GenericTypeIndicator<List<Object>>() {
+////                    };
+//                        List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
+////                    HashMap <String,Object> driverLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
+////                    List<Object> driverLocationMap = new ArrayList<Object>(driverLocHMap.values());
+//                        double LocationLat = 0;
+//                        double LocationLong = 0;
+//                        callBtn.setText("Driver Found");
+//                        //Get closest driver wrong position
+//                        //mapfragment not support DUNZO
+//                        // Initialize location
+//
+//                        if (driverLocationMap.get(0) != null){
+//                            LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
+//                            Log.println(Log.INFO," IS THE latitude oF DRI", driverLocationMap.get(0).toString());
+////                        {g=qw8nsmhqg3, l=[-7.2662892, 112.692749]}
+//                        }
+//                        if (driverLocationMap.get(1) != null){
+//                            LocationLong = Double.parseDouble(driverLocationMap.get(1).toString());
+//                            Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
+//                        }
+//
+//                        DriverLatLng = new LatLng(LocationLat,LocationLong);
+//                        connect = true;
+//                        //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
+//                    if (DriverMarker!=null){
+//                        DriverMarker.remove();
+//                    }
+//                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+//
+//                        Location location1 = new Location("");
+//                        location1.setLatitude(PassengerPickupLocation.latitude);
+//                        location1.setLongitude(PassengerPickupLocation.longitude);
+//
+//                        Location location2 = new Location("");
+//                        location2.setLatitude(DriverLatLng.latitude);
+//                        location2.setLongitude(DriverLatLng.longitude);
+//                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+//                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+//                        float Distance = location1.distanceTo(location2);
+//                        if (Distance<75){
+////                        callBtn.setText("Your Driver is here");
+//                            callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
+//
+//                        }
+//                        else{
+//                            callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
+//                        }
+//
+//
+//                    }else{
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
+//        }
+
 
 //        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
 //        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Passengers");
@@ -422,19 +521,20 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 
     private void DisconnectThePassenger() {
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
-
-        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
-        geoFire.removeLocation(userID, new GeoFire.CompletionListener() {
-            @Override
-            public void onComplete(String key, DatabaseError error) {
-                if (error != null) {
-                    System.err.println("There was an error saving the location to GeoFire: " + error);
-                } else {
-                    System.out.println("DELEETEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED!");
-                }
-            }
-        });
+        FirebaseDatabase.getInstance().getReference().child("Passenger Online").child(userID).removeValue();
+//        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
+//
+//        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
+//        geoFire.removeLocation(userID, new GeoFire.CompletionListener() {
+//            @Override
+//            public void onComplete(String key, DatabaseError error) {
+//                if (error != null) {
+//                    System.err.println("There was an error saving the location to GeoFire: " + error);
+//                } else {
+//                    System.out.println("DELEETEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEED!");
+//                }
+//            }
+//        });
     }
 
     @Override
@@ -483,12 +583,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     public void onRoutingCancelled() {
 
     }
-    private void erasePolylines(){
-        for (Polyline line : polylines){
-            line.remove();
-        }
-        polylines.clear();
-    }
+
 
     @Override
     public void onTaskDone(Object... values) {
