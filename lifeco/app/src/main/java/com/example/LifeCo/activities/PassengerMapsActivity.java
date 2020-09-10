@@ -83,6 +83,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private LatLng DriverLatLng;
     private boolean connect = false;
     private SupportMapFragment mapFragment;
+    private boolean Search = true;
     //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +103,6 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        InitializePosition();
         currentUser = mAuth.getCurrentUser();
 //        logoutBtn = findViewById(R.id.passenger_logout_button);
         settingsBtn = findViewById(R.id.passenger_settings_button);
@@ -433,6 +433,10 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     @Override
     public void onLocationChanged(Location location) {
         lastLocation = location;
+        if (Search ==true){
+            Search =false;
+            InitializePosition();
+        }
         LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
