@@ -10,8 +10,8 @@
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnEmergencyCall"
-        android:layout_width="200dp"
-        android:layout_height="181dp"
+        android:layout_width="193dp"
+        android:layout_height="176dp"
         android:background="#E56956"
         android:backgroundTint="#E56956"
         android:clickable="true"
@@ -25,19 +25,6 @@
         app:layout_constraintVertical_bias="0.365"
         app:maxImageSize="100dp" />
 
-    <Button
-        android:id="@+id/btnChatApp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:background="#EF6256"
-        android:backgroundTint="#EF6256"
-        android:text="@string/btnChat"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <ImageView
         android:id="@+id/imageView22"
         android:layout_width="wrap_content"
@@ -50,12 +37,13 @@
 
     <ImageView
         android:id="@+id/imageView20"
-        android:layout_width="245dp"
-        android:layout_height="429dp"
-        android:layout_marginTop="92dp"
+        android:layout_width="206dp"
+        android:layout_height="364dp"
+        android:layout_marginTop="136dp"
+        android:alpha=".75"
         android:src="@drawable/doc"
         app:layout_constraintEnd_toEndOf="@+id/imageView22"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.209"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEmergencyCall" />
 

@@ -90,7 +90,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
         DriverID = mAuth.getCurrentUser().getUid();
-        logoutBtn = findViewById(R.id.drivermap_logout_button);
+//        logoutBtn = findViewById(R.id.drivermap_logout_button);
         settingsBtn = findViewById(R.id.drivermap_settings_button);
         DriverLocationRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
         OntheJobDriverRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");

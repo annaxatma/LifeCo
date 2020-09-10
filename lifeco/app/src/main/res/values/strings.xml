@@ -62,5 +62,7 @@
     <string name="txtKesehatanPribadi">Kesehatan Pribadi</string>
     <string name="txtTekananDarah">Tekanan Darah</string>
     <string name="mmhg">mmHg</string>
+    <string name="CallBtn">Call</string>
+    <string name="ChatNowBtn">Chat Now</string>
 
 </resources>
