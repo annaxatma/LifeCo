@@ -168,7 +168,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                         }
                     });
                     PassengerPickupLocation = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
-                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
+                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart)));
 
                     callBtn.setText("Getting an Ambulance....");
                     GetClosestDriverCab();
@@ -257,9 +257,9 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                         DriverMarker.remove();
                     }
 
-                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground)));
+                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart)));
 
-                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulanceheart)));
 
                     Location location1 = new Location("");
                     location1.setLatitude(PassengerPickupLocation.latitude);

@@ -171,7 +171,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                     PassengerLatLng = new LatLng(LocationLat,LocationLong);
 //                    connect = true;
 
-                    PickUpLocationMarkerOpt = new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground));
+                    PickUpLocationMarkerOpt = new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart));
                     PickUpLocationMarker = mMap.addMarker(PickUpLocationMarkerOpt);
 //                    if (DriverLocationMarker!=null){
 //                        DriverLocationMarker.remove();
@@ -225,7 +225,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                     if (DriverLocationMarker!=null){
                         DriverLocationMarker.remove();
                     }
-                    DriverLocationMarkerOpt = new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground));
+                    DriverLocationMarkerOpt = new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulanceheart));
                     DriverLocationMarker = mMap.addMarker(DriverLocationMarkerOpt);
                     if (once == false){
                         url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
@@ -423,7 +423,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                                 LocationLong = Double.parseDouble(passengerLocationMap.get(1).toString());
                             }
                             PassengerLatLng = new LatLng(LocationLat,LocationLong);
-                            PickUpLocationMarkerOpt = new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_damaged_foreground));
+                            PickUpLocationMarkerOpt = new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart));
                             PickUpLocationMarker = mMap.addMarker(PickUpLocationMarkerOpt);
 //                    if (DriverLocationMarker!=null){
 //                        DriverLocationMarker.remove();
@@ -491,7 +491,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                 if (DriverLocationMarker!=null){
                     DriverLocationMarker.remove();
                 }
-                DriverLocationMarkerOpt = new MarkerOptions().position(latLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground));
+                DriverLocationMarkerOpt = new MarkerOptions().position(latLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulanceheart));
                 DriverLocationMarker = mMap.addMarker(DriverLocationMarkerOpt);
                 if (DriverLocationMarkerOpt!=null &&PickUpLocationMarkerOpt !=null ){
                     url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
