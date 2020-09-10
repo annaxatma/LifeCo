@@ -238,7 +238,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 
                     double LocationLat = 0;
                     double LocationLong = 0;
-                    callBtn.setText("Driver Found");
+//                    callBtn.setText("Driver Found");
 
                     if (driverLocationMap.get(0) != null){
                         LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
