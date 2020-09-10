@@ -102,7 +102,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
+        GetClosestDriverCab();
         currentUser = mAuth.getCurrentUser();
 //        logoutBtn = findViewById(R.id.passenger_logout_button);
         settingsBtn = findViewById(R.id.passenger_settings_button);

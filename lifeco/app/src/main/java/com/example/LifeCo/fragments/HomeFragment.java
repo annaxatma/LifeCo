@@ -84,8 +84,7 @@ public class HomeFragment extends Fragment {
         callAmb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
-                startActivity(intent);
+
 
                 if (requestbol){
                     requestbol = false;
@@ -139,8 +138,9 @@ public class HomeFragment extends Fragment {
                     PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart)));
 
 //                    callBtn.setText("Getting an Ambulance....");
-                    GetClosestDriverCab();
                 }
+                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
+                startActivity(intent);
             }
         });
 
