@@ -50,8 +50,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener,com.google.android.gms.location.LocationListener, TaskLoadedCallback {
-
+public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, com.google.android.gms.location.LocationListener, TaskLoadedCallback {
 
 
     private GoogleMap mMap;
@@ -66,24 +65,25 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     private DatabaseReference AssignedPassengerRef, AssignedPassengerPickupRef;
     private String DriverID, PassengerID = "";
     String userID;
-    private MarkerOptions PickUpLocationMarkerOpt,DriverLocationMarkerOpt;
-    private Marker PickUpLocationMarker,DriverLocationMarker;
+    private MarkerOptions PickUpLocationMarkerOpt, DriverLocationMarkerOpt;
+    private Marker PickUpLocationMarker, DriverLocationMarker;
     private ValueEventListener AssignedPassengerPickUpListener;
     private List<Polyline> polylines;
     private static final int[] COLORS = new int[]{R.color.primary_dark_material_light};
     private Polyline currentPolyline;
-    private boolean connect =  false;
+    private boolean connect = false;
     private boolean state = false;
     private boolean once = false;
     private SupportMapFragment mapFragment;
     private DatabaseReference DriverLocationRef, OntheJobDriverRef;
     private ValueEventListener driverLocationRefListener, OntheJobRefListener;
-    private  LatLng PassengerLatLng;
+    private LatLng PassengerLatLng;
     private String url;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.println(Log.INFO,"CREATION","MAP STARTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+        Log.println(Log.INFO, "CREATION", "MAP STARTINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         setContentView(R.layout.activity_driver_maps);
         polylines = new ArrayList<>();
         userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -119,23 +119,22 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     private void GetAssignedRequest() {
         AssignedPassengerRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverID).child("CustomerRideID");
-        Log.println(Log.ERROR,"THIS IS THE ID of PASSS", "GOING TO EXECUTE OT");
+        Log.println(Log.ERROR, "THIS IS THE ID of PASSS", "GOING TO EXECUTE OT");
 
         AssignedPassengerRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
                     PassengerID = dataSnapshot.getValue().toString();
                     GetAssignedPassengerPickUpLocation();
-                    Log.println(Log.ERROR,"THIS IS THE ID of PASSS", PassengerID);
-                }
-                else{
+                    Log.println(Log.ERROR, "THIS IS THE ID of PASSS", PassengerID);
+                } else {
                     PassengerID = "";
-                    if (PickUpLocationMarker!=null){
+                    if (PickUpLocationMarker != null) {
                         PickUpLocationMarker.remove();
                     }
-                    if (AssignedPassengerPickUpListener!=null){
+                    if (AssignedPassengerPickUpListener != null) {
                         AssignedPassengerPickupRef.removeEventListener(AssignedPassengerPickUpListener);
                     }
                 }
@@ -153,7 +152,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         AssignedPassengerPickUpListener = AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists() && !PassengerID.equals("")){
+                if (dataSnapshot.exists() && !PassengerID.equals("")) {
 //                    GenericTypeIndicator<List<Object>> passengerLocIndicator  = new GenericTypeIndicator<List<Object>>() {
 //                    };
                     List<Object> passengerLocationMap = (List<Object>) dataSnapshot.getValue();
@@ -162,13 +161,13 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                     double LocationLat = 0;
                     double LocationLong = 0;
 
-                    if (passengerLocationMap.get(0) != null){
+                    if (passengerLocationMap.get(0) != null) {
                         LocationLat = Double.parseDouble(passengerLocationMap.get(0).toString());
                     }
-                    if (passengerLocationMap.get(1) != null){
+                    if (passengerLocationMap.get(1) != null) {
                         LocationLong = Double.parseDouble(passengerLocationMap.get(1).toString());
                     }
-                    PassengerLatLng = new LatLng(LocationLat,LocationLong);
+                    PassengerLatLng = new LatLng(LocationLat, LocationLong);
 //                    connect = true;
 
                     PickUpLocationMarkerOpt = new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart));
@@ -193,11 +192,11 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
             }
         });
         DriverLocationRef = DriverLocationRef.child(DriverID).child("l");
-        Log.println(Log.INFO,"THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
+        Log.println(Log.INFO, "THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
         driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.exists()){
+                if (dataSnapshot.exists()) {
 //                    GenericTypeIndicator <List<Object>> driverLocIndicator  = new GenericTypeIndicator<List<Object>>() {
 //                    };
                     List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
@@ -209,32 +208,32 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                     //mapfragment not support DUNZO
                     // Initialize location
 
-                    if (driverLocationMap.get(0) != null){
+                    if (driverLocationMap.get(0) != null) {
                         LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
-                        Log.println(Log.INFO," IS THE latitude oF DRI", driverLocationMap.get(0).toString());
+                        Log.println(Log.INFO, " IS THE latitude oF DRI", driverLocationMap.get(0).toString());
 //                        {g=qw8nsmhqg3, l=[-7.2662892, 112.692749]}
                     }
-                    if (driverLocationMap.get(1) != null){
+                    if (driverLocationMap.get(1) != null) {
                         LocationLong = Double.parseDouble(driverLocationMap.get(1).toString());
-                        Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
+                        Log.println(Log.INFO, " ISE Longitude oF DRI", driverLocationMap.get(1).toString());
                     }
 
-                    LatLng DriverLatLng = new LatLng(LocationLat,LocationLong);
+                    LatLng DriverLatLng = new LatLng(LocationLat, LocationLong);
 //                    connect = true;
                     //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
-                    if (DriverLocationMarker!=null){
+                    if (DriverLocationMarker != null) {
                         DriverLocationMarker.remove();
                     }
                     DriverLocationMarkerOpt = new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulanceheart));
                     DriverLocationMarker = mMap.addMarker(DriverLocationMarkerOpt);
-                    if (once == false){
-                        url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
+                    if (once == false) {
+                        url = getUrl(DriverLocationMarkerOpt.getPosition(), PickUpLocationMarkerOpt.getPosition(), "driving");
                         new FetchURL(DriverMapsActivity.this).execute(url, "driving");
-                        once =true;
+                        once = true;
                     }
 
 
-                }else{
+                } else {
                 }
             }
 
@@ -244,6 +243,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
             }
         });
     }
+
     private String getUrl(LatLng origin, LatLng dest, String directionMode) {
         // Origin of route
         String str_origin = "origin=" + origin.latitude + "," + origin.longitude;
@@ -285,10 +285,10 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         mMap = googleMap;
 //        mMap.clear();
         buildGoogleApiClient();
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(DriverMapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},44);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(DriverMapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 44);
             String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
-            requestPermissions(permission,44);
+            requestPermissions(permission, 44);
             return;
         }
         mMap.setMyLocationEnabled(true);
@@ -313,15 +313,15 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         locationRequest.setInterval(3000);
         locationRequest.setFastestInterval(3000);
 
-        Log.println(Log.INFO,"MAP SHIFTING","MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+        Log.println(Log.INFO, "MAP SHIFTING", "MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(DriverMapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},44);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(DriverMapsActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 44);
             String[] permission = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};
-            requestPermissions(permission,44);
+            requestPermissions(permission, 44);
             return;
         }
-        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient,locationRequest,this);
+        LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
 
 
     }
@@ -338,22 +338,22 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     @Override
     public void onLocationChanged(Location location) {
-        if (getApplicationContext() != null){
+        if (getApplicationContext() != null) {
             lastLocation = location;
-            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 //            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
             GetAssignedRequest();
-            Log.println(Log.INFO,"LATLNG VALUE", String.valueOf(latLng));
+            Log.println(Log.INFO, "LATLNG VALUE", String.valueOf(latLng));
 
 //            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
             DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
-            GeoFire geoFireAvailability= new GeoFire(DriverAvailabilityRef);
+            GeoFire geoFireAvailability = new GeoFire(DriverAvailabilityRef);
 
             DatabaseReference DriverWorkingRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
             GeoFire geoFireWorking = new GeoFire(DriverWorkingRef);
 
-            switch (PassengerID){
+            switch (PassengerID) {
                 case "":
                     state = true;
                     geoFireWorking.removeLocation(userID, new GeoFire.CompletionListener() {
@@ -401,13 +401,13 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                     });
                     break;
             }
-            if (connect == true){//IF STATE TRUE OR LIKE THIS NOW IT LASTS LOONG
+            if (connect == true) {//IF STATE TRUE OR LIKE THIS NOW IT LASTS LOONG
 //                if (state == true){
                 AssignedPassengerPickupRef = FirebaseDatabase.getInstance().getReference().child("Pick Up Request").child(PassengerID).child("l");
                 AssignedPassengerPickUpListener = AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists() && !PassengerID.equals("")){
+                        if (dataSnapshot.exists() && !PassengerID.equals("")) {
 //                    GenericTypeIndicator<List<Object>> passengerLocIndicator  = new GenericTypeIndicator<List<Object>>() {
 //                    };
                             List<Object> passengerLocationMap = (List<Object>) dataSnapshot.getValue();
@@ -416,13 +416,13 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                             double LocationLat = 0;
                             double LocationLong = 0;
 
-                            if (passengerLocationMap.get(0) != null){
+                            if (passengerLocationMap.get(0) != null) {
                                 LocationLat = Double.parseDouble(passengerLocationMap.get(0).toString());
                             }
-                            if (passengerLocationMap.get(1) != null){
+                            if (passengerLocationMap.get(1) != null) {
                                 LocationLong = Double.parseDouble(passengerLocationMap.get(1).toString());
                             }
-                            PassengerLatLng = new LatLng(LocationLat,LocationLong);
+                            PassengerLatLng = new LatLng(LocationLat, LocationLong);
                             PickUpLocationMarkerOpt = new MarkerOptions().position(PassengerLatLng).title("Pickup Location").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart));
                             PickUpLocationMarker = mMap.addMarker(PickUpLocationMarkerOpt);
 //                    if (DriverLocationMarker!=null){
@@ -488,18 +488,17 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 //
 //                        }
 //                    });
-                if (DriverLocationMarker!=null){
+                if (DriverLocationMarker != null) {
                     DriverLocationMarker.remove();
                 }
                 DriverLocationMarkerOpt = new MarkerOptions().position(latLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.drawable.ambulanceheart));
                 DriverLocationMarker = mMap.addMarker(DriverLocationMarkerOpt);
-                if (DriverLocationMarkerOpt!=null &&PickUpLocationMarkerOpt !=null ){
-                    url = getUrl(DriverLocationMarkerOpt.getPosition(),PickUpLocationMarkerOpt.getPosition(),"driving");
+                if (DriverLocationMarkerOpt != null && PickUpLocationMarkerOpt != null) {
+                    url = getUrl(DriverLocationMarkerOpt.getPosition(), PickUpLocationMarkerOpt.getPosition(), "driving");
                     new FetchURL(DriverMapsActivity.this).execute(url, "driving");
                 }
 
-            }
-            else {
+            } else {
 //                    OntheJobDriverRef = OntheJobDriverRef.child(DriverID).child("l");
 //                    Log.println(Log.INFO,"THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
 //                    OntheJobRefListener = OntheJobDriverRef.addValueEventListener(new ValueEventListener() {
@@ -552,9 +551,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
 
-
-
-    protected synchronized void buildGoogleApiClient(){
+    protected synchronized void buildGoogleApiClient() {
         googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
@@ -567,13 +564,12 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch  (requestCode){
-            case 44:{
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+        switch (requestCode) {
+            case 44: {
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                }
-                else {
-                    Toast.makeText(this,"Permission Denied",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
                 }
             }
         }
@@ -584,7 +580,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         //when the this page is exited, SUPPOSEDLY HERE IS WHERE YOU PUT THE DELETE
         super.onStop();
 
-        if (!currentLogoutDriverStatus){
+        if (!currentLogoutDriverStatus) {
             DisconnectTheDriver();
         }
 //        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -611,14 +607,11 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
 
-
-
     @Override
     public void onTaskDone(Object... values) {
-        if (currentPolyline != null){
+        if (currentPolyline != null) {
             currentPolyline.remove();
-        }
-        else{
+        } else {
             currentPolyline = mMap.addPolyline((PolylineOptions) values[0]);
         }
     }
