@@ -119,7 +119,7 @@ public class ChatMainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(ChatMainActivity.this, StartActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(ChatMainActivity.this, welcome.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;
         }
         return false;

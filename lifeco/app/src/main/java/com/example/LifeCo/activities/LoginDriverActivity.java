@@ -1,8 +1,5 @@
 package com.example.LifeCo.activities;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.lifeco.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +19,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginDriverActivity extends AppCompatActivity {
 
     Button btnLogin, btnDaftarAkun;
     String email, password;
@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_logindriver);
 
         btnLogin = findViewById(R.id.btnLogin);
         btnDaftarAkun = findViewById(R.id.btnDaftarAkun);
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         if (fAuth.getCurrentUser() != null) {
             // User is logged in
-            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            Intent intent = new Intent(LoginDriverActivity.this, MainActivity.class);
             startActivity(intent);
         }
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -67,15 +67,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, "User Logged In.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginDriverActivity.this, "User Logged In.", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            String account = "pasien";
+                            Intent intent = new Intent(LoginDriverActivity.this, MainActivity.class);
+                            String account = "ambulans";
                             intent.putExtra("account",account);
                             startActivity(intent);
                             finish();
                         }else {
-                            Toast.makeText(LoginActivity.this, "Tidak dapat log in akun.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginDriverActivity.this, "Tidak dapat log in akun.", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -85,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         btnDaftarAkun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
+                Intent intent = new Intent(LoginDriverActivity.this, RegistrationDriverActivity.class);
 
                 startActivity(intent);
             }

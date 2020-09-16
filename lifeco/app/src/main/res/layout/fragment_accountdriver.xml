@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FEFCEB"
+    tools:context="com.example.LifeCo.fragments.AccountFragment">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <View
+                android:id="@+id/myRectangleView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="#E0DCA7"
+                app:layout_constraintBottom_toBottomOf="@+id/imgProfilePicture"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/horizontalLine5"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:layout_marginTop="15dp"
+                android:background="#424242"
+                app:layout_constraintEnd_toEndOf="@+id/txtEmailDriver"
+                app:layout_constraintHorizontal_bias="0.446"
+                app:layout_constraintStart_toStartOf="@+id/txtEmailDriver"
+                app:layout_constraintTop_toBottomOf="@+id/txtEmailDriver" />
+
+            <ImageView
+                android:id="@+id/borderRectangle3"
+                android:layout_width="0dp"
+                android:layout_height="183dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/borderrectangle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/myRectangleView" />
+
+            <ImageView
+                android:id="@+id/imageView33"
+                android:layout_width="39dp"
+                android:layout_height="35dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/home"
+                app:layout_constraintStart_toStartOf="@+id/txtInformasiPersonalDriver"
+                app:layout_constraintTop_toBottomOf="@+id/txtInformasiPersonalDriver" />
+
+            <ImageView
+                android:id="@+id/imgProfilePicture"
+                android:layout_width="128dp"
+                android:layout_height="128dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/female"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btnEditProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:clickable="true"
+                android:src="@drawable/ic_settings_black_24dp"
+                app:backgroundTint="#00FFFFFF"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/btnLogOut"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="32dp"
+                android:background="#EF6256"
+                android:onClick="logout"
+                android:text="@string/btnLogOut"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView32"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginEnd="32dp"
+                android:src="@drawable/hospitalicon"
+                app:layout_constraintBottom_toTopOf="@+id/borderRectangle3"
+                app:layout_constraintEnd_toEndOf="@+id/borderRectangle3"
+                app:layout_constraintTop_toTopOf="@+id/borderRectangle3" />
+
+            <TextView
+                android:id="@+id/txtNamaDriver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="32dp"
+                android:text="Nama Driver"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/imgProfilePicture"
+                app:layout_constraintTop_toTopOf="@+id/imgProfilePicture" />
+
+            <TextView
+                android:id="@+id/txtInformasiPersonalDriver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/txtInformasiPersonal"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/borderRectangle3"
+                app:layout_constraintTop_toTopOf="@+id/borderRectangle3" />
+
+            <TextView
+                android:id="@+id/txtEmailDriver"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginTop="10dp"
+                android:text="tinaranw@gmail.com"
+                android:textSize="14sp"
+                app:layout_constraintStart_toStartOf="@+id/txtNamaDriver"
+                app:layout_constraintTop_toBottomOf="@+id/txtNamaDriver" />
+
+            <TextView
+                android:id="@+id/txtRumahSakit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:text="Rumah Sakit Panti Nirmala"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView33"
+                app:layout_constraintEnd_toEndOf="@+id/borderRectangle3"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/imageView33"
+                app:layout_constraintTop_toTopOf="@+id/imageView33" />
+
+            <ImageView
+                android:id="@+id/imageView34"
+                android:layout_width="40dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/call_1"
+                app:layout_constraintStart_toStartOf="@+id/imageView33"
+                app:layout_constraintTop_toBottomOf="@+id/imageView33" />
+
+            <TextView
+                android:id="@+id/txtNoHPDriver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="081333364492"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView34"
+                app:layout_constraintStart_toEndOf="@+id/imageView34"
+                app:layout_constraintTop_toTopOf="@+id/imageView34" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

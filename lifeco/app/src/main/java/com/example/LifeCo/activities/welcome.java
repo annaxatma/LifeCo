@@ -24,15 +24,15 @@ public class welcome extends AppCompatActivity {
         ambulansButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterDriverIntent = new Intent(welcome.this,RegistrationActivity.class);
+                Intent LoginRegisterDriverIntent = new Intent(welcome.this,LoginDriverActivity.class);
                 startActivity(LoginRegisterDriverIntent);
             }
         });
         pasienButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterPassengerIntnet = new Intent(welcome.this,RegistrationActivity.class);
-                startActivity(LoginRegisterPassengerIntnet);
+                Intent LoginRegisterPassengerIntent = new Intent(welcome.this,LoginActivity.class);
+                startActivity(LoginRegisterPassengerIntent);
             }
         });
     }

@@ -44,12 +44,13 @@
             android:label="@string/title_activity_passenger_maps" />
         <activity android:name="com.example.LifeCo.activities.ChatMainActivity" />
         <activity android:name="com.example.LifeCo.activities.RegistrationActivity" />
+        <activity android:name="com.example.LifeCo.activities.RegistrationDriverActivity" />
         <activity android:name="com.example.LifeCo.activities.LoginActivity" />
+        <activity android:name="com.example.LifeCo.activities.LoginDriverActivity" />
         <activity android:name="com.example.LifeCo.activities.DetailActivity" />
         <activity android:name="com.example.LifeCo.activities.MainActivity" />
         <activity android:name="com.example.LifeCo.activities.ResetPasswordActivity" />
         <activity android:name="com.example.LifeCo.activities.MessageActivity" />
-        <activity android:name="com.example.LifeCo.activities.StartActivity" />
         <activity android:name="com.example.LifeCo.activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

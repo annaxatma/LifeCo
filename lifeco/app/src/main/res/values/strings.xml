@@ -70,5 +70,12 @@
     <string name="txtRiwayatKesehatan" />
     <string name="textRiwayatKesehatan">Riwayat Kesehatan</string>
     <string name="txtKeluhan">Keluhan</string>
+    <string name="hintRumahSakit">Nama Rumah Sakit</string>
+    <string name="inpNamaDriverRegis">Nama Lengkap</string>
+    <string name="inpEmailDriverRegis">Email</string>
+    <string name="inpPasswordDriverRegis">Password</string>
+    <string name="inpNoTelpDriverRegis">No. Telepon</string>
+    <string name="inpRumahSakitDriverRegis">Nama Rumah Sakit</string>
+    <string name="btnDaftarAkunText">Daftar Akun</string>
 
 </resources>

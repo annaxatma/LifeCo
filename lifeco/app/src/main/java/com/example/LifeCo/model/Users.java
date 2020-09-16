@@ -25,11 +25,12 @@ public class Users {
     private String imageURL;
     private String status;
     private String search;
+    private String rumahSakit;
 
     public Users() {
     }
 
-    public Users(String id, String nama, String username, String email, String password, String alamat, String noHP, String noBPJS, String noKTP, String tekananDarah, String gulaDarah, String golDarah, String jenisKelamin, String penyakitSendiri, String penyakitKeluarga, String keluhanUtama, String obat, String alergiObat, String alergiMakanan, String tanggalLahir, String noAsuransi, String imageURL, String status, String search) {
+    public Users(String id, String nama, String username, String email, String password, String alamat, String noHP, String noBPJS, String noKTP, String tekananDarah, String gulaDarah, String golDarah, String jenisKelamin, String penyakitSendiri, String penyakitKeluarga, String keluhanUtama, String obat, String alergiObat, String alergiMakanan, String tanggalLahir, String noAsuransi, String imageURL, String status, String search, String rumahSakit) {
         this.id = id;
         this.nama = nama;
         this.username = username;
@@ -54,6 +55,7 @@ public class Users {
         this.imageURL = imageURL;
         this.status = status;
         this.search = search;
+        this.rumahSakit = rumahSakit;
     }
 
     public String getId() {
@@ -246,5 +248,9 @@ public class Users {
 
     public void setSearch(String search) {
         this.search = search;
+    }
+
+    public void setRumahSakit(String search) {
+        this.rumahSakit = rumahSakit;
     }
 }

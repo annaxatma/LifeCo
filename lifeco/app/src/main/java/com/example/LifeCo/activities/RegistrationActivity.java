@@ -58,7 +58,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
     Users users;
 
-//    private DatabaseReference PassengerDatabaseRef;
+    //    private DatabaseReference PassengerDatabaseRef;
 //    private String OnlinePassengerID;
 //    private DatabaseReference DriverDatabaseRef;
 //    private String OnlineDriverID;
@@ -387,6 +387,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     });
                     buatAkun();
                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                    String account = "pasien";
+                    intent.putExtra("account",account);
                     startActivity(intent);
                     finish();
 

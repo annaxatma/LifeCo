@@ -8,9 +8,11 @@ package com.example.LifeCo.activities;
 
         import android.content.Intent;
         import android.os.Bundle;
+        import android.util.Log;
         import android.view.MenuItem;
         import android.view.View;
 
+        import com.example.LifeCo.fragments.AccountDriverFragment;
         import com.example.LifeCo.fragments.AccountFragment;
         import com.example.LifeCo.fragments.HistoryFragment;
         import com.example.LifeCo.fragments.HomeFragment;
@@ -57,7 +59,13 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.menu_account:
                         toolbar.setTitle(R.string.menu_account);
                         setSupportActionBar(toolbar);
-                        fragment = new AccountFragment();
+                        Intent i = getIntent();
+                        //what is wrooooong with this oneee
+                        if(i.getStringExtra("account").equalsIgnoreCase("pasien")){
+                            fragment = new AccountFragment();
+                        } else {
+                            fragment = new AccountDriverFragment();
+                        }
                         loadFragment(fragment);
                         return true;
                 }
@@ -70,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.frame_main, fragment);
         transaction.commit();
     }
+
 
     @Override
     protected void onStart() {
