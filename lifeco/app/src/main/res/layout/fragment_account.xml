@@ -74,7 +74,8 @@
                 android:layout_width="128dp"
                 android:layout_height="134dp"
                 android:layout_marginStart="16dp"
-                android:src="@drawable/ic_account_circle_orange_24dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/female"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -436,7 +437,7 @@
                 android:layout_height="36dp"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_baseline_healing_24"
+                android:src="@drawable/sick"
                 app:layout_constraintStart_toStartOf="@+id/borderRectangle3"
                 app:layout_constraintTop_toBottomOf="@+id/riwayatKesehatan" />
 
@@ -454,7 +455,7 @@
                 android:layout_width="42dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_baseline_healing_24"
+                android:src="@drawable/sick"
                 app:layout_constraintStart_toStartOf="@+id/imageView9"
                 app:layout_constraintTop_toBottomOf="@+id/imageView9" />
 
