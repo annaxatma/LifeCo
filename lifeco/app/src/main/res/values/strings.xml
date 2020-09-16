@@ -64,5 +64,11 @@
     <string name="mmhg">mmHg</string>
     <string name="CallBtn">Call</string>
     <string name="ChatNowBtn">Chat Now</string>
+    <string name="ambulansButton">Ambulans</string>
+    <string name="pasienButton">Pasien</string>
+    <string name="chooseText">Pilih Tipe Akun</string>
+    <string name="txtRiwayatKesehatan" />
+    <string name="textRiwayatKesehatan">Riwayat Kesehatan</string>
+    <string name="txtKeluhan">Keluhan</string>
 
 </resources>

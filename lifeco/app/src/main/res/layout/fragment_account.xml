@@ -48,7 +48,7 @@
             <ImageView
                 android:id="@+id/borderRectangle2"
                 android:layout_width="0dp"
-                android:layout_height="450dp"
+                android:layout_height="511dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="64dp"
                 android:layout_marginEnd="32dp"
@@ -60,7 +60,7 @@
             <ImageView
                 android:id="@+id/borderRectangle3"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
+                android:layout_height="183dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="64dp"
                 android:layout_marginEnd="32dp"
@@ -118,9 +118,19 @@
                 android:layout_height="3dp"
                 android:layout_marginTop="8dp"
                 android:background="#424242"
-                app:layout_constraintEnd_toEndOf="@+id/txtInformasiPersonal2"
-                app:layout_constraintStart_toStartOf="@+id/txtInformasiPersonal2"
-                app:layout_constraintTop_toBottomOf="@+id/txtInformasiPersonal2" />
+                app:layout_constraintEnd_toEndOf="@+id/kesehatanPribadi"
+                app:layout_constraintStart_toStartOf="@+id/kesehatanPribadi"
+                app:layout_constraintTop_toBottomOf="@+id/kesehatanPribadi" />
+
+            <View
+                android:id="@+id/horizontalLine4"
+                android:layout_width="0dp"
+                android:layout_height="3dp"
+                android:background="#424242"
+                app:layout_constraintEnd_toEndOf="@+id/riwayatKesehatan"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="@+id/riwayatKesehatan"
+                app:layout_constraintTop_toBottomOf="@+id/riwayatKesehatan" />
 
             <TextView
                 android:id="@+id/txtEmail"
@@ -165,17 +175,19 @@
 
             <Button
                 android:id="@+id/btnLogOut"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
-                android:background="@drawable/primary_button"
+                android:background="#EF6256"
                 android:onClick="logout"
                 android:text="@string/btnLogOut"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/borderRectangle3" />
 
             <TextView
@@ -192,7 +204,7 @@
                 app:layout_constraintTop_toTopOf="@+id/borderRectangle" />
 
             <TextView
-                android:id="@+id/txtInformasiPersonal2"
+                android:id="@+id/kesehatanPribadi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -203,6 +215,19 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/borderRectangle2"
                 app:layout_constraintTop_toTopOf="@+id/borderRectangle2" />
+
+            <TextView
+                android:id="@+id/riwayatKesehatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/textRiwayatKesehatan"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/borderRectangle3"
+                app:layout_constraintTop_toTopOf="@+id/borderRectangle3" />
 
             <TextView
                 android:id="@+id/txtAlamat"
@@ -295,11 +320,12 @@
                 android:id="@+id/txtKeluhanUtama"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:text="Migraine"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView11"
-                app:layout_constraintStart_toEndOf="@+id/imageView11"
-                app:layout_constraintTop_toTopOf="@+id/imageView11" />
+                app:layout_constraintBottom_toBottomOf="@+id/borderRectangle2"
+                app:layout_constraintStart_toStartOf="@+id/imageView11"
+                app:layout_constraintTop_toBottomOf="@+id/imageView11"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
                 android:id="@+id/txtObat"
@@ -408,11 +434,11 @@
                 android:id="@+id/imageView9"
                 android:layout_width="42dp"
                 android:layout_height="36dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="16dp"
                 android:src="@drawable/ic_baseline_healing_24"
                 app:layout_constraintStart_toStartOf="@+id/borderRectangle3"
-                app:layout_constraintTop_toTopOf="@+id/borderRectangle3" />
+                app:layout_constraintTop_toBottomOf="@+id/riwayatKesehatan" />
 
             <ImageView
                 android:id="@+id/imageView26"
@@ -437,9 +463,7 @@
                 android:layout_width="42dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="16dp"
-                android:layout_marginBottom="32dp"
-                android:src="@drawable/ic_baseline_healing_24"
-                app:layout_constraintBottom_toBottomOf="@+id/borderRectangle2"
+                android:src="@drawable/sick"
                 app:layout_constraintStart_toStartOf="@+id/imageView16"
                 app:layout_constraintTop_toBottomOf="@+id/imageView16" />
 
@@ -448,7 +472,7 @@
                 android:layout_width="42dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_baseline_healing_24"
+                android:src="@drawable/obat"
                 app:layout_constraintStart_toStartOf="@+id/imageView14"
                 app:layout_constraintTop_toBottomOf="@+id/imageView14" />
 
@@ -457,7 +481,7 @@
                 android:layout_width="40dp"
                 android:layout_height="36dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_baseline_mood_bad_24"
+                android:src="@drawable/obat"
                 app:layout_constraintStart_toStartOf="@+id/imageView18"
                 app:layout_constraintTop_toBottomOf="@+id/imageView18" />
 
@@ -466,7 +490,7 @@
                 android:layout_width="40dp"
                 android:layout_height="44dp"
                 android:layout_marginTop="16dp"
-                android:src="@drawable/ic_baseline_fastfood_24"
+                android:src="@drawable/food"
                 app:layout_constraintStart_toStartOf="@+id/imageView14"
                 app:layout_constraintTop_toBottomOf="@+id/imageView15" />
 
@@ -558,6 +582,27 @@
                 app:layout_constraintEnd_toEndOf="@+id/textView3"
                 app:layout_constraintTop_toTopOf="@+id/txtGulaDarah"
                 app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/imageView31"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/riwayat"
+                app:layout_constraintBottom_toTopOf="@+id/borderRectangle3"
+                app:layout_constraintEnd_toEndOf="@+id/imageView25"
+                app:layout_constraintStart_toStartOf="@+id/imageView25"
+                app:layout_constraintTop_toTopOf="@+id/borderRectangle3" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/txtKeluhan"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView11"
+                app:layout_constraintStart_toEndOf="@+id/imageView11"
+                app:layout_constraintTop_toTopOf="@+id/imageView11" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
