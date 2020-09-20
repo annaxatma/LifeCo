@@ -24,11 +24,17 @@ public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     BottomNavigationView bottomNavigationView;
+    Boolean trial = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+//        if(getIntent().getStringExtra("whytinton").equalsIgnoreCase("dahell")){
+//            trial = true;
+//            Log.d("trialtinton", String.valueOf(trial));
+//        }
 
         toolbar = findViewById(R.id.toolbar_main);
 
@@ -60,11 +66,17 @@ public class MainActivity extends AppCompatActivity {
                         toolbar.setTitle(R.string.menu_account);
                         setSupportActionBar(toolbar);
                         Intent i = getIntent();
-                        //what is wrooooong with this oneee
-                        if(i.getStringExtra("account").equalsIgnoreCase("pasien")){
+                        if(i.getStringExtra("account").equalsIgnoreCase("pasien") ){
+
                             fragment = new AccountFragment();
+                            Bundle args = new Bundle();
+                            args.putString("akun", "pasien");
+                            fragment.setArguments(args);
                         } else {
                             fragment = new AccountDriverFragment();
+                            Bundle args = new Bundle();
+                            args.putString("akun", "ambulans");
+                            fragment.setArguments(args);
                         }
                         loadFragment(fragment);
                         return true;

@@ -139,8 +139,21 @@ public class HomeFragment extends Fragment {
 //
 ////                    callBtn.setText("Getting an Ambulance....");
 //                }
-                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
-                startActivity(intent);
+
+
+
+                String akunTipe = getArguments().getString("akun");
+                if(akunTipe.equalsIgnoreCase("pasien")){
+                    Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(getActivity(), DriverMapsActivity.class);
+                    startActivity(intent);
+                }
+
+//                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
+//                startActivity(intent);
+
             }
         });
 
