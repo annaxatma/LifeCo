@@ -79,6 +79,8 @@ public class UsersFragment extends Fragment {
     private void searchUsers(String s){
 
         final FirebaseUser fuser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("FirebaseUserTinton", String.valueOf(fuser));
+        System.out.println(fuser);
         Query query = FirebaseDatabase.getInstance().getReference("Users").orderByChild("search")
                 .startAt(s)
                 .endAt(s+"\uf8ff");
@@ -123,6 +125,7 @@ public class UsersFragment extends Fragment {
                         Users users = snapshot.getValue(Users.class);
                         assert users != null;
                         assert firebaseUser != null;
+                        //errorrrrrr
                         if (!users.getId().equals(firebaseUser.getUid())) {
                             mUsers.add(users);
                         }
