@@ -317,7 +317,6 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
         locationRequest.setInterval(3000);
         locationRequest.setFastestInterval(3000);
 
-        Log.println(Log.INFO,"MAP SHIFTING","MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if(ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED&& ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)!=PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(DriversMapActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},44);
@@ -346,9 +345,12 @@ public class DriversMapActivity extends FragmentActivity implements OnMapReadyCa
             lastLocation = location;
             LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
 //            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+            Log.println(Log.INFO,"MAP SHIFTING","MAP CHANGGIIIIIIINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG");
+            Log.println(Log.INFO,"LATLNG VALUE", String.valueOf(latLng));
+
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,15));
             GetAssignedRequest();
-            Log.println(Log.INFO,"LATLNG VALUE", String.valueOf(latLng));
+
 
 //            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
             DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
