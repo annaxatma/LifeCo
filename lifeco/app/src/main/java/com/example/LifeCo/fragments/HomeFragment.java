@@ -84,7 +84,8 @@ public class HomeFragment extends Fragment {
         callAmb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
+                startActivity(intent);
 
 //                if (requestbol){
 //                    requestbol = false;
@@ -150,10 +151,33 @@ public class HomeFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), DriverMapsActivity.class);
                     startActivity(intent);
                 }
+<<<<<<< HEAD
 
 //                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
 //                startActivity(intent);
 
+=======
+                else{
+                    requestbol = true;
+
+                    GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+                    geoFire.setLocation(passengerID, new GeoLocation( lastLocation.getLatitude(),lastLocation.getLongitude()), new GeoFire.CompletionListener() {
+                        @Override
+                        public void onComplete(String key, DatabaseError error) {
+                            if (error != null) {
+                                System.err.println("There was an error saving the location to GeoFire: " + error);
+                            } else {
+                                System.out.println("Location saved on server successfully!");
+                            }
+                        }
+                    });
+                    PassengerPickupLocation = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
+                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart)));
+
+//                    callBtn.setText("Getting an Ambulance....");
+                    GetClosestDriverCab();
+                }
+>>>>>>> parent of a633759... NickSuc
             }
         });
 
