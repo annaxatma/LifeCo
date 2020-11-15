@@ -141,7 +141,7 @@ public class HomeFragment extends Fragment {
 
 
 
-                String akunTipe = getActivity().getIntent().getStringExtra("akun");
+                String akunTipe = getActivity().getIntent().getStringExtra("account");
                 if(akunTipe.equalsIgnoreCase("pasien")){
                     intent = new Intent(getActivity(), PassengerMapsActivity.class);
                     startActivity(intent);
