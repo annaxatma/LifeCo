@@ -104,7 +104,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
             }
         });
-        
+
 
         GetAssignedRequest();
     }
