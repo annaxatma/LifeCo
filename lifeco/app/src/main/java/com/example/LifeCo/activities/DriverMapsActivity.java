@@ -104,15 +104,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
             }
         });
-        logoutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                currentLogoutDriverStatus = true;
-                DisconnectTheDriver();
-                mAuth.signOut();
-                LogoutDriver();
-            }
-        });
+        
 
         GetAssignedRequest();
     }

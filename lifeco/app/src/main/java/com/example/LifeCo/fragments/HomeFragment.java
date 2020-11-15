@@ -84,8 +84,8 @@ public class HomeFragment extends Fragment {
         callAmb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
-                startActivity(intent);
+//                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
+//                startActivity(intent);
 //                if (requestbol){
 //                    requestbol = false;
 //                    geoQuery.removeAllListeners();
@@ -142,6 +142,7 @@ public class HomeFragment extends Fragment {
 
 
                 String akunTipe = getActivity().getIntent().getStringExtra("account");
+                Intent intent;
                 if(akunTipe.equalsIgnoreCase("pasien")){
                     intent = new Intent(getActivity(), PassengerMapsActivity.class);
                     startActivity(intent);
