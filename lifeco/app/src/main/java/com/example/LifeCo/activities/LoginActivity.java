@@ -42,6 +42,8 @@ public class LoginActivity extends AppCompatActivity {
         if (fAuth.getCurrentUser() != null) {
             // User is logged in
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            String account = "pasien";
+            intent.putExtra("account",account);
             startActivity(intent);
         }
         btnLogin.setOnClickListener(new View.OnClickListener() {

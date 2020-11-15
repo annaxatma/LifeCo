@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="92a71671-2881-47d5-99e9-657ca0b28284" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lifeco/app/src/main/java/com/example/LifeCo/fragments/HomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/lifeco/app/src/main/java/com/example/LifeCo/fragments/HomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lifeco/app/src/main/java/com/example/LifeCo/activities/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/lifeco/app/src/main/java/com/example/LifeCo/activities/MainActivity.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
