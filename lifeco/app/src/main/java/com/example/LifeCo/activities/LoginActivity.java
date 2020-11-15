@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         if (fAuth.getCurrentUser() != null) {
             // User is logged in
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-            String account = "pasien";
-            intent.putExtra("account",account);
             startActivity(intent);
         }
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +70,8 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, "User Logged In.", Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-
+                            String account = "pasien";
+                            intent.putExtra("account",account);
                             startActivity(intent);
                             finish();
                         }else {

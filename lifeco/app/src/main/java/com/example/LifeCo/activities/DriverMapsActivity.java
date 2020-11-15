@@ -15,6 +15,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.directions.route.AbstractRouting;
+import com.directions.route.Route;
+import com.directions.route.RouteException;
+import com.directions.route.Routing;
+import com.directions.route.RoutingListener;
 import com.example.LifeCo.gDirection.FetchURL;
 import com.example.LifeCo.gDirection.TaskLoadedCallback;
 import com.example.lifeco.R;
@@ -34,7 +39,6 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,8 +54,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
 
     private GoogleMap mMap;
-    FloatingActionButton chatBtn;
-    Button backBtn;
+
     GoogleApiClient googleApiClient;
     Location lastLocation;
     LocationRequest locationRequest;
@@ -88,27 +91,20 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         currentUser = mAuth.getCurrentUser();
         DriverID = mAuth.getCurrentUser().getUid();
 //        logoutBtn = findViewById(R.id.drivermap_logout_button);
+        settingsBtn = findViewById(R.id.drivermap_settings_button);
         DriverLocationRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
         OntheJobDriverRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
-
-        chatBtn = findViewById(R.id.drivermap_chat_button);
-        backBtn = findViewById(R.id.drivermap_back_button);
-
-
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-
-        chatBtn.setOnClickListener(new View.OnClickListener() {
+        settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentMain = new Intent(DriverMapsActivity.this, ChatMainActivity.class);
-                startActivity(intentMain);
+
             }
         });
-
-        backBtn.setOnClickListener(new View.OnClickListener() {
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 currentLogoutDriverStatus = true;

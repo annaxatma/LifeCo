@@ -140,6 +140,7 @@ public class HomeFragment extends Fragment {
 //
 ////                    callBtn.setText("Getting an Ambulance....");
 //                }
+<<<<<<< HEAD
 
 
 
@@ -175,6 +176,10 @@ public class HomeFragment extends Fragment {
 //                    callBtn.setText("Getting an Ambulance....");
                     GetClosestDriverCab();
                 }
+=======
+                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
+                startActivity(intent);
+>>>>>>> parent of 099e056... latest, kurang bundle yg masi error
             }
         });
 

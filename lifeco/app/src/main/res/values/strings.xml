@@ -77,6 +77,5 @@
     <string name="inpNoTelpDriverRegis">No. Telepon</string>
     <string name="inpRumahSakitDriverRegis">Nama Rumah Sakit</string>
     <string name="btnDaftarAkunText">Daftar Akun</string>
-    <string name="backBtnDriver">Kembali</string>
 
 </resources>
