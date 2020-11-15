@@ -151,12 +151,10 @@ public class HomeFragment extends Fragment {
                     Intent intent = new Intent(getActivity(), DriverMapsActivity.class);
                     startActivity(intent);
                 }
-<<<<<<< HEAD
 
 //                Intent intent = new Intent(getActivity(), PassengerMapsActivity.class);
 //                startActivity(intent);
 
-=======
                 else{
                     requestbol = true;
 
@@ -177,7 +175,6 @@ public class HomeFragment extends Fragment {
 //                    callBtn.setText("Getting an Ambulance....");
                     GetClosestDriverCab();
                 }
->>>>>>> parent of a633759... NickSuc
             }
         });
 

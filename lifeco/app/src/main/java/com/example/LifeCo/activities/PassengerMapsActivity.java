@@ -105,10 +105,6 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-<<<<<<< HEAD
-=======
-
->>>>>>> parent of a633759... NickSuc
         currentUser = mAuth.getCurrentUser();
 
         chatBtn.setOnClickListener(new View.OnClickListener() {
