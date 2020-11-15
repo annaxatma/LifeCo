@@ -141,7 +141,7 @@ public class HomeFragment extends Fragment {
 
 
 
-                String akunTipe = getArguments().getString("akun");
+                String akunTipe = getActivity().getIntent().getStringExtra("akun");
                 if(akunTipe.equalsIgnoreCase("pasien")){
                     intent = new Intent(getActivity(), PassengerMapsActivity.class);
                     startActivity(intent);
@@ -151,8 +151,8 @@ public class HomeFragment extends Fragment {
                 }
 
 
-                intent = new Intent(getActivity(), PassengerMapsActivity.class);
-                startActivity(intent);
+//                intent = new Intent(getActivity(), PassengerMapsActivity.class);
+//                startActivity(intent);
 
             }
         });
