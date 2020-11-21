@@ -46,7 +46,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Spinner spinnerGolDarah, spinnerJenisKelamin;
     TextInputLayout inpNama, inpEmail, inpPassword, inpAlamat, inpNoHP, inpNoBPJS, inpNoKTP, inpTekananDarah, inpGulaDarah, inpNoAsuransi, inpUsername;
     EditText inpPenyakitSendiri, inpPenyakitKeluarga, inpKeluhanUtama, inpObat, inpAlergiObat, inpAlergiMakanan, inpTanggalLahir;
-
+    String tipeakun;
 
     String userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userGolDarah, userJenisKelamin, userNoAsuransi, userUsername;
     String userID;
@@ -300,7 +300,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
                     userID = fAuth.getCurrentUser().getUid();
                     DocumentReference documentReference = fStore.collection("Users").document(userID);
-
+                    tipeakun = "pasien";
 
 
                     Map<String, Object> user = new HashMap<>();
@@ -324,6 +324,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     user.put("alergiMakanan", alergiMakanan);
                     user.put("tanggalLahir", tanggalLahir);
                     user.put("noAsuransi", noAsuransi);
+                    user.put("tipeakun", tipeakun);
                     user.put("imageURL", "default");
                     user.put("status", status);
                     user.put("search", search);
@@ -344,12 +345,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     final String userid = firebaseUser.getUid();
 
                     reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
-
-//                    HashMap<String, String> hashMap = new HashMap<>();
-//                    hashMap.put("id", userid);
-//                    hashMap.put("username", username);
-//                    hashMap.put("imageURL", "default");
-//                    hashMap.put("search", username.toLowerCase());
 
                     Users users = new Users();
                     users.setId(userid);
@@ -391,8 +386,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     intent.putExtra("account",account);
                     startActivity(intent);
                     finish();
-
-
+                    
                 } else {
                     Toast.makeText(RegistrationActivity.this, "Tidak dapat mendaftarkan akun.", Toast.LENGTH_SHORT).show();
                 }

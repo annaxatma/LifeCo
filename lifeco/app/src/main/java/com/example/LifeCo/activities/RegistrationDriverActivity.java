@@ -45,7 +45,7 @@ public class RegistrationDriverActivity extends AppCompatActivity {
     Button btnDaftarAkun;
     Spinner spinnerGolDarah, spinnerJenisKelamin;
     TextInputLayout inpNamaDriver, inpEmailDriver, inpPasswordDriver, inpNoHPDriver, inpRumahSakitDriver;
-
+    String tipeakun;
 
     String userNama, userEmail, userPassword, userNoHP, userRumahSakit;
     String userID;
@@ -119,12 +119,12 @@ public class RegistrationDriverActivity extends AppCompatActivity {
         fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                tipeakun = "driver";
+
                 if (task.isSuccessful()) {
                     Toast.makeText(RegistrationDriverActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
                     userID = fAuth.getCurrentUser().getUid();
                     DocumentReference documentReference = fStore.collection("Users").document(userID);
-
-
 
                     Map<String, Object> user = new HashMap<>();
                     user.put("nama", nama);
@@ -135,6 +135,7 @@ public class RegistrationDriverActivity extends AppCompatActivity {
                     user.put("imageURL", "default");
                     user.put("status", status);
                     user.put("search", search);
+                    user.put("tipeakun", tipeakun);
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

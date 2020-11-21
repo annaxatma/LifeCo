@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.LifeCo.activities.MainActivity;
 import com.example.LifeCo.activities.RegistrationActivity;
+import com.example.LifeCo.activities.SplashScreenActivity;
 import com.example.LifeCo.model.History;
 import com.example.LifeCo.model.Users;
 import com.example.lifeco.R;
@@ -113,8 +114,8 @@ public class EditAkunFragment extends Fragment {
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
 
-
-
+        userId = fAuth.getCurrentUser().getUid();
+        Log.d("userIDAccount", userId);
         btnUpdateAkun = view.findViewById(R.id.btnUpdateAkun);
         btnUpdateAkun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,10 +140,34 @@ public class EditAkunFragment extends Fragment {
                 userAlergiMakanan = inpAlergiMakanan.getText().toString().trim();
                 userTanggalLahir = inpTanggalLahir.getText().toString().trim();
                 userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
-                userId = fAuth.getCurrentUser().getUid();
-
+                
                 Users users = new Users();
                 users.setId(userId);
+
+
+
+                DocumentReference documentReference = fStore.collection("Users").document(userId);
+                documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                    @Override
+                    public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                        inpNama.getEditText().setText(documentSnapshot.getString("nama"));
+                        inpEmail.getEditText().setText(documentSnapshot.getString("email"));
+                        inpAlamat.getEditText().setText(documentSnapshot.getString("alamat"));
+                        inpNoHP.getEditText().setText(documentSnapshot.getString("noHP"));
+                        inpNoKTP.getEditText().setText(documentSnapshot.getString("noKTP"));
+                        inpNoBPJS.getEditText().setText(documentSnapshot.getString("noBPJS"));
+                        inpNoAsuransi.getEditText().setText(documentSnapshot.getString("noAsuransi"));
+                        inpTanggalLahir.setText(documentSnapshot.getString("tanggalLahir"));
+                        inpPenyakitSendiri.setText(documentSnapshot.getString("penyakitSendiri"));
+                        inpPenyakitKeluarga.setText(documentSnapshot.getString("penyakitKeluarga"));
+                        inpKeluhanUtama.setText(documentSnapshot.getString("keluhanUtama"));
+                        inpObat.setText(documentSnapshot.getString("obat"));
+                        inpAlergiObat.setText(documentSnapshot.getString("alergiObat"));
+                        inpAlergiMakanan.setText(documentSnapshot.getString("alergiMakanan"));
+                        inpTekananDarah.getEditText().setText(documentSnapshot.getString("tekananDarah"));
+                        inpGulaDarah.getEditText().setText(documentSnapshot.getString("gulaDarah"));
+                    }
+                });
 
                 DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(userId);
                 Map<String, Object> map = new HashMap<>();
