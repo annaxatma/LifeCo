@@ -140,7 +140,7 @@ public class EditAkunFragment extends Fragment {
                 userAlergiMakanan = inpAlergiMakanan.getText().toString().trim();
                 userTanggalLahir = inpTanggalLahir.getText().toString().trim();
                 userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
-                
+
                 Users users = new Users();
                 users.setId(userId);
 
@@ -250,8 +250,6 @@ public class EditAkunFragment extends Fragment {
                         Log.e("Failed to Update", "OnFailure: ", e);
                     }
                 });
-
-
 
             }
         });

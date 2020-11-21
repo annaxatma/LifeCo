@@ -20,7 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.LifeCo.activities.welcome"></activity>
+        <activity android:name="com.example.LifeCo.activities.welcome">
+
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -45,7 +47,9 @@
         <activity android:name="com.example.LifeCo.activities.ChatMainActivity" />
         <activity android:name="com.example.LifeCo.activities.RegistrationActivity" />
         <activity android:name="com.example.LifeCo.activities.RegistrationDriverActivity" />
-        <activity android:name="com.example.LifeCo.activities.LoginActivity" />
+        <activity android:name="com.example.LifeCo.activities.LoginActivity">
+
+        </activity>
         <activity android:name="com.example.LifeCo.activities.LoginDriverActivity" />
         <activity android:name="com.example.LifeCo.activities.DetailActivity" />
         <activity android:name="com.example.LifeCo.activities.MainActivity" />

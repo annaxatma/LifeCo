@@ -22,9 +22,6 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 public class welcome extends AppCompatActivity {
 
     Button pasienButton, ambulansButton;
-    String userId;
-    FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,9 +29,6 @@ public class welcome extends AppCompatActivity {
 
         pasienButton = findViewById(R.id.pasienButton);
         ambulansButton = findViewById(R.id.ambulansButton);
-        fAuth = FirebaseAuth.getInstance();
-        fStore = FirebaseFirestore.getInstance();
-        userId = fAuth.getCurrentUser().getUid();
 
         ambulansButton.setOnClickListener(new View.OnClickListener() {
             @Override

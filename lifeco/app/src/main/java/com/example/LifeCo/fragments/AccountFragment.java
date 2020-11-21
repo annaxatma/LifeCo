@@ -1,6 +1,7 @@
 package com.example.LifeCo.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -13,8 +14,11 @@ import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.LifeCo.activities.MainActivity;
+import com.example.LifeCo.activities.SplashScreenActivity;
 import com.example.lifeco.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +36,7 @@ public class AccountFragment extends Fragment {
     FirebaseFirestore fStore;
     String userId;
     FloatingActionButton btnEditAkun;
-
+    Button btnLogOut;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -105,6 +109,17 @@ public class AccountFragment extends Fragment {
                 fragmentTransaction.replace(R.id.frame_main, fragment);
                 fragmentTransaction.addToBackStack(null);
                 fragmentTransaction.commit();
+            }
+        });
+
+        btnLogOut = view.findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(), SplashScreenActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         });
     }

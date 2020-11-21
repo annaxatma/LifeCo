@@ -183,7 +183,6 @@
                 android:layout_marginEnd="32dp"
                 android:layout_marginBottom="32dp"
                 android:background="#EF6256"
-                android:onClick="logout"
                 android:text="@string/btnLogOut"
                 android:textColor="#FFFFFF"
                 app:layout_constraintBottom_toBottomOf="parent"

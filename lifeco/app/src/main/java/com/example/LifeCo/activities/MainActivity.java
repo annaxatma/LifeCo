@@ -90,11 +90,5 @@ public class MainActivity extends AppCompatActivity {
 //        loadFragment(fragment);
     }
 
-    public void logout(View view) {
-        FirebaseAuth.getInstance().signOut();
-        Intent intent = new Intent(MainActivity.this, SplashScreenActivity.class);
-        startActivity(intent);
-        finish();
 
-    }
 }
