@@ -10,16 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.LifeCo.activities.MainActivity;
-import com.example.LifeCo.activities.SplashScreenActivity;
 import com.example.lifeco.R;
+import com.example.LifeCo.activities.SplashScreenNew;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -117,7 +115,7 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getActivity(), SplashScreenActivity.class);
+                Intent intent = new Intent(getActivity(), SplashScreenNew.class);
                 startActivity(intent);
                 getActivity().finish();
             }

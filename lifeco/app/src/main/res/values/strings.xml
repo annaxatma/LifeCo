@@ -77,5 +77,11 @@
     <string name="inpNoTelpDriverRegis">No. Telepon</string>
     <string name="inpRumahSakitDriverRegis">Nama Rumah Sakit</string>
     <string name="btnDaftarAkunText">Daftar Akun</string>
+    <string name="title_activity_splash_screen_new">SplashScreenNew</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
 
 </resources>

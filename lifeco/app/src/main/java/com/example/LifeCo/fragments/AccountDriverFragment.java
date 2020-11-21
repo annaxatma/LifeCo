@@ -1,21 +1,21 @@
 package com.example.LifeCo.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.util.EventLog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lifeco.R;
+import com.example.LifeCo.activities.SplashScreenNew;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -31,8 +31,8 @@ public class AccountDriverFragment extends Fragment {
     FirebaseAuth fAuth;
     FirebaseFirestore fStore;
     String userId;
-    FloatingActionButton btnEditAkun;
-
+    FloatingActionButton btnEditAkunDriver;
+    Button btnLogoutDriver;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,6 +66,28 @@ public class AccountDriverFragment extends Fragment {
             }
         });
 
+        btnEditAkunDriver = view.findViewById(R.id.btnEditProfileDriver);
+        btnEditAkunDriver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Fragment fragment = new EditAkunFragment();
+//                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                fragmentTransaction.replace(R.id.frame_main, fragment);
+//                fragmentTransaction.addToBackStack(null);
+//                fragmentTransaction.commit();
+            }
+        });
+        btnLogoutDriver = view.findViewById(R.id.btnLogOutDriver);
+        btnLogoutDriver.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                Intent intent = new Intent(getActivity(), SplashScreenNew.class);
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
 
     }
 }
