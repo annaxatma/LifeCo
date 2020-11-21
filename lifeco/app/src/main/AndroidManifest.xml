@@ -38,7 +38,7 @@
 
         <activity
             android:name="com.example.LifeCo.activities.SplashScreenNew"
-            android:label="@string/title_activity_splash_screen_new">
+           >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
