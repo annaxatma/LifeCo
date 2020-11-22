@@ -59,7 +59,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     GoogleApiClient googleApiClient;
     Location lastLocation;
     LocationRequest locationRequest;
-    private Button logoutBtn, settingsBtn, callBtn;
+    private Button logoutBtn, settingsBtn, callBtn, btn_toChat;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private Boolean currentLogoutDriverStatus = false;
@@ -107,6 +107,15 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         currentUser = mAuth.getCurrentUser();
 //        logoutBtn = findViewById(R.id.passenger_logout_button);
         settingsBtn = findViewById(R.id.passenger_settings_button);
+        btn_toChat = findViewById(R.id.btn_toChat);
+
+        btn_toChat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PassengerMapsActivity.this, ChatMainActivity.class);
+                startActivity(intent);
+            }
+        });
 
 //        callBtn = findViewById(R.id.passengerMap_callDriver_button);
 //        logoutBtn.setOnClickListener(new View.OnClickListener() {
