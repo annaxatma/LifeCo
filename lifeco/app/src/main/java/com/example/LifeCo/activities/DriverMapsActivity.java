@@ -58,7 +58,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     GoogleApiClient googleApiClient;
     Location lastLocation;
     LocationRequest locationRequest;
-    private Button logoutBtn, settingsBtn;
+    private Button logoutBtn, settingsBtn, chatBtn;
     private FirebaseAuth mAuth;
     private FirebaseUser currentUser;
     private Boolean currentLogoutDriverStatus = false;
@@ -107,6 +107,15 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
 
         GetAssignedRequest();
+
+        chatBtn = findViewById(R.id.btn_toChatDriver);
+        chatBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DriverMapsActivity.this, ChatMainActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void GetAssignedRequest() {

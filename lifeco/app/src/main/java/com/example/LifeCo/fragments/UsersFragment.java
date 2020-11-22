@@ -53,7 +53,7 @@ public class UsersFragment extends Fragment {
         Log.d("Check","userAdapter");
 
 
-        readUsers();
+//        readUsers();
 
         search_users = view.findViewById(R.id.search_users);
         search_users.addTextChangedListener(new TextWatcher() {
@@ -123,6 +123,8 @@ public class UsersFragment extends Fragment {
                         Users users = snapshot.getValue(Users.class);
                         assert users != null;
                         assert firebaseUser != null;
+                        Log.d("userIDUSER", users.getId());
+                        Log.d("userIDFirebase", firebaseUser.getUid());
                         if (!users.getId().equals(firebaseUser.getUid())) {
                             mUsers.add(users);
                         }

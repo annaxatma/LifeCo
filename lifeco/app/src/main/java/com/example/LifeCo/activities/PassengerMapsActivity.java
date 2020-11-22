@@ -261,7 +261,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     driverFound = true;
                     DriverFoundID = key;
 
-                    DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverFoundID);
+                    DriverRef = FirebaseDatabase.getInstance().getReference().child("Drivers").child(DriverFoundID);
                     HashMap driverMap = new HashMap();
                     driverMap.put("CustomerRideID", passengerID);
                     DriverRef.updateChildren(driverMap);
