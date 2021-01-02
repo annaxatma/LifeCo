@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0DCA7">
+    android:background="#D7DDEB">
 
     <ImageView
         android:id="@+id/imageView"
@@ -18,21 +18,41 @@
         app:srcCompat="@drawable/lifeco" />
 
     <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="197dp"
-        android:layout_height="130dp"
-        android:alpha=".2"
+        android:id="@+id/imageView37"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/bottomrightcorner" />
+
+    <ImageView
+        android:id="@+id/imageView36"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/obat2" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/topleftcorner" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="264dp"
+        android:layout_height="211dp"
+        android:adjustViewBounds="true"
+        android:alpha="0.6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/bluemed" />
 
     <ImageView
         android:id="@+id/imageView13"
-        android:layout_width="197dp"
-        android:layout_height="130dp"
-        android:alpha=".2"
+        android:layout_width="237dp"
+        android:layout_height="170dp"
+        android:adjustViewBounds="true"
+        android:alpha="0.6"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/obat2" />
+        app:srcCompat="@drawable/meds" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
