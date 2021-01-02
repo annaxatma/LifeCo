@@ -5,7 +5,7 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEFCEB"
+    android:background="#EBEBEB"
     tools:context=".HomeFragment">
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -29,22 +29,39 @@
         android:id="@+id/imageView22"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
+        android:layout_marginTop="124dp"
+        android:adjustViewBounds="true"
         android:alpha=".2"
-        android:src="@drawable/bg_bottom"
+        android:src="@drawable/bluemed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnEmergencyCall" />
 
-    <ImageView
-        android:id="@+id/imageView20"
-        android:layout_width="206dp"
-        android:layout_height="364dp"
-        android:layout_marginTop="136dp"
-        android:alpha=".75"
-        android:src="@drawable/doc"
-        app:layout_constraintEnd_toEndOf="@+id/imageView22"
-        app:layout_constraintHorizontal_bias="0.209"
-        app:layout_constraintStart_toStartOf="parent"
+    <TextView
+        android:id="@+id/dontknowtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Tidak tahu apa yang \n harus dilakukan?"
+        android:textAlignment="center"
+        android:textColor="#2D2D33"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/btnEmergencyCall"
+        app:layout_constraintStart_toStartOf="@+id/btnEmergencyCall"
         app:layout_constraintTop_toBottomOf="@+id/btnEmergencyCall" />
+
+    <TextView
+        android:id="@+id/firstaidtxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Membutuhkan pertolongan \n pertama?"
+        android:textAlignment="center"
+        android:textColor="#2D2D33"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnEmergencyCall"
+        app:layout_constraintEnd_toEndOf="@+id/btnEmergencyCall"
+        app:layout_constraintStart_toStartOf="@+id/btnEmergencyCall" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
