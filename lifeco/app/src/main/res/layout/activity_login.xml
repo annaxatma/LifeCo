@@ -4,27 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FEFCEB"
     tools:context=".LoginActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/loginToolbar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="@string/login_toolbar"
-        app:titleTextColor="#FFFFFF" />
+        app:titleTextColor="#1A1A1A" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/inputEmailLogin"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@drawable/inputbg"
         app:layout_constraintEnd_toEndOf="@+id/imageView19"
         app:layout_constraintStart_toStartOf="@+id/imageView19"
         app:layout_constraintTop_toBottomOf="@+id/imageView19">
@@ -41,6 +40,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@drawable/inputbg"
         app:layout_constraintEnd_toEndOf="@+id/inputEmailLogin"
         app:layout_constraintStart_toStartOf="@+id/inputEmailLogin"
         app:layout_constraintTop_toBottomOf="@+id/inputEmailLogin">
@@ -57,7 +57,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="#E56956"
+        android:background="#F4767C"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/btnLogin"
         android:textColor="#FFFFFF"
@@ -109,15 +109,13 @@
         app:layout_constraintTop_toBottomOf="@+id/loginToolbar" />
 
     <ImageView
-        android:id="@+id/imageView21"
+        android:id="@+id/imageView38"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:alpha=".2"
-        android:src="@drawable/bg_bottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnLogin" />
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+        android:alpha="0.3"
+        android:src="@drawable/bluemed"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
