@@ -69,4 +69,5 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:2.3.0'
     compileOnly 'com.google.android.wearable:wearable:2.6.0'
 
+    implementation 'com.journeyapps:zxing-android-embedded:4.2.0'
 }
