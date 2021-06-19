@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,21 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
-
-
-import android.content.Context;
-import android.net.Uri;
-import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -70,7 +59,8 @@ public class ChatsFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
-
+        Log.d("plz work", "why why");
+        Log.d("trial user: ", fuser.getUid());
         usersList = new ArrayList<>();
 
         reference = FirebaseDatabase.getInstance().getReference("Chats");
@@ -83,9 +73,13 @@ public class ChatsFragment extends Fragment {
                     Chat chat = snapshot.getValue(Chat.class);
 
                     if(chat.getSender().equals(fuser.getUid())){
+                        String uid = chat.getSender();
+                        Log.d("trial sender: ", uid);
                         usersList.add(chat.getReceiver());
                     }
                     if (chat.getReceiver().equals(fuser.getUid())){
+                        String uid = chat.getReceiver();
+                        Log.d("trial receiver: ", uid);
                         usersList.add(chat.getSender());
                     }
                 }
