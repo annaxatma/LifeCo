@@ -14,6 +14,7 @@ package com.example.LifeCo.activities;
 
         import com.example.LifeCo.fragments.AccountDriverFragment;
         import com.example.LifeCo.fragments.AccountFragment;
+        import com.example.LifeCo.fragments.BarcodeFragment;
         import com.example.LifeCo.fragments.HistoryFragment;
         import com.example.LifeCo.fragments.HomeFragment;
         import com.example.lifeco.R;
@@ -66,6 +67,13 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             fragment = new AccountDriverFragment();
                         }
+                        loadFragment(fragment);
+                        return true;
+
+                    case R.id.menu_barcode:
+                        toolbar.setTitle(R.string.menu_barcode);
+                        setSupportActionBar(toolbar);
+                        fragment = new BarcodeFragment();
                         loadFragment(fragment);
                         return true;
                 }
