@@ -45,7 +45,6 @@ public class BarcodeFragment extends Fragment {
             e.printStackTrace();
         }
 
-
         return view;
     }
 }
