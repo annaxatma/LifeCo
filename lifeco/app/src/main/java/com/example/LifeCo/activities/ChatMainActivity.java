@@ -68,13 +68,28 @@ public class ChatMainActivity extends AppCompatActivity {
         username = findViewById(R.id.username);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
         reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
+//        reference.child("email").addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                String email = dataSnapshot.getValue().toString();
+//                Log.d("email chatmain - ", email);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                System.out.println("The read failed: " + databaseError.getCode());
+//            }
+//        });
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Users users = dataSnapshot.getValue(Users.class);
-                username.setText(users.getUsername());
+                Log.d("getEmail: " , users.getEmail());
+//                Log.d("getEmail: " , users.getUsername());
+                username.setText(users.getNama());
                 if (users.getImageURL().equalsIgnoreCase("default")) {
                     profile_image.setImageResource(R.mipmap.ic_launcher);
                 }else{

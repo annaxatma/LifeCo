@@ -246,7 +246,6 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         PassengerPickupLocation = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
         PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart)));
 
-
         GetClosestDriverCab();
     }
 
@@ -265,9 +264,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     HashMap driverMap = new HashMap();
                     driverMap.put("CustomerRideID", passengerID);
                     DriverRef.updateChildren(driverMap);
-
                     GettingDriverLocation();
-
                     callBtn.setText("Initializing Ambulance Location");
                 }
             }

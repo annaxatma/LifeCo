@@ -130,6 +130,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                     PassengerID = dataSnapshot.getValue().toString();
                     GetAssignedPassengerPickUpLocation();
                     Log.println(Log.ERROR, "THIS IS THE ID of PASSS", PassengerID);
+                    Log.d("driver id:", DriverID);
                 } else {
                     PassengerID = "";
                     if (PickUpLocationMarker != null) {

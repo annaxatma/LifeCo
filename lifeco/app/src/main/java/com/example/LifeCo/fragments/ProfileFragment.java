@@ -5,6 +5,7 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,13 +64,14 @@ public class ProfileFragment extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference("uploads");
 
         fuser = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d("profile - uid: ", fuser.getUid());
         reference = FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Users users = dataSnapshot.getValue(Users.class);
-                username.setText(users.getUsername());
+                username.setText(users.getNama());
 
                 if (users.getImageURL().equals("default")){
                     image_profile.setImageResource(R.mipmap.ic_launcher);
