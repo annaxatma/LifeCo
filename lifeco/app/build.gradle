@@ -4,6 +4,10 @@ apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.example.cobanavfragment"
         multiDexEnabled true
@@ -65,4 +69,5 @@ dependencies {
     implementation 'com.google.android.libraries.places:places:2.3.0'
     compileOnly 'com.google.android.wearable:wearable:2.6.0'
 
+    implementation 'com.journeyapps:zxing-android-embedded:3.3.0'
 }
