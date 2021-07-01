@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.LifeCo.activities.BarcodeDataActivity;
 import com.example.LifeCo.activities.MainActivity;
 import com.example.LifeCo.activities.MessageActivity;
 import com.example.lifeco.R;
@@ -76,16 +77,20 @@ public class BarcodeFragment extends Fragment {
         IntentResult intentResult = IntentIntegrator.parseActivityResult(requestCode,resultCode,data);
 
         if(intentResult.getContents()!= null){
-            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Results");
-            builder.setMessage(intentResult.getContents());
-            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    dialogInterface.dismiss();
-                }
-            });
-            builder.show();
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+//            builder.setTitle("Results");
+//            builder.setMessage(intentResult.getContents());
+//            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface dialogInterface, int i) {
+//                    dialogInterface.dismiss();
+//                }
+//            });
+//            builder.show();
+            Intent intent = new Intent(getContext(), BarcodeDataActivity.class);
+            intent.putExtra("userID", userID);
+            startActivity(intent);
+
         }else{
             Toast.makeText(getContext(), "OOPS... That doesn't look like a barcode, please try again!", Toast.LENGTH_SHORT).show();
         }
