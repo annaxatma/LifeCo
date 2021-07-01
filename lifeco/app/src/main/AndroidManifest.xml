@@ -4,8 +4,7 @@
     package="com.example.lifeco">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.CAMERA"/>
-
+    <uses-permission android:name="android.permission.CAMERA" />
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
          Google Maps Android API v2, but you must specify either coarse or fine
@@ -20,15 +19,16 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="LIFECO"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:usesCleartextTraffic="true"
-        android:largeHeap="true">
+        android:usesCleartextTraffic="true">
+        <activity android:name="com.example.LifeCo.activities.BarcodeDataActivity"></activity>
+
         <uses-library
             android:name="com.google.android.wearable"
             android:required="false" />
-
         <!--
                Set to true if your app is Standalone, that is, it does not require the handheld
                app to run.
@@ -37,16 +37,14 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <activity
-            android:name="com.example.LifeCo.activities.SplashScreenNew"
-           >
+        <activity android:name="com.example.LifeCo.activities.SplashScreenNew">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.LifeCo.activities.welcome"></activity>
+        <activity android:name="com.example.LifeCo.activities.welcome" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -71,15 +69,13 @@
         <activity android:name="com.example.LifeCo.activities.ChatMainActivity" />
         <activity android:name="com.example.LifeCo.activities.RegistrationActivity" />
         <activity android:name="com.example.LifeCo.activities.RegistrationDriverActivity" />
-        <activity android:name="com.example.LifeCo.activities.LoginActivity"></activity>
+        <activity android:name="com.example.LifeCo.activities.LoginActivity" />
         <activity android:name="com.example.LifeCo.activities.LoginDriverActivity" />
         <activity android:name="com.example.LifeCo.activities.DetailActivity" />
         <activity android:name="com.example.LifeCo.activities.MainActivity" />
         <activity android:name="com.example.LifeCo.activities.ResetPasswordActivity" />
         <activity android:name="com.example.LifeCo.activities.MessageActivity" />
-        <activity android:name="com.example.LifeCo.activities.SplashScreenActivity">
-
-        </activity>
+        <activity android:name="com.example.LifeCo.activities.SplashScreenActivity"></activity>
         <activity android:name="com.example.LifeCo.fragments.Capture" />
     </application>
 
