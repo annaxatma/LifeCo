@@ -72,7 +72,7 @@
                 android:text="@string/txtKesehatanPribadi"
                 android:textSize="18sp"
                 android:textStyle="normal"
-                app:layout_constraintStart_toStartOf="@+id/imageView36"
+                app:layout_constraintStart_toStartOf="@+id/barcodeData_profile_pict"
                 app:layout_constraintTop_toBottomOf="@+id/divider" />
 
             <View
@@ -86,7 +86,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/barcodeData_jeniskelamin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -95,13 +95,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/horizontalLine" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/barcodeData_goldarah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:text="A"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView9" />
+                app:layout_constraintTop_toTopOf="@+id/barcodeData_jeniskelamin" />
 
             <TextView
                 android:id="@+id/textView11"
@@ -109,19 +109,19 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/txtTekananDarah"
-                app:layout_constraintStart_toStartOf="@+id/textView9"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                app:layout_constraintStart_toStartOf="@+id/barcodeData_jeniskelamin"
+                app:layout_constraintTop_toBottomOf="@+id/barcodeData_jeniskelamin" />
 
             <TextView
                 android:id="@+id/textView12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/mmhg"
-                app:layout_constraintEnd_toEndOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/textView13" />
+                app:layout_constraintEnd_toEndOf="@+id/barcodeData_goldarah"
+                app:layout_constraintTop_toTopOf="@+id/barcodeData_tekanandarah" />
 
             <TextView
-                android:id="@+id/textView13"
+                android:id="@+id/barcodeData_tekanandarah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123"
@@ -143,10 +143,10 @@
                 android:layout_height="wrap_content"
                 android:text="mg/dL"
                 app:layout_constraintEnd_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="@+id/textView16" />
+                app:layout_constraintTop_toTopOf="@+id/barcodeData_guladarah" />
 
             <TextView
-                android:id="@+id/textView16"
+                android:id="@+id/barcodeData_guladarah"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123"
@@ -154,7 +154,7 @@
                 app:layout_constraintTop_toTopOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/textView17"
+                android:id="@+id/barcodeData_obat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -163,22 +163,22 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
             <TextView
-                android:id="@+id/textView18"
+                android:id="@+id/barcodeData_alergiobat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Tidak Ada"
-                app:layout_constraintStart_toStartOf="@+id/textView17"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintStart_toStartOf="@+id/barcodeData_obat"
+                app:layout_constraintTop_toBottomOf="@+id/barcodeData_obat" />
 
             <TextView
-                android:id="@+id/textView19"
+                android:id="@+id/barcodeData_alergimakanan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Tidak Ada"
-                app:layout_constraintStart_toStartOf="@+id/textView18"
-                app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                app:layout_constraintStart_toStartOf="@+id/barcodeData_alergiobat"
+                app:layout_constraintTop_toBottomOf="@+id/barcodeData_alergiobat" />
 
             <TextView
                 android:id="@+id/textView20"
@@ -186,8 +186,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/txtKeluhan"
-                app:layout_constraintStart_toStartOf="@+id/textView19"
-                app:layout_constraintTop_toBottomOf="@+id/textView19" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/barcodeData_alergimakanan"
+                app:layout_constraintTop_toBottomOf="@+id/barcodeData_alergimakanan" />
 
             <View
                 android:id="@+id/divider2"
@@ -196,8 +197,9 @@
                 android:layout_marginTop="16dp"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="@+id/divider"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/divider"
-                app:layout_constraintTop_toBottomOf="@+id/textView20" />
+                app:layout_constraintTop_toBottomOf="@+id/barcodeData_keluhanutama" />
 
             <TextView
                 android:id="@+id/textView21"
@@ -221,22 +223,31 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView21" />
 
             <TextView
-                android:id="@+id/textView22"
+                android:id="@+id/barcodeData_penyakitsendiri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Maag"
                 app:layout_constraintStart_toStartOf="@+id/textView21"
                 app:layout_constraintTop_toBottomOf="@+id/horizontalLine2" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/barcodeData_penyakitkeluarga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Diabetes"
-                app:layout_constraintStart_toStartOf="@+id/textView22"
-                app:layout_constraintTop_toBottomOf="@+id/textView22" />
+                app:layout_constraintStart_toStartOf="@+id/barcodeData_penyakitsendiri"
+                app:layout_constraintTop_toBottomOf="@+id/barcodeData_penyakitsendiri" />
+
+            <TextView
+                android:id="@+id/barcodeData_keluhanutama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Migraine"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

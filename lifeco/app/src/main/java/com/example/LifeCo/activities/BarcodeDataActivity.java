@@ -47,12 +47,6 @@ public class BarcodeDataActivity extends AppCompatActivity {
                 barcodeData_email.setText(documentSnapshot.getString("email"));
                 barcodeData_jeniskelamin.setText(documentSnapshot.getString("jenisKelamin"));
                 barcodeData_goldarah.setText(documentSnapshot.getString("golDarah"));
-                barcodeData_alamat.setText(documentSnapshot.getString("alamat"));
-                barcodeData_nohp.setText(documentSnapshot.getString("noHP"));
-                barcodeData_noktp.setText(documentSnapshot.getString("noKTP"));
-                barcodeData_nobpjs.setText(documentSnapshot.getString("noBPJS"));
-                barcodeData_noasuransi.setText(documentSnapshot.getString("noAsuransi"));
-                barcodeData_tanggallahir.setText(documentSnapshot.getString("tanggalLahir"));
                 barcodeData_penyakitsendiri.setText(documentSnapshot.getString("penyakitSendiri"));
                 barcodeData_penyakitkeluarga.setText(documentSnapshot.getString("penyakitKeluarga"));
                 barcodeData_keluhanutama.setText(documentSnapshot.getString("keluhanUtama"));
@@ -68,15 +62,8 @@ public class BarcodeDataActivity extends AppCompatActivity {
     private void initialize() {
         barcodeData_profile_pict = findViewById(R.id.barcodeData_profile_pict);
         barcodeData_nama = findViewById(R.id.barcodeData_nama);
-        barcodeData_email = findViewById(R.id.barcodeData_email);
         barcodeData_jeniskelamin = findViewById(R.id.barcodeData_jeniskelamin);
         barcodeData_goldarah = findViewById(R.id.barcodeData_goldarah);
-        barcodeData_alamat = findViewById(R.id.barcodeData_alamat);
-        barcodeData_nohp = findViewById(R.id.barcodeData_nohp);
-        barcodeData_noktp = findViewById(R.id.barcodeData_noktp);
-        barcodeData_nobpjs = findViewById(R.id.barcodeData_nobpjs);
-        barcodeData_noasuransi = findViewById(R.id.barcodeData_noasuransi);
-        barcodeData_tanggallahir = findViewById(R.id.barcodeData_tanggallahir);
         barcodeData_penyakitsendiri = findViewById(R.id.barcodeData_penyakitsendiri);
         barcodeData_penyakitkeluarga = findViewById(R.id.barcodeData_penyakitkeluarga);
         barcodeData_keluhanutama = findViewById(R.id.barcodeData_keluhanutama);
