@@ -1,7 +1,7 @@
 package com.example.LifeCo.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import com.example.lifeco.R;
 import android.os.Bundle;
 
 public class BarcodeDataActivity extends AppCompatActivity {
