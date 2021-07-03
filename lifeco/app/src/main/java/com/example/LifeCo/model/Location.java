@@ -7,10 +7,6 @@ public class Location implements Parcelable {
     String longitude;
     String latitude;
 
-    public Location(){
-
-    }
-
     public Location(String longitude, String latitude) {
         this.longitude = longitude;
         this.latitude = latitude;

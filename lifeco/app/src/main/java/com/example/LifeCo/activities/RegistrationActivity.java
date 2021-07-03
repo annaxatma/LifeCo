@@ -18,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.LifeCo.model.History;
-import com.example.LifeCo.model.Location;
 import com.example.LifeCo.model.Patient;
 import com.example.LifeCo.model.Users;
 import com.example.lifeco.R;
@@ -54,7 +53,7 @@ public class RegistrationActivity extends AppCompatActivity {
     String userID;
     String status, search, imageURL;
     FirebaseAuth fAuth;
-    DatabaseReference reference, childReference;
+    DatabaseReference reference;
     FirebaseFirestore fStore;
     CollectionReference histRef;
     Patient patient;
@@ -276,24 +275,6 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
 
-                    DocumentReference childDocumentReference = fStore.collection("Users").document(userID).collection("location").document();
-
-                    Map<String, Object> location = new HashMap<>();
-                    location.put("longitude", "-");
-                    location.put("latitude", "-");
-
-                    childDocumentReference.set(location).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Log.d("New Location","onSuccess: New Location Registered for " + userID);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d("Failed to Register","onFailure: " + e.toString());
-                        }
-                    });
-
                     FirebaseUser firebaseUser = fAuth.getCurrentUser();
                     assert firebaseUser != null;
                     final String userid = firebaseUser.getUid();
@@ -326,7 +307,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     patient.setImageURL("default");
                     patient.setStatus("-");
                     patient.setSearch("-");
-                    patient.setG("-");
 
                     reference.setValue(patient).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -336,22 +316,6 @@ public class RegistrationActivity extends AppCompatActivity {
                             }
                         }
                     });
-
-                    childReference = FirebaseDatabase.getInstance().getReference("Users").child(userid).child("location");
-
-                    Location patientLocation = new Location();
-                    patientLocation.setLongitude("-");
-                    patientLocation.setLatitude("-");
-
-                    childReference.setValue(patientLocation).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                Log.d("New User - Realtime","onSuccess: Added location for " + userid);
-                            }
-                        }
-                    });
-
                     buatAkun();
                     Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
                     String account = "pasien";
