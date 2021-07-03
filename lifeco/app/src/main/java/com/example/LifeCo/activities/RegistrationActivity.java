@@ -305,8 +305,8 @@ public class RegistrationActivity extends AppCompatActivity {
                     patient.setInsuranceNumber(noAsuransi);
                     patient.setAccount("patient");
                     patient.setImageURL("default");
-                    patient.setStatus(status);
-                    patient.setSearch(search);
+                    patient.setStatus("-");
+                    patient.setSearch("-");
 
                     reference.setValue(patient).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

@@ -166,8 +166,8 @@ public class RegistrationDriverActivity extends AppCompatActivity {
                     ambulance.setPhoneNumber(noHP);
                     ambulance.setHospital(rumahSakit);
                     ambulance.setImageURl("default");
-                    ambulance.setStatus(status);
-                    ambulance.setSearch(search);
+                    ambulance.setStatus("-");
+                    ambulance.setSearch("-");
 
                     reference.setValue(ambulance).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
