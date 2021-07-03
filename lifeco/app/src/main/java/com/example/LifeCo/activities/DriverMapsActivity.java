@@ -353,7 +353,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
             Log.println(Log.INFO, "LATLNG VALUE", String.valueOf(latLng));
 
 //            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
-            GeoFire geoFireDrivers = new GeoFire(FirebaseDatabase.getInstance().getReference().child("Users"));
+            GeoFire geoFireDrivers = new GeoFire(DriverRef);
             geoFireDrivers.setLocation(userID, new GeoLocation(location.getLatitude(), location.getLongitude()), new GeoFire.CompletionListener() {
                 @Override
                 public void onComplete(String key, DatabaseError error) {
