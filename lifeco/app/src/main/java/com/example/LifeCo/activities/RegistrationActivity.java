@@ -18,6 +18,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.LifeCo.model.History;
+import com.example.LifeCo.model.Patient;
 import com.example.LifeCo.model.Users;
 import com.example.lifeco.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,7 +56,7 @@ public class RegistrationActivity extends AppCompatActivity {
     DatabaseReference reference;
     FirebaseFirestore fStore;
     CollectionReference histRef;
-
+    Patient patient;
     Users users;
 
     //    private DatabaseReference PassengerDatabaseRef;
@@ -101,6 +102,7 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
         users = new Users();
+        patient = new Patient();
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         fStore = FirebaseFirestore.getInstance();
@@ -304,30 +306,31 @@ public class RegistrationActivity extends AppCompatActivity {
 
 
                     Map<String, Object> user = new HashMap<>();
-                    user.put("nama", nama);
-                    user.put("username", username);
                     user.put("email", email);
                     user.put("password", password);
-                    user.put("alamat", alamat);
-                    user.put("noHP", noHP);
-                    user.put("noBPJS", noBPJS);
-                    user.put("noKTP", noKTP);
-                    user.put("tekananDarah", tekananDarah);
-                    user.put("gulaDarah", gulaDarah);
-                    user.put("golDarah", golDarah);
-                    user.put("jenisKelamin", jenisKelamin);
-                    user.put("penyakitSendiri", penyakitSendiri);
-                    user.put("penyakitKeluarga", penyakitKeluarga);
-                    user.put("keluhanUtama", keluhanUtama);
-                    user.put("obat", obat);
-                    user.put("alergiObat", alergiObat);
-                    user.put("alergiMakanan", alergiMakanan);
-                    user.put("tanggalLahir", tanggalLahir);
-                    user.put("noAsuransi", noAsuransi);
-                    user.put("tipeakun", tipeakun);
-                    user.put("imageURL", "default");
-                    user.put("status", status);
+                    user.put("name", nama);
+                    user.put("gender", jenisKelamin);
+                    user.put("birthdate", tanggalLahir);
+                    user.put("bloodType", golDarah);
+                    user.put("bloodPressure", tekananDarah);
+                    user.put("bloodSugar", gulaDarah);
+                    user.put("medicineIntake", obat);
+                    user.put("foodAllergy", alergiMakanan);
+                    user.put("medicineAllergy", alergiObat);
+                    user.put("address", alamat);
+                    user.put("phoneNumber", noHP);
+                    user.put("KTPNumber", noKTP);
+                    user.put("insuranceNumber", noAsuransi);
+                    user.put("BPJSNumber", noBPJS);
+                    user.put("complaint", keluhanUtama);
+                    user.put("geneticDisease", penyakitKeluarga);
+                    user.put("ownDisease", penyakitSendiri);
                     user.put("search", search);
+                    user.put("status", status);
+                    user.put("account", tipeakun);
+                    user.put("imageURL", "default");
+                    user.put("g", "-");
+
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -346,33 +349,34 @@ public class RegistrationActivity extends AppCompatActivity {
 
                     reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
-                    Users users = new Users();
-                    users.setId(userid);
-                    users.setNama(nama);
-                    users.setUsername(username);
-                    users.setEmail(email);
-                    users.setPassword(password);
-                    users.setAlamat(alamat);
-                    users.setNoHP(noHP);
-                    users.setNoBPJS(noBPJS);
-                    users.setNoKTP(noKTP);
-                    users.setTekananDarah(tekananDarah);
-                    users.setGulaDarah(gulaDarah);
-                    users.setGolDarah(golDarah);
-                    users.setJenisKelamin(jenisKelamin);
-                    users.setPenyakitSendiri(penyakitSendiri);
-                    users.setPenyakitKeluarga(penyakitKeluarga);
-                    users.setKeluhanUtama(keluhanUtama);
-                    users.setObat(obat);
-                    users.setAlergiObat(alergiObat);
-                    users.setAlergiMakanan(alergiMakanan);
-                    users.setTanggalLahir(tanggalLahir);
-                    users.setNoAsuransi(noAsuransi);
-                    users.setImageURL("default");
-                    users.setStatus(status);
-                    users.setSearch(search);
+                    Patient patient = new Patient();
 
-                    reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    patient.setUid(userid);
+                    patient.setName(nama);
+                    patient.setEmail(email);
+                    patient.setPassword(password);
+                    patient.setAddress(alamat);
+                    patient.setPhoneNumber(noHP);
+                    patient.setBPJSNumber(noBPJS);
+                    patient.setKTPNumber(noKTP);
+                    patient.setBloodPressure(tekananDarah);
+                    patient.setBloodSugar(gulaDarah);
+                    patient.setBloodType(golDarah);
+                    patient.setGender(jenisKelamin);
+                    patient.setOwnDisease(penyakitSendiri);
+                    patient.setGeneticDisease(penyakitKeluarga);
+                    patient.setComplaint(keluhanUtama);
+                    patient.setMedicineIntake(obat);
+                    patient.setMedicineAllergy(alergiObat);
+                    patient.setFoodAllergy(alergiMakanan);
+                    patient.setBirthdate(tanggalLahir);
+                    patient.setInsuranceNumber(noAsuransi);
+                    patient.setAccount("patient");
+                    patient.setImageURL("default");
+                    patient.setStatus(status);
+                    patient.setSearch(search);
+
+                    reference.setValue(patient).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){

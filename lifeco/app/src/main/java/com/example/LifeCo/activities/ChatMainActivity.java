@@ -57,7 +57,6 @@ public class ChatMainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_main);
-
         appBarLayout = findViewById(R.id.appbarlayout);
 
         toolbar = findViewById(R.id.toolbar);
@@ -108,21 +107,15 @@ public class ChatMainActivity extends AppCompatActivity {
 
             }
         });
-
         TabLayout tabLayout = findViewById(R.id.tab_layout);
         ViewPager viewPager = findViewById(R.id.view_pager);
-
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-
         viewPagerAdapter.addFragment(new ChatsFragment(), "Chats");
         Log.d("checkFrqagment", "hi");
         viewPagerAdapter.addFragment(new UsersFragment(), "Users");
         viewPagerAdapter.addFragment(new ProfileFragment(), "Profile");
-
         viewPager.setAdapter(viewPagerAdapter);
-
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     @Override
