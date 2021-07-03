@@ -64,11 +64,10 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private FirebaseUser currentUser;
     private Boolean currentLogoutDriverStatus = false;
     private String passengerID;
+    private DatabaseReference CustomerDatabaseRef;
+    private DatabaseReference DriverAvailableRef;
     private DatabaseReference DriverRef;
-    private DatabaseReference CustomerRef;
-
-    private DatabaseReference PairedLocationRef;
-
+    private DatabaseReference DriverLocationRef;
     private ValueEventListener driverLocationRefListener;
     private LatLng PassengerPickupLocation;
     private int radius = 1;
@@ -94,8 +93,9 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         mAuth = FirebaseAuth.getInstance();
 
         passengerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        PairedLocationRef = FirebaseDatabase.getInstance().getReference().child("Paired");
-        CustomerRef = FirebaseDatabase.getInstance().getReference().child(passengerID);
+        CustomerDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Pick Up Request");
+        DriverAvailableRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
+        DriverLocationRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
         polylines = new ArrayList<>();
         if (!Places.isInitialized()) {
             Places.initialize(getApplicationContext(), getString(R.string.google_maps_key));
@@ -117,23 +117,94 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             }
         });
 
+//        callBtn = findViewById(R.id.passengerMap_callDriver_button);
+//        logoutBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                currentLogoutDriverStatus = true;
+//                DisconnectThePassenger();
+//                mAuth.signOut();
+//                LogoutPassenger();
+//            }
+//        });
+//        callBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (requestbol){
+//                    requestbol = false;
+//                    geoQuery.removeAllListeners();
+//                    DriverLocationRef.removeEventListener(driverLocationRefListener);
+//
+//                    if (DriverFoundID !=null){
+//                        DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverFoundID);
+//                        DriverRef.setValue(true);
+//                        DriverFoundID = null;
+//                    }
+//                    driverFound = false;
+//                    radius=1;
+//
+//                    GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+//                    geoFire.removeLocation(passengerID, new GeoFire.CompletionListener() {
+//                        @Override
+//                        public void onComplete(String key, DatabaseError error) {
+//                            if (error != null) {
+//                                System.err.println("There was an error removing the location to GeoFire: " + error);
+//                            } else {
+//                                System.out.println("Location removed on server successfully!");
+//                            }
+//                        }
+//                    });
+//
+//                    if (PickupMarker != null){
+//                        PickupMarker.remove();
+//                    }
+//                    callBtn.setText("I'M DYING 4 REAL");
+//                    FirebaseDatabase.getInstance().getReference().child("Pick Up Request").child(passengerID).removeValue();
+//                    FirebaseDatabase.getInstance().getReference().child("Drivers Working").child(DriverFoundID).removeValue();
+//                    //CHECK AGAIN, MAYBE WRONG
+//
+//                }
+//                else{
+//                    requestbol = true;
+//
+//                    GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+//                    geoFire.setLocation(passengerID, new GeoLocation( lastLocation.getLatitude(),lastLocation.getLongitude()), new GeoFire.CompletionListener() {
+//                        @Override
+//                        public void onComplete(String key, DatabaseError error) {
+//                            if (error != null) {
+//                                System.err.println("There was an error saving the location to GeoFire: " + error);
+//                            } else {
+//                                System.out.println("Location saved on server successfully!");
+//                            }
+//                        }
+//                    });
+//                    PassengerPickupLocation = new LatLng(lastLocation.getLatitude(),lastLocation.getLongitude());
+//                    PickupMarker = mMap.addMarker(new MarkerOptions().position(PassengerPickupLocation).title("Pickup Customer").icon(BitmapDescriptorFactory.fromResource(R.drawable.patientheart)));
+//
+//                    callBtn.setText("Getting an Ambulance....");
+//                    GetClosestDriverCab();
+//                }
+//
+//            }
+//
+//        });
     }
 
     private void InitializePosition() {
         if (requestbol) {
             requestbol = false;
             geoQuery.removeAllListeners();
-            DriverRef.removeEventListener(driverLocationRefListener);
+            DriverLocationRef.removeEventListener(driverLocationRefListener);
 
             if (DriverFoundID != null) {
-                DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child(DriverFoundID);
-//                DriverRef.setValue(true);
+                DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverFoundID);
+                DriverRef.setValue(true);
                 DriverFoundID = null;
             }
             driverFound = false;
             radius = 1;
 
-            GeoFire geoFire = new GeoFire(CustomerRef);
+            GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
             geoFire.removeLocation(passengerID, new GeoFire.CompletionListener() {
                 @Override
                 public void onComplete(String key, DatabaseError error) {
@@ -156,7 +227,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         } else {
             requestbol = true;
 
-            GeoFire geoFire = new GeoFire(CustomerRef);
+            GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
             geoFire.setLocation(passengerID, new GeoLocation(lastLocation.getLatitude(), lastLocation.getLongitude()), new GeoFire.CompletionListener() {
                 @Override
                 public void onComplete(String key, DatabaseError error) {
@@ -179,7 +250,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void GetClosestDriverCab() {
-        GeoFire geoFire = new GeoFire(DriverRef);//filter
+        GeoFire geoFire = new GeoFire(DriverAvailableRef);
         geoQuery = geoFire.queryAtLocation(new GeoLocation(PassengerPickupLocation.latitude, PassengerPickupLocation.longitude), radius);
         geoQuery.removeAllListeners();
         geoQuery.addGeoQueryEventListener(new GeoQueryEventListener() {
@@ -188,10 +259,11 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                 if (!driverFound && requestbol) {
                     driverFound = true;
                     DriverFoundID = key;
-                    PairedLocationRef.child("DriverID").setValue(DriverFoundID);
 
-                    PairedLocationRef.child(DriverFoundID).child("DriverID").setValue(DriverFoundID);
-                    PairedLocationRef.child(DriverFoundID).child("PatientID").setValue(passengerID);
+                    DriverRef = FirebaseDatabase.getInstance().getReference().child("Drivers").child(DriverFoundID);
+                    HashMap driverMap = new HashMap();
+                    driverMap.put("CustomerRideID", passengerID);
+                    DriverRef.updateChildren(driverMap);
                     GettingDriverLocation();
                     callBtn.setText("Initializing Ambulance Location");
                 }
@@ -223,9 +295,9 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void GettingDriverLocation() {
-//        DriverLocationRef = DriverLocationRef.child(DriverFoundID).child("l");//fix
+        DriverLocationRef = DriverLocationRef.child(DriverFoundID).child("l");
         Log.println(Log.INFO, "THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
-        driverLocationRefListener = DriverRef.child(DriverFoundID).child("location").child("l").addValueEventListener(new ValueEventListener() {//fix
+        driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -379,7 +451,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
         Log.println(Log.INFO, "LATLNG VALUE", String.valueOf(latLng));
-        GeoFire geoFireOnline = new GeoFire(FirebaseDatabase.getInstance().getReference().child("Users").child(passengerID));
+        DatabaseReference PassengerOnlineRef = FirebaseDatabase.getInstance().getReference().child("Passenger Online");
+        GeoFire geoFireOnline = new GeoFire(PassengerOnlineRef);
         geoFireOnline.setLocation(passengerID, new GeoLocation(location.getLatitude(), location.getLongitude()), new GeoFire.CompletionListener() {
             @Override
             public void onComplete(String key, DatabaseError error) {
@@ -390,6 +463,95 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                 }
             }
         });
+//        if(connect == true){
+//            if (DriverMarker!=null){
+//                DriverMarker.remove();
+//            }
+//            DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+//            String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+//            new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+//            mapFragment.getMapAsync(PassengerMapsActivity.this);
+
+//            driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                    if (dataSnapshot.exists()){
+////                    GenericTypeIndicator <List<Object>> driverLocIndicator  = new GenericTypeIndicator<List<Object>>() {
+////                    };
+//                        List<Object> driverLocationMap = (List<Object>) dataSnapshot.getValue();
+////                    HashMap <String,Object> driverLocHMap = (HashMap<String, Object>) dataSnapshot.getValue();
+////                    List<Object> driverLocationMap = new ArrayList<Object>(driverLocHMap.values());
+//                        double LocationLat = 0;
+//                        double LocationLong = 0;
+//                        callBtn.setText("Driver Found");
+//                        //Get closest driver wrong position
+//                        //mapfragment not support DUNZO
+//                        // Initialize location
+//
+//                        if (driverLocationMap.get(0) != null){
+//                            LocationLat = Double.parseDouble(driverLocationMap.get(0).toString());
+//                            Log.println(Log.INFO," IS THE latitude oF DRI", driverLocationMap.get(0).toString());
+////                        {g=qw8nsmhqg3, l=[-7.2662892, 112.692749]}
+//                        }
+//                        if (driverLocationMap.get(1) != null){
+//                            LocationLong = Double.parseDouble(driverLocationMap.get(1).toString());
+//                            Log.println(Log.INFO," ISE Longitude oF DRI", driverLocationMap.get(1).toString());
+//                        }
+//
+//                        DriverLatLng = new LatLng(LocationLat,LocationLong);
+//                        connect = true;
+//                        //THIS IS SUPPOSED TO BE CALLED REPEATEDLY
+//                    if (DriverMarker!=null){
+//                        DriverMarker.remove();
+//                    }
+//                    DriverMarker = mMap.addMarker(new MarkerOptions().position(DriverLatLng).title("Your Ambulance").icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_ambulance_foreground)));
+//
+//                        Location location1 = new Location("");
+//                        location1.setLatitude(PassengerPickupLocation.latitude);
+//                        location1.setLongitude(PassengerPickupLocation.longitude);
+//
+//                        Location location2 = new Location("");
+//                        location2.setLatitude(DriverLatLng.latitude);
+//                        location2.setLongitude(DriverLatLng.longitude);
+//                    String url = getUrl(DriverMarker.getPosition(),PickupMarker.getPosition(),"driving");
+//                    new FetchURL(PassengerMapsActivity.this).execute(url, "driving");
+//                        float Distance = location1.distanceTo(location2);
+//                        if (Distance<75){
+////                        callBtn.setText("Your Driver is here");
+//                            callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
+//
+//                        }
+//                        else{
+//                            callBtn.setText("Driver is " + String.valueOf(Distance) +  "m Away");
+//                        }
+//
+//
+//                    }else{
+//                    }
+//                }
+//
+//                @Override
+//                public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//                }
+//            });
+//        }
+
+
+//        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
+//        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Passengers");
+//
+//        geoFire= new GeoFire(DriverAvailabilityRef);
+//        geoFire.setLocation(userID, new GeoLocation(location.getLatitude(), location.getLongitude()), new GeoFire.CompletionListener() {
+//            @Override
+//            public void onComplete(String key, DatabaseError error) {
+//                if (error != null) {
+//                    System.err.println("There was an error saving the location to GeoFire: " + error);
+//                } else {
+//                    System.out.println("Location saved on server successfully!");
+//                }
+//            }
+//        });
     }
 
     protected synchronized void buildGoogleApiClient() {
@@ -432,8 +594,9 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void DisconnectThePassenger() {
-        PairedLocationRef.child(DriverFoundID).removeValue();
-    //        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("Passenger Online").child(userID).removeValue();
+//        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
 //
 //        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
 //        geoFire.removeLocation(userID, new GeoFire.CompletionListener() {

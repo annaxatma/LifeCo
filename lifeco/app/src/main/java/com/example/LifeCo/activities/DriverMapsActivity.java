@@ -75,11 +75,10 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     private boolean state = false;
     private boolean once = false;
     private SupportMapFragment mapFragment;
-    private DatabaseReference DriverRef;
+    private DatabaseReference DriverLocationRef, OntheJobDriverRef;
     private ValueEventListener driverLocationRefListener, OntheJobRefListener;
     private LatLng PassengerLatLng;
     private String url;
-    private DatabaseReference PairedLocationRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,14 +92,12 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         DriverID = mAuth.getCurrentUser().getUid();
 //        logoutBtn = findViewById(R.id.drivermap_logout_button);
         settingsBtn = findViewById(R.id.drivermap_settings_button);
-        DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child(DriverID);
+        DriverLocationRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
+        OntheJobDriverRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        DriverRef.child("status").setValue("Available");
-        PairedLocationRef = FirebaseDatabase.getInstance().getReference().child("Paired");
-
         settingsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +119,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void GetAssignedRequest() {
-        AssignedPassengerRef = FirebaseDatabase.getInstance().getReference().child("Paired").child(DriverID).child("PatientID");
+        AssignedPassengerRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverID).child("CustomerRideID");
         Log.println(Log.ERROR, "THIS IS THE ID of PASSS", "GOING TO EXECUTE OT");
 
         AssignedPassengerRef.addValueEventListener(new ValueEventListener() {
@@ -131,8 +128,6 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
                 if (dataSnapshot.exists()) {
                     PassengerID = dataSnapshot.getValue().toString();
-                    DriverRef.child("status").setValue("Working");
-
                     GetAssignedPassengerPickUpLocation();
                     Log.println(Log.ERROR, "THIS IS THE ID of PASSS", PassengerID);
                     Log.d("driver id:", DriverID);
@@ -155,7 +150,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void GetAssignedPassengerPickUpLocation() {
-        AssignedPassengerPickupRef = FirebaseDatabase.getInstance().getReference().child("Users").child(PassengerID).child("location").child("l");//fix
+        AssignedPassengerPickupRef = FirebaseDatabase.getInstance().getReference().child("Pick Up Request").child(PassengerID).child("l");
         AssignedPassengerPickUpListener = AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -198,8 +193,9 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
             }
         });
+        DriverLocationRef = DriverLocationRef.child(DriverID).child("l");
         Log.println(Log.INFO, "THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
-        driverLocationRefListener = DriverRef.child("location").child("l").addValueEventListener(new ValueEventListener() {
+        driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -353,7 +349,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
             Log.println(Log.INFO, "LATLNG VALUE", String.valueOf(latLng));
 
 //            String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();//THIS KEEPS RUNNING EVEN THOUGH IT IS CLOSED!
-            DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");//fix
+            DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
             GeoFire geoFireAvailability = new GeoFire(DriverAvailabilityRef);
 
             DatabaseReference DriverWorkingRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
@@ -598,7 +594,8 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void DisconnectTheDriver() {
-        PairedLocationRef.child(DriverID).removeValue();//        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
+        FirebaseDatabase.getInstance().getReference().child("Drivers Available").child(userID).removeValue();
+//        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
 //        geoFire.removeLocation(userID, new GeoFire.CompletionListener() {
 //            @Override
 //            public void onComplete(String key, DatabaseError error) {
