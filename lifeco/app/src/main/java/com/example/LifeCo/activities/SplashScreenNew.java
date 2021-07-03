@@ -38,13 +38,13 @@ public class SplashScreenNew extends AppCompatActivity {
                     documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                         @Override
                         public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                            if(documentSnapshot.getString("tipeakun").equalsIgnoreCase("driver")){
+                            if(documentSnapshot.getString("account").equalsIgnoreCase("ambulance")){
                                 Intent intent = new Intent(SplashScreenNew.this, MainActivity.class);
                                 String account = "ambulans";
                                 intent.putExtra("account",account);
                                 startActivity(intent);
                                 finish();
-                            } else if(documentSnapshot.getString("tipeakun").equalsIgnoreCase("pasien")){
+                            } else if(documentSnapshot.getString("account").equalsIgnoreCase("patient")){
                                 Intent intent = new Intent(SplashScreenNew.this, MainActivity.class);
                                 String account = "pasien";
                                 intent.putExtra("account",account);

@@ -134,48 +134,6 @@ public class RegistrationActivity extends AppCompatActivity {
                 userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
                 userUsername = inpUsername.getEditText().getText().toString().trim();
 
-//                register(userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi);
-//
-//                users.setNama(userNama);
-//                users.setEmail(userEmail);
-//                users.setPassword(userPassword);
-//                users.setAlamat(userAlamat);
-//                users.setNoHP(userNoHP);
-//                users.setNoBPJS(userNoBPJS);
-//                users.setNoKTP(userNoKTP);
-//                users.setTekananDarah(userTekananDarah);
-//                users.setGulaDarah(userGulaDarah);
-//                users.setGolDarah(userGolDarah);
-//                users.setJenisKelamin(userJenisKelamin);
-//                users.setPenyakitSendiri(userPenyakitSendiri);
-//                users.setPenyakitKeluarga(userPenyakitKeluarga);
-//                users.setKeluhanUtama(userKeluhanUtama);
-//                users.setObat(userObat);
-//                users.setAlergiObat(userAlergiObat);
-//                users.setAlergiMakanan(userAlergiMakanan);
-//                users.setTanggalLahir(userTanggalLahir);
-//                users.setNoAsuransi(userNoAsuransi);
-//
-//                reference.push().setValue(users);
-//                Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
-//                startActivity(intent);
-//                finish();
-//
-//                if(userNama.equals("") && userEmail.equals("") && userPassword.equals("") && userAlamat.equals("") && userNoHP.equals("") && userNoBPJS.equals("") && userNoKTP.equals("") && userTekananDarah.equals("") && userGulaDarah.equals("") && userGolDarah.equals("") && userJenisKelamin.equals("") && userPenyakitSendiri.equals("") && userPenyakitKeluarga.equals("") && userKeluhanUtama.equals("") && userObat.equals("") && userAlergiObat.equals("") && userAlergiMakanan.equals("")  && userTanggalLahir.equals("") && userNoAsuransi.equals("")){
-//                    btnDaftarAkun.setEnabled(false);
-//                } else {
-//                    btnDaftarAkun.setEnabled(true);
-//                    String activityType = "DaftarAkun";
-//
-//                    userId = generateUserID();
-//                    Log.d("UserID", userId);
-//
-//                    BackgroundWorker backgroundWorker = new BackgroundWorker(v.getContext());
-//                    backgroundWorker.execute(activityType,userNama,userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi, userId);
-//
-//                    Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
-//                    startActivity(intent);
-//                }
 
                 if(TextUtils.isEmpty(userNama)){
                     inpNama.setError("Silahkan isi nama Anda.");
@@ -260,30 +218,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "Password must be at least 6 characters!", Toast.LENGTH_SHORT).show();
                 }else{
 
-//                    Firebase Realtime Database:
-
-//                    users.setNama(userNama);
-//                    users.setEmail(userEmail);
-//                    users.setPassword(userPassword);
-//                    users.setAlamat(userAlamat);
-//                    users.setNoHP(userNoHP);
-//                    users.setNoBPJS(userNoBPJS);
-//                    users.setNoKTP(userNoKTP);
-//                    users.setTekananDarah(userTekananDarah);
-//                    users.setGulaDarah(userGulaDarah);
-//                    users.setGolDarah(userGolDarah);
-//                    users.setJenisKelamin(userJenisKelamin);
-//                    users.setPenyakitSendiri(userPenyakitSendiri);
-//                    users.setPenyakitKeluarga(userPenyakitKeluarga);
-//                    users.setKeluhanUtama(userKeluhanUtama);
-//                    users.setObat(userObat);
-//                    users.setAlergiObat(userAlergiObat);
-//                    users.setAlergiMakanan(userAlergiMakanan);
-//                    users.setTanggalLahir(userTanggalLahir);
-//                    users.setNoAsuransi(userNoAsuransi);
-//
-//                    reference.push().setValue(users);
-
                     register(userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi, userUsername);
                 }
 
@@ -302,9 +236,7 @@ public class RegistrationActivity extends AppCompatActivity {
                     Toast.makeText(RegistrationActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
                     userID = fAuth.getCurrentUser().getUid();
                     DocumentReference documentReference = fStore.collection("Users").document(userID);
-                    tipeakun = "pasien";
-
-
+                    tipeakun = "patient";
                     Map<String, Object> user = new HashMap<>();
                     user.put("email", email);
                     user.put("password", password);

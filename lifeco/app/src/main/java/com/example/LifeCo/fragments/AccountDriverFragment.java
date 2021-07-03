@@ -59,10 +59,10 @@ public class AccountDriverFragment extends Fragment {
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                nama.setText(documentSnapshot.getString("nama"));
+                nama.setText(documentSnapshot.getString("name"));
                 email.setText(documentSnapshot.getString("email"));
-                rumahsakit.setText(documentSnapshot.getString("rumahSakit"));
-                nohp.setText(documentSnapshot.getString("noHP"));
+                rumahsakit.setText(documentSnapshot.getString("hospital"));
+                nohp.setText(documentSnapshot.getString("phoneNumber"));
             }
         });
 

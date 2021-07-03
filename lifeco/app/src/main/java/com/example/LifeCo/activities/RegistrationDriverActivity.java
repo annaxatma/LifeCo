@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.LifeCo.model.Ambulance;
 import com.example.LifeCo.model.History;
 import com.example.LifeCo.model.Users;
 import com.example.lifeco.R;
@@ -55,7 +56,8 @@ public class RegistrationDriverActivity extends AppCompatActivity {
     FirebaseFirestore fStore;
     CollectionReference histRef;
 
-    Users users;
+//    Users users;
+    Ambulance ambulance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +71,8 @@ public class RegistrationDriverActivity extends AppCompatActivity {
         inpNoHPDriver = findViewById(R.id.inpNoTelpDriverRegis);
         btnDaftarAkun = findViewById(R.id.btnDaftarAkunDriver);
 
-        users = new Users();
+//        users = new Users();
+        ambulance = new Ambulance();
         reference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         fStore = FirebaseFirestore.getInstance();
@@ -119,7 +122,7 @@ public class RegistrationDriverActivity extends AppCompatActivity {
         fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                tipeakun = "driver";
+                tipeakun = "ambulance";
 
                 if (task.isSuccessful()) {
                     Toast.makeText(RegistrationDriverActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
@@ -127,15 +130,15 @@ public class RegistrationDriverActivity extends AppCompatActivity {
                     DocumentReference documentReference = fStore.collection("Users").document(userID);
 
                     Map<String, Object> user = new HashMap<>();
-                    user.put("nama", nama);
+                    user.put("name", nama);
                     user.put("email", email);
                     user.put("password", password);
-                    user.put("noHP", noHP);
-                    user.put("rumahSakit", rumahSakit);
+                    user.put("phoneNumber", noHP);
+                    user.put("hospital", rumahSakit);
                     user.put("imageURL", "default");
                     user.put("status", status);
                     user.put("search", search);
-                    user.put("tipeakun", tipeakun);
+                    user.put("account", tipeakun);
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
@@ -154,18 +157,19 @@ public class RegistrationDriverActivity extends AppCompatActivity {
 
                     reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
-                    Users users = new Users();
-                    users.setId(userid);
-                    users.setNama(nama);
-                    users.setEmail(email);
-                    users.setPassword(password);
-                    users.setNoHP(noHP);
-                    users.setRumahSakit(rumahSakit);
-                    users.setImageURL("default");
-                    users.setStatus(status);
-                    users.setSearch(search);
+//                    Users users = new Users();
+                    Ambulance ambulance = new Ambulance();
+                    ambulance.setUid(userid);
+                    ambulance.setName(nama);
+                    ambulance.setEmail(email);
+                    ambulance.setPassword(password);
+                    ambulance.setPhoneNumber(noHP);
+                    ambulance.setHospital(rumahSakit);
+                    ambulance.setImageURl("default");
+                    ambulance.setStatus(status);
+                    ambulance.setSearch(search);
 
-                    reference.setValue(users).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    reference.setValue(ambulance).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()){
