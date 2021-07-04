@@ -64,7 +64,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private FirebaseUser currentUser;
     private Boolean currentLogoutDriverStatus = false;
     private String passengerID;
-    private DatabaseReference CustomerDatabaseRef;
+    private DatabaseReference RequestDatabaseRef;
     private DatabaseReference DriverAvailableRef;
     private DatabaseReference DriverRef;
     private DatabaseReference DriverLocationRef;
@@ -93,7 +93,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         mAuth = FirebaseAuth.getInstance();
 
         passengerID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        CustomerDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Pick Up Request");
+        RequestDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Pick Up Request");
         DriverAvailableRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
         DriverLocationRef = FirebaseDatabase.getInstance().getReference().child("Drivers Working");
         polylines = new ArrayList<>();
@@ -143,7 +143,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 //                    driverFound = false;
 //                    radius=1;
 //
-//                    GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+//                    GeoFire geoFire = new GeoFire(RequestDatabaseRef);
 //                    geoFire.removeLocation(passengerID, new GeoFire.CompletionListener() {
 //                        @Override
 //                        public void onComplete(String key, DatabaseError error) {
@@ -167,7 +167,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 //                else{
 //                    requestbol = true;
 //
-//                    GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+//                    GeoFire geoFire = new GeoFire(RequestDatabaseRef);
 //                    geoFire.setLocation(passengerID, new GeoLocation( lastLocation.getLatitude(),lastLocation.getLongitude()), new GeoFire.CompletionListener() {
 //                        @Override
 //                        public void onComplete(String key, DatabaseError error) {
@@ -204,7 +204,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             driverFound = false;
             radius = 1;
 
-            GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+            GeoFire geoFire = new GeoFire(RequestDatabaseRef);
             geoFire.removeLocation(passengerID, new GeoFire.CompletionListener() {
                 @Override
                 public void onComplete(String key, DatabaseError error) {
@@ -220,14 +220,14 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                 PickupMarker.remove();
             }
 //                    callBtn.setText("I'M DYING 4 REAL");
-            FirebaseDatabase.getInstance().getReference().child("Pick Up Request").child(passengerID).removeValue();
-            FirebaseDatabase.getInstance().getReference().child("Drivers Working").child(DriverFoundID).removeValue();
+//            FirebaseDatabase.getInstance().getReference().child("Pick Up Request").child(passengerID).removeValue();
+//            FirebaseDatabase.getInstance().getReference().child("Drivers Working").child(DriverFoundID).removeValue();
             //CHECK AGAIN, MAYBE WRONG
 
         } else {
             requestbol = true;
 
-            GeoFire geoFire = new GeoFire(CustomerDatabaseRef);
+            GeoFire geoFire = new GeoFire(RequestDatabaseRef);
             geoFire.setLocation(passengerID, new GeoLocation(lastLocation.getLatitude(), lastLocation.getLongitude()), new GeoFire.CompletionListener() {
                 @Override
                 public void onComplete(String key, DatabaseError error) {
@@ -260,9 +260,10 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     driverFound = true;
                     DriverFoundID = key;
 
-                    DriverRef = FirebaseDatabase.getInstance().getReference().child("Drivers").child(DriverFoundID);
+                    DriverRef = FirebaseDatabase.getInstance().getReference().child("Paired Request").child(DriverFoundID);
                     HashMap driverMap = new HashMap();
-                    driverMap.put("CustomerRideID", passengerID);
+                    driverMap.put("Patient", passengerID);
+                    driverMap.put("Ambulance", DriverFoundID);
                     DriverRef.updateChildren(driverMap);
                     GettingDriverLocation();
                     callBtn.setText("Initializing Ambulance Location");
@@ -297,6 +298,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private void GettingDriverLocation() {
         DriverLocationRef = DriverLocationRef.child(DriverFoundID).child("l");
         Log.println(Log.INFO, "THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
+
         driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -594,8 +596,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void DisconnectThePassenger() {
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference().child("Passenger Online").child(userID).removeValue();
+        FirebaseDatabase.getInstance().getReference().child("Passenger Online").child(passengerID).removeValue();
 //        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
 //
 //        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);

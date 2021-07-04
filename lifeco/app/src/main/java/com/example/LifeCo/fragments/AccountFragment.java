@@ -76,24 +76,24 @@ public class AccountFragment extends Fragment {
         documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                nama.setText(documentSnapshot.getString("nama"));
+                nama.setText(documentSnapshot.getString("name"));
                 email.setText(documentSnapshot.getString("email"));
-                jeniskelamin.setText(documentSnapshot.getString("jenisKelamin"));
-                goldarah.setText(documentSnapshot.getString("golDarah"));
-                alamat.setText(documentSnapshot.getString("alamat"));
-                nohp.setText(documentSnapshot.getString("noHP"));
-                noktp.setText(documentSnapshot.getString("noKTP"));
-                nobpjs.setText(documentSnapshot.getString("noBPJS"));
-                noasuransi.setText(documentSnapshot.getString("noAsuransi"));
-                tanggallahir.setText(documentSnapshot.getString("tanggalLahir"));
-                penyakitsendiri.setText(documentSnapshot.getString("penyakitSendiri"));
-                penyakitkeluarga.setText(documentSnapshot.getString("penyakitKeluarga"));
-                keluhanutama.setText(documentSnapshot.getString("keluhanUtama"));
-                obat.setText(documentSnapshot.getString("obat"));
-                alergiobat.setText(documentSnapshot.getString("alergiObat"));
-                alergimakanan.setText(documentSnapshot.getString("alergiMakanan"));
-                tekanandarah.setText(documentSnapshot.getString("tekananDarah"));
-                guladarah.setText(documentSnapshot.getString("gulaDarah"));
+                jeniskelamin.setText(documentSnapshot.getString("gender"));
+                goldarah.setText(documentSnapshot.getString("bloodType"));
+                alamat.setText(documentSnapshot.getString("address"));
+                nohp.setText(documentSnapshot.getString("phoneNumber"));
+                noktp.setText(documentSnapshot.getString("KTPNumber"));
+                nobpjs.setText(documentSnapshot.getString("BPJSNumber"));
+                noasuransi.setText(documentSnapshot.getString("insuranceNumber"));
+                tanggallahir.setText(documentSnapshot.getString("birthdate"));
+                penyakitsendiri.setText(documentSnapshot.getString("ownDisease"));
+                penyakitkeluarga.setText(documentSnapshot.getString("geneticDisease"));
+                keluhanutama.setText(documentSnapshot.getString("complaint"));
+                obat.setText(documentSnapshot.getString("medicineIntake"));
+                alergiobat.setText(documentSnapshot.getString("medicineAllergy"));
+                alergimakanan.setText(documentSnapshot.getString("foodAllergy"));
+                tekanandarah.setText(documentSnapshot.getString("bloodPressure"));
+                guladarah.setText(documentSnapshot.getString("bloodSugar"));
             }
         });
 

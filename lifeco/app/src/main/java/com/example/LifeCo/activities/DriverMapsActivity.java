@@ -119,7 +119,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void GetAssignedRequest() {
-        AssignedPassengerRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverID).child("CustomerRideID");
+        AssignedPassengerRef = FirebaseDatabase.getInstance().getReference().child("Paired Request").child(DriverID).child("Patient");
         Log.println(Log.ERROR, "THIS IS THE ID of PASSS", "GOING TO EXECUTE OT");
 
         AssignedPassengerRef.addValueEventListener(new ValueEventListener() {
@@ -150,7 +150,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     private void GetAssignedPassengerPickUpLocation() {
-        AssignedPassengerPickupRef = FirebaseDatabase.getInstance().getReference().child("Pick Up Request").child(PassengerID).child("l");
+        AssignedPassengerPickupRef = FirebaseDatabase.getInstance().getReference().child("Passenger Online").child(PassengerID).child("l");//fix
         AssignedPassengerPickUpListener = AssignedPassengerPickupRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -364,7 +364,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                             if (error != null) {
                                 System.err.println("There was an error saving the location to GeoFire: " + error);
                             } else {
-                                System.out.println("Location saved on server successfully!");
+                                System.out.println("Location saved on server successfully! AVAILABLE");
                             }
                         }
                     });
@@ -374,7 +374,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                             if (error != null) {
                                 System.err.println("There was an error saving the location to GeoFire: " + error);
                             } else {
-                                System.out.println("Location saved on server successfully!");
+                                System.out.println("Location saved on server successfully! AVAILABLE");
                             }
                         }
                     });
@@ -387,7 +387,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                             if (error != null) {
                                 System.err.println("There was an error saving the location to GeoFire: " + error);
                             } else {
-                                System.out.println("Location saved on server successfully!");
+                                System.out.println("Location saved on server successfully! WORKING");
                             }
                         }
                     });
@@ -397,7 +397,7 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
                             if (error != null) {
                                 System.err.println("There was an error saving the location to GeoFire: " + error);
                             } else {
-                                System.out.println("Location saved on server successfully!");
+                                System.out.println("Location saved on server successfully! WORKING");
                             }
                         }
                     });
@@ -595,6 +595,8 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
 
     private void DisconnectTheDriver() {
         FirebaseDatabase.getInstance().getReference().child("Drivers Available").child(userID).removeValue();
+        FirebaseDatabase.getInstance().getReference().child("Drivers Working").child(userID).removeValue();
+
 //        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
 //        geoFire.removeLocation(userID, new GeoFire.CompletionListener() {
 //            @Override
