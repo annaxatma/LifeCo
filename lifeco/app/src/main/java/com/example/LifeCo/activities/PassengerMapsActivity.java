@@ -298,8 +298,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private void GettingDriverLocation() {
         DriverLocationRef = DriverLocationRef.child(DriverFoundID).child("l");
         Log.println(Log.INFO, "THIS IS THE ID oF DRI", "GOINT TO DIEEEEE");
-        RequestDatabaseRef.child(passengerID).removeValue();
-        DriverAvailableRef.child(DriverFoundID).removeValue();//got passenger
+
         driverLocationRefListener = DriverLocationRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -597,8 +596,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     }
 
     private void DisconnectThePassenger() {
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference().child("Passenger Online").child(userID).removeValue();
+        FirebaseDatabase.getInstance().getReference().child("Passenger Online").child(passengerID).removeValue();
 //        DatabaseReference DriverAvailabilityRef = FirebaseDatabase.getInstance().getReference().child("Drivers Available");
 //
 //        GeoFire geoFire= new GeoFire(DriverAvailabilityRef);
