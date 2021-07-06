@@ -199,6 +199,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             if (DriverFoundID != null) {
                 DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverFoundID);
                 DriverRef.setValue(true);
+                PassengerRef.setValue(true);
                 DriverFoundID = null;
             }
             driverFound = false;
