@@ -9,12 +9,14 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.directions.route.Route;
 import com.directions.route.RouteException;
 import com.directions.route.RoutingListener;
@@ -39,6 +41,8 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.Places;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -197,10 +201,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
             DriverLocationRef.removeEventListener(driverLocationRefListener);
 
             if (DriverFoundID != null) {
-                DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverFoundID);
-                DriverRef.setValue(true);
-                PassengerRef = FirebaseDatabase.getInstance().getReference().child("Paired Request 2").child(passengerID);
-                PassengerRef.setValue(true);
+//                DriverRef = FirebaseDatabase.getInstance().getReference().child("Users").child("Drivers").child(DriverFoundID);
+//                DriverRef.setValue(true);
                 DriverFoundID = null;
             }
             driverFound = false;
@@ -273,7 +275,17 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     HashMap passengerMap = new HashMap();
                     driverMap.put("Patient", passengerID);
                     driverMap.put("Ambulance", DriverFoundID);
-                    PassengerRef.updateChildren(passengerMap);
+                    PassengerRef.updateChildren(passengerMap).addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Log.d("SUCCCESS","YESS");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d("Failed to give ID","onFailure: " + e.toString());
+                        }
+                    });
 
 
                     GettingDriverLocation();
