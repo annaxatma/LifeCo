@@ -94,7 +94,7 @@ public class MessageActivity extends AppCompatActivity {
                         }
                     });
                 } else if(documentSnapshot.getString("account").equalsIgnoreCase("patient")){
-                    targetRef = FirebaseDatabase.getInstance().getReference().child("Paired Request 2").child(targetID).child("Ambulance");
+                    targetRef = FirebaseDatabase.getInstance().getReference().child("Paired Request").child(targetID).child("Ambulance");
                     targetRef.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
