@@ -66,7 +66,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private String passengerID;
     private DatabaseReference RequestDatabaseRef;
     private DatabaseReference DriverAvailableRef;
-    private DatabaseReference DriverRef;
+    private DatabaseReference DriverRef,PassengerRef;
     private DatabaseReference DriverLocationRef;
     private ValueEventListener driverLocationRefListener;
     private LatLng PassengerPickupLocation;
@@ -265,6 +265,11 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
                     driverMap.put("Patient", passengerID);
                     driverMap.put("Ambulance", DriverFoundID);
                     DriverRef.updateChildren(driverMap);
+                    PassengerRef = FirebaseDatabase.getInstance().getReference().child("Paired Request 2").child(passengerID);
+                    HashMap passengerMap = new HashMap();
+                    driverMap.put("Patient", passengerID);
+                    driverMap.put("Ambulance", DriverFoundID);
+                    PassengerRef.updateChildren(passengerMap);
                     GettingDriverLocation();
                     callBtn.setText("Initializing Ambulance Location");
                 }
