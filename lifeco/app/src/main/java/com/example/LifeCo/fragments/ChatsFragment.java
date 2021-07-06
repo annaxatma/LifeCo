@@ -50,7 +50,7 @@ public class ChatsFragment extends Fragment {
 
     private UserAdapter userAdapter;
     private List<Users> mUsers;
-    private DatabaseReference ChatRef, targetRef;
+    private DatabaseReference targetRef;
     FirebaseUser fuser;
     DatabaseReference reference;
     private String targetID,partnerID;
@@ -62,7 +62,6 @@ public class ChatsFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         //EDITING DIS
-        ChatRef = FirebaseDatabase.getInstance().getReference().child("Conversations");
         FirebaseFirestore fStore = FirebaseFirestore.getInstance();
         fuser = FirebaseAuth.getInstance().getCurrentUser();
         targetID = fuser.getUid();

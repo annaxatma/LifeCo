@@ -3,6 +3,7 @@ package com.example.LifeCo.activities;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -28,6 +29,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -54,14 +60,61 @@ public class MessageActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     Intent intent;
+    private DatabaseReference targetRef;
 
     ValueEventListener seenListener;
-
+    private String targetID,partnerID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        //EDIT
+        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+        fuser = FirebaseAuth.getInstance().getCurrentUser();
+        targetID = fuser.getUid();
+        DocumentReference documentReference = fStore.collection("Users").document(targetID);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                if(documentSnapshot.getString("account").equalsIgnoreCase("ambulance")){
+                    targetRef = FirebaseDatabase.getInstance().getReference().child("Paired Request").child(targetID).child("Patient");
+                    targetRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                partnerID = dataSnapshot.getValue().toString();
+                            } else {
+                                Log.d("ERROR", "Empty snapshot");
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.d("ERROR", databaseError.toString());
+                        }
+                    });
+                } else if(documentSnapshot.getString("account").equalsIgnoreCase("patient")){
+                    targetRef = FirebaseDatabase.getInstance().getReference().child("Paired Request 2").child(targetID).child("Ambulance");
+                    targetRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                partnerID = dataSnapshot.getValue().toString();
+                            } else {
+                                Log.d("ERROR", "Empty snapshot");
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.d("ERROR", databaseError.toString());
+                        }
+                    });
+
+                }
+
+            }});
+        //EDIT
         Toolbar toolbar = findViewById(R.id.toolbar_chat);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
