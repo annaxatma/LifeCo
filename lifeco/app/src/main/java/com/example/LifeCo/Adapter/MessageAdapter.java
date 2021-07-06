@@ -58,17 +58,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         holder.show_message.setText(chat.getMessage());
 
-        if (imageurl.equals("default")){
-            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
-        }else{
-            StorageReference sr = FirebaseStorage.getInstance().getReference().child("" + imageurl);
-            sr.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                @Override
-                public void onSuccess(Uri uri) {
-                    Glide.with(mContext).asBitmap().load(uri.toString()).error(R.mipmap.ic_launcher).into(holder.profile_image);
-                }
-            });
-        }
+//        if (imageurl.equals("default")){
+//            holder.profile_image.setImageResource(R.mipmap.ic_launcher);
+//        }else{
+//            StorageReference sr = FirebaseStorage.getInstance().getReference().child("" + imageurl);
+//            sr.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                @Override
+//                public void onSuccess(Uri uri) {
+//                    Glide.with(mContext).asBitmap().load(uri.toString()).error(R.mipmap.ic_launcher).into(holder.profile_image);
+//                }
+//            });
+//        }
 
         if (position == mChat.size() - 1){
             if (chat.isIsseen()){

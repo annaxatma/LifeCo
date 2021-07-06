@@ -22,6 +22,7 @@ import com.directions.route.RouteException;
 import com.directions.route.RoutingListener;
 import com.example.LifeCo.gDirection.FetchURL;
 import com.example.LifeCo.gDirection.TaskLoadedCallback;
+import com.example.LifeCo.model.Chat;
 import com.example.lifeco.R;
 import com.firebase.geofire.GeoFire;
 import com.firebase.geofire.GeoLocation;
@@ -70,7 +71,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private String passengerID;
     private DatabaseReference RequestDatabaseRef;
     private DatabaseReference DriverAvailableRef;
-    private DatabaseReference DriverRef,PassengerRef;
+    private DatabaseReference DriverRef,PassengerRef, ChatRef;
     private DatabaseReference DriverLocationRef;
     private ValueEventListener driverLocationRefListener;
     private LatLng PassengerPickupLocation;
@@ -88,6 +89,7 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
     private boolean connect = false;
     private SupportMapFragment mapFragment;
     private boolean Search = true;
+    String chatID;
 
     //Possible Errors 1. The polyline 2. The Permission 3. The Database method
     @Override
@@ -116,7 +118,9 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
         btn_toChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PassengerMapsActivity.this, ChatMainActivity.class);
+
+                Intent intent = new Intent(PassengerMapsActivity.this, MessageActivity.class);
+                intent.putExtra("userid", DriverFoundID);
                 startActivity(intent);
             }
         });

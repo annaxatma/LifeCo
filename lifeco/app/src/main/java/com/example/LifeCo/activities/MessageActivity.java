@@ -69,51 +69,51 @@ public class MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
         //EDIT
-        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
-        fuser = FirebaseAuth.getInstance().getCurrentUser();
-        targetID = fuser.getUid();
-        DocumentReference documentReference = fStore.collection("Users").document(targetID);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                if(documentSnapshot.getString("account").equalsIgnoreCase("ambulance")){
-                    targetRef = FirebaseDatabase.getInstance().getReference().child("Paired Request").child(targetID).child("Patient");
-                    targetRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                partnerID = dataSnapshot.getValue().toString();
-                            } else {
-                                Log.d("ERROR", "Empty snapshot");
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.d("ERROR", databaseError.toString());
-                        }
-                    });
-                } else if(documentSnapshot.getString("account").equalsIgnoreCase("patient")){
-                    targetRef = FirebaseDatabase.getInstance().getReference().child("Paired Request").child(targetID).child("Ambulance");
-                    targetRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                partnerID = dataSnapshot.getValue().toString();
-                            } else {
-                                Log.d("ERROR", "Empty snapshot");
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                            Log.d("ERROR", databaseError.toString());
-                        }
-                    });
-
-                }
-
-            }});
+//        FirebaseFirestore fStore = FirebaseFirestore.getInstance();
+//        fuser = FirebaseAuth.getInstance().getCurrentUser();
+//        targetID = fuser.getUid();
+//        DocumentReference documentReference = fStore.collection("Users").document(targetID);
+//        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+//                if(documentSnapshot.getString("account").equalsIgnoreCase("ambulance")){
+//                    targetRef = FirebaseDatabase.getInstance().getReference().child("Paired Request").child(targetID).child("Patient");
+//                    targetRef.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            if (dataSnapshot.exists()) {
+//                                partnerID = dataSnapshot.getValue().toString();
+//                            } else {
+//                                Log.d("ERROR", "Empty snapshot");
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//                            Log.d("ERROR", databaseError.toString());
+//                        }
+//                    });
+//                } else if(documentSnapshot.getString("account").equalsIgnoreCase("patient")){
+//                    targetRef = FirebaseDatabase.getInstance().getReference().child("Paired Request").child(targetID).child("Ambulance");
+//                    targetRef.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                            if (dataSnapshot.exists()) {
+//                                partnerID = dataSnapshot.getValue().toString();
+//                            } else {
+//                                Log.d("ERROR", "Empty snapshot");
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError databaseError) {
+//                            Log.d("ERROR", databaseError.toString());
+//                        }
+//                    });
+//
+//                }
+//
+//            }});
         //EDIT
         Toolbar toolbar = findViewById(R.id.toolbar_chat);
         setSupportActionBar(toolbar);
@@ -161,19 +161,19 @@ public class MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 Users users = dataSnapshot.getValue(Users.class);
                 username.setText(users.getUsername());
-                if (users.getImageURL().equalsIgnoreCase("default")){
-                    profile_image.setImageResource(R.mipmap.ic_launcher);
-                }else{
-
-                    StorageReference sr = FirebaseStorage.getInstance().getReference().child("" + users.getImageURL());
-                    sr.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            Glide.with(getBaseContext()).asBitmap().load(uri.toString()).error(R.mipmap.ic_launcher).into(profile_image);
-                        }
-                    });
-
-                }
+//                if (users.getImageURL().equalsIgnoreCase("default")){
+//                    profile_image.setImageResource(R.mipmap.ic_launcher);
+//                }else{
+//
+//                    StorageReference sr = FirebaseStorage.getInstance().getReference().child("" + users.getImageURL());
+//                    sr.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+//                        @Override
+//                        public void onSuccess(Uri uri) {
+//                            Glide.with(getBaseContext()).asBitmap().load(uri.toString()).error(R.mipmap.ic_launcher).into(profile_image);
+//                        }
+//                    });
+//
+//                }
 
                 readMessages(fuser.getUid(), userid, users.getImageURL());
             }
