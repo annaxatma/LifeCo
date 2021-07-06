@@ -273,8 +273,8 @@ public class PassengerMapsActivity extends FragmentActivity implements OnMapRead
 
                     PassengerRef = FirebaseDatabase.getInstance().getReference().child("Paired Request 2").child(passengerID);
                     HashMap passengerMap = new HashMap();
-                    driverMap.put("Patient", passengerID);
-                    driverMap.put("Ambulance", DriverFoundID);
+                    passengerMap.put("Patient", passengerID);
+                    passengerMap.put("Ambulance", DriverFoundID);
                     PassengerRef.updateChildren(passengerMap).addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
