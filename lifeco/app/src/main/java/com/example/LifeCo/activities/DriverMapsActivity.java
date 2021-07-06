@@ -111,8 +111,9 @@ public class DriverMapsActivity extends FragmentActivity implements OnMapReadyCa
         chatBtn = findViewById(R.id.btn_toChatDriver);
         chatBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(DriverMapsActivity.this, ChatMainActivity.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(DriverMapsActivity.this, MessageActivity.class);
+                intent.putExtra("userid", PassengerID);
                 startActivity(intent);
             }
         });
