@@ -21,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class welcome extends AppCompatActivity {
 
-    Button pasienButton, ambulansButton;
+    Button pasienButton, ambulansButton, socsButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +29,7 @@ public class welcome extends AppCompatActivity {
 
         pasienButton = findViewById(R.id.pasienButton);
         ambulansButton = findViewById(R.id.ambulansButton);
+        socsButton = findViewById(R.id.socsButton);
 
         ambulansButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +42,13 @@ public class welcome extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent LoginRegisterPassengerIntent = new Intent(welcome.this,LoginActivity.class);
+                startActivity(LoginRegisterPassengerIntent);
+            }
+        });
+        socsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent LoginRegisterPassengerIntent = new Intent(welcome.this,socsActivity.class);
                 startActivity(LoginRegisterPassengerIntent);
             }
         });
