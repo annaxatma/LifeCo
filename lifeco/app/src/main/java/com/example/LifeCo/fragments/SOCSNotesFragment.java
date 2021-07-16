@@ -1,66 +1,140 @@
 package com.example.LifeCo.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.example.lifeco.R;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SOCSNotesFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
 public class SOCSNotesFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    View view;
+    RecyclerView note_recyclerView;
+    SwipeRefreshLayout note_swipeRefresh;
+    FloatingActionButton note_FAB_create;
+    SearchView note_search_input;
+    ArrayList<Note> noteList;
+    NoteRVAdapter adapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    Query noteReference;
 
-    public SOCSNotesFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SOCSNotesFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SOCSNotesFragment newInstance(String param1, String param2) {
-        SOCSNotesFragment fragment = new SOCSNotesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
+    String userID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_socs_notes, container, false);
+        view = inflater.inflate(R.layout.fragment_socs_notes, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        fStore = FirebaseFirestore.getInstance();
+        userID = mAuth.getCurrentUser().getUid();
+
+        initialize();
+
+        loadNote();
+//        setSearch();
+
+        setListener();
+        setSwipeRefresh();
+
+        return view;
+    }
+
+    @Override
+    public void onClick(int position) {
+        Note note = noteList.get(position);
+        String noteId = note.NoteId;
+
+        Intent intent = new Intent(getContext(), EditNoteActivity.class);
+        intent.putExtra("noteId", noteId);
+        startActivity(intent);
+
+        note_search_input.clearFocus();
+        note_search_input.setQuery("", false);
+    }
+
+    @Override
+    public void setSwipeRefresh() {
+        note_swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                noteList.clear();
+                loadNote();
+
+                note_swipeRefresh.setRefreshing(false);
+            }
+        });
+    }
+
+    private void setListener() {
+        note_FAB_create.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fm = getParentFragmentManager();
+                CreateNoteFragment createNote = new CreateNoteFragment(NoteFragment.this);
+                createNote.show(fm, null);
+            }
+        });
+    }
+
+
+    private void loadNote() {
+        noteReference = fStore.collection("user_collection")
+                .document(userID).collection("note_collection")
+                .orderBy("created", Query.Direction.DESCENDING);
+
+        noteReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+            @Override
+            public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
+                noteList.clear();
+
+                for (QueryDocumentSnapshot doc : value) {
+                    if (doc != null) {
+                        String id = doc.getId();
+                        Note note = doc.toObject(Note.class).withId(id);
+
+                        noteList.add(note);
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        });
+    }
+
+    private void initialize() {
+        note_recyclerView = view.findViewById(R.id.note_recyclerView);
+        note_swipeRefresh = view.findViewById(R.id.note_swipeRefresh);
+        note_FAB_create = view.findViewById(R.id.note_FAB_create);
+        note_search_input = view.findViewById(R.id.note_search_input);
+        noteList = new ArrayList<Note>();
+        adapter = new NoteRVAdapter(noteList, this);
+
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
+        note_recyclerView.setLayoutManager(manager);
+        note_recyclerView.setAdapter(adapter);
     }
 }
