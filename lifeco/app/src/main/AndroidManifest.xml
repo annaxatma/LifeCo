@@ -24,7 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.LifeCo.activities.BarcodeDataActivity"></activity>
+        <activity android:name="com.example.LifeCo.activities.AddGroupActivity"></activity>
+        <activity android:name="com.example.LifeCo.activities.GroupMessageActivity" />
+        <activity android:name="com.example.LifeCo.activities.GroupChatActivity" />
+        <activity android:name="com.example.LifeCo.activities.BarcodeDataActivity" />
 
         <uses-library
             android:name="com.google.android.wearable"
@@ -75,7 +78,7 @@
         <activity android:name="com.example.LifeCo.activities.MainActivity" />
         <activity android:name="com.example.LifeCo.activities.ResetPasswordActivity" />
         <activity android:name="com.example.LifeCo.activities.MessageActivity" />
-        <activity android:name="com.example.LifeCo.activities.SplashScreenActivity"></activity>
+        <activity android:name="com.example.LifeCo.activities.SplashScreenActivity" />
         <activity android:name="com.example.LifeCo.fragments.Capture" />
     </application>
 
