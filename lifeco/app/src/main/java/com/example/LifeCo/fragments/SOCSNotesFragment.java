@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
+import com.example.LifeCo.Adapter.NRVAdapter;
 import com.example.lifeco.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,7 +36,7 @@ public class SOCSNotesFragment extends Fragment {
     FloatingActionButton note_FAB_create;
     SearchView note_search_input;
     ArrayList<Note> noteList;
-    NoteRVAdapter adapter;
+    NRVAdapter adapter;
 
     Query noteReference;
 
