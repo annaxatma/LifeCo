@@ -6,4 +6,5 @@
     android:layout_height="match_parent"
     tools:context="com.example.LifeCo.activities.GroupChatActivity">
 
+
 </androidx.constraintlayout.widget.ConstraintLayout>

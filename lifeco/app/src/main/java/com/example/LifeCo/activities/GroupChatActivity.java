@@ -2,18 +2,32 @@ package com.example.LifeCo.activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.LifeCo.Adapter.UserAdapter;
+import com.example.LifeCo.fragments.AccountDriverFragment;
+import com.example.LifeCo.fragments.AccountFragment;
+import com.example.LifeCo.fragments.BarcodeFragment;
+import com.example.LifeCo.fragments.HistoryFragment;
+import com.example.LifeCo.fragments.HomeFragment;
+import com.example.LifeCo.fragments.SOCSChatFragment;
+import com.example.LifeCo.fragments.SOCSNotesFragment;
+import com.example.LifeCo.fragments.SOCSProfileFragment;
 import com.example.LifeCo.model.Chat;
 import com.example.LifeCo.model.Users;
 import com.example.lifeco.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -43,7 +57,7 @@ public class GroupChatActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_chat);
 
-//        View view = inflater.inflate(R.layout.activity_group_chat, container, false);
+//            View view = inflater.inflate(R.layout.activity_group_chat, container, false);
 
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setHasFixedSize(true);

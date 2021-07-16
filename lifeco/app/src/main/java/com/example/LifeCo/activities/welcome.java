@@ -48,7 +48,7 @@ public class welcome extends AppCompatActivity {
         socsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterSocsIntent = new Intent(welcome.this,socsActivity.class);
+                Intent LoginRegisterSocsIntent = new Intent(welcome.this,SOCSMainActivity.class);
                 startActivity(LoginRegisterSocsIntent);
             }
         });
