@@ -8,14 +8,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
 import com.example.LifeCo.Adapter.NRVAdapter;
+import com.example.LifeCo.activities.SOCSNotesEditActivity;
+import com.example.LifeCo.model.Note;
+import com.example.LifeCo.model.OnCardClickListener;
 import com.example.lifeco.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -28,21 +31,19 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class SOCSNotesFragment extends Fragment {
+public class SOCSNotesFragment extends Fragment implements OnCardClickListener {
 
-    View view;
-    RecyclerView note_recyclerView;
-    SwipeRefreshLayout note_swipeRefresh;
-    FloatingActionButton note_FAB_create;
-    SearchView note_search_input;
-    ArrayList<Note> noteList;
-    NRVAdapter adapter;
+    private View view;
+    private RecyclerView note_recyclerView;
+    private FloatingActionButton note_FAB_create;
+    private ArrayList<Note> noteList;
+    private NRVAdapter adapter;
 
-    Query noteReference;
+    private Query noteReference;
 
-    FirebaseAuth mAuth;
-    FirebaseFirestore fStore;
-    String userID;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,12 +56,8 @@ public class SOCSNotesFragment extends Fragment {
         userID = mAuth.getCurrentUser().getUid();
 
         initialize();
-
         loadNote();
-//        setSearch();
-
         setListener();
-        setSwipeRefresh();
 
         return view;
     }
@@ -70,33 +67,17 @@ public class SOCSNotesFragment extends Fragment {
         Note note = noteList.get(position);
         String noteId = note.NoteId;
 
-        Intent intent = new Intent(getContext(), EditNoteActivity.class);
+        Intent intent = new Intent(getContext(), SOCSNotesEditActivity.class);
         intent.putExtra("noteId", noteId);
         startActivity(intent);
-
-        note_search_input.clearFocus();
-        note_search_input.setQuery("", false);
-    }
-
-    @Override
-    public void setSwipeRefresh() {
-        note_swipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                noteList.clear();
-                loadNote();
-
-                note_swipeRefresh.setRefreshing(false);
-            }
-        });
     }
 
     private void setListener() {
         note_FAB_create.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentManager fm = getParentFragmentManager();
-                CreateNoteFragment createNote = new CreateNoteFragment(NoteFragment.this);
+                FragmentManager fm = getFragmentManager();
+                SOCSNotesCreateFragment createNote = new SOCSNotesCreateFragment();
                 createNote.show(fm, null);
             }
         });
@@ -104,15 +85,14 @@ public class SOCSNotesFragment extends Fragment {
 
 
     private void loadNote() {
-        noteReference = fStore.collection("user_collection")
-                .document(userID).collection("note_collection")
+        noteReference = fStore.collection("Users")
+                .document(userID).collection("Notes")
                 .orderBy("created", Query.Direction.DESCENDING);
 
         noteReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 noteList.clear();
-
                 for (QueryDocumentSnapshot doc : value) {
                     if (doc != null) {
                         String id = doc.getId();
@@ -128,11 +108,9 @@ public class SOCSNotesFragment extends Fragment {
 
     private void initialize() {
         note_recyclerView = view.findViewById(R.id.note_recyclerView);
-        note_swipeRefresh = view.findViewById(R.id.note_swipeRefresh);
         note_FAB_create = view.findViewById(R.id.note_FAB_create);
-        note_search_input = view.findViewById(R.id.note_search_input);
         noteList = new ArrayList<Note>();
-        adapter = new NoteRVAdapter(noteList, this);
+        adapter = new NRVAdapter(noteList, this);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
         note_recyclerView.setLayoutManager(manager);
