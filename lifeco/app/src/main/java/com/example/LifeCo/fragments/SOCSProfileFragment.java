@@ -1,14 +1,20 @@
 package com.example.LifeCo.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
+import com.example.LifeCo.activities.SplashScreenNew;
 import com.example.lifeco.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,7 +31,7 @@ public class SOCSProfileFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
+    Button btnLogOut;
     public SOCSProfileFragment() {
         // Required empty public constructor
     }
@@ -62,5 +68,23 @@ public class SOCSProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_socs_profile, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        btnLogOut = view.findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FirebaseAuth.getInstance().signOut();
+                if (FirebaseAuth.getInstance().getUid() == null) {
+                    Intent intent = new Intent(getActivity(), SplashScreenNew.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+            }
+        });
     }
 }
