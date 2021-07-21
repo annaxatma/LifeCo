@@ -45,8 +45,8 @@ public class SOCSProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        nama = view.findViewById(R.id.txtNamaDriver);
-        email = view.findViewById(R.id.txtEmailDriver);
+        nama = view.findViewById(R.id.txtInformasiPersonalSocs);
+        email = view.findViewById(R.id.txtEmailSocs);
         btnLogOut = view.findViewById(R.id.btnLogOut);
 
         fAuth = FirebaseAuth.getInstance();
@@ -54,14 +54,14 @@ public class SOCSProfileFragment extends Fragment {
 
         userId = fAuth.getCurrentUser().getUid();
 
-//        DocumentReference documentReference = fStore.collection("Users").document(userId);
-//        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
-//            @Override
-//            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-//                nama.setText(documentSnapshot.getString("name"));
-//                email.setText(documentSnapshot.getString("email"));
-//            }
-//        });
+        DocumentReference documentReference = fStore.collection("Users").document(userId);
+        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+                nama.setText(documentSnapshot.getString("name"));
+                email.setText(documentSnapshot.getString("email"));
+            }
+        });
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
