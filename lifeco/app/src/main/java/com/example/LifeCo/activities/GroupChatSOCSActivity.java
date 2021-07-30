@@ -77,7 +77,7 @@ public class GroupChatSOCSActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //input data
-                String message = messageEt.getText().toString();
+                String message = messageEt.getText().toString().trim();
 
                 if (message.length() > 0) {
                     messageEt.getText().clear();

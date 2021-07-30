@@ -63,7 +63,7 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
                 for (DataSnapshot ds: dataSnapshot.getChildren()){
                     Socs modelUser = ds.getValue(Socs.class);
 
-                    //get all users accept curretly signed in
+                    //get all users accept currently signed in
                     if (!fAuth.getUid().equals(modelUser.getUid())){
                         //not my uid
                         userList.add(modelUser);
