@@ -1,6 +1,7 @@
 package com.example.LifeCo.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.LifeCo.activities.GroupChatSOCSActivity;
 import com.example.LifeCo.model.ModelGroupChatList;
 import com.example.lifeco.R;
 
@@ -55,7 +57,10 @@ public class AdapterGroupChatList extends RecyclerView.Adapter<AdapterGroupChatL
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                //open group chat
+                Intent intent = new Intent(context, GroupChatSOCSActivity.class);
+                intent.putExtra("groupId", groupId);
+                context.startActivity(intent);
             }
         });
     }

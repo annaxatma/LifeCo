@@ -24,12 +24,15 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.LifeCo.activities.RegistrationSOCSActivity"></activity>
+        <activity android:name="com.example.LifeCo.activities.GroupChatSOCSActivity"></activity>
+        <activity android:name="com.example.LifeCo.activities.RegistrationSOCSActivity" />
         <activity android:name="com.example.LifeCo.activities.SOCSNotesEditActivity" />
         <activity android:name="com.example.LifeCo.activities.SOCSMainActivity" />
         <activity android:name="com.example.LifeCo.activities.AddGroupActivity" />
         <activity android:name="com.example.LifeCo.activities.GroupMessageActivity" />
-        <activity android:name="com.example.LifeCo.activities.GroupChatActivity" />
+        <activity android:name="com.example.LifeCo.activities.GroupChatActivity"
+            android:theme="@style/AppTheme"
+            />
         <activity android:name="com.example.LifeCo.activities.BarcodeDataActivity" />
 
         <uses-library
