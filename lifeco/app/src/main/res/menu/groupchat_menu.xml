@@ -6,7 +6,13 @@
         android:id="@+id/action_create_group"
         android:icon="@drawable/ic_baseline_group_add_24"
         android:title="Create Group"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
+        />
+    <item
+        android:id="@+id/action_add_participants"
+        android:icon="@drawable/ic_baseline_person_add_24"
+        android:title="Add Group Participant"
+        app:showAsAction="always"
         />
     <item
         android:id="@+id/action_search_group"
