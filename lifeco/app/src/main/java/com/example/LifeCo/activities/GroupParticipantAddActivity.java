@@ -37,9 +37,9 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
         setContentView(R.layout.activity_group_participant_add);
 
         actionBar = getSupportActionBar();
-        actionBar.setTitle("Add Participants");
-        actionBar.setDisplayShowHomeEnabled(true);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+//        actionBar.setTitle("Add Participants");
+//        actionBar.setDisplayShowHomeEnabled(true);
+//        actionBar.setDisplayHomeAsUpEnabled(true);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -97,7 +97,7 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
                     String groupIcon = "" + ds.child("groupIcon").getValue();
                     String createdBy = "" + ds.child("createdBy").getValue();
                     String timestamp = "" + ds.child("timestamp").getValue();
-                    actionBar.setTitle("Add Participants");
+//                    actionBar.setTitle("Add Participants");
 
                     ref1.child(groupId).child("Participants").child(fAuth.getUid())
                             .addValueEventListener(new ValueEventListener() {
@@ -105,7 +105,7 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()){
                                         myGroupRole = "" + dataSnapshot.child("role").getValue();
-                                        actionBar.setTitle(groupTitle + "(" + myGroupRole + ")");
+//                                        actionBar.setTitle(groupTitle + "(" + myGroupRole + ")");
 
                                         getAllUsers();
                                     }
@@ -128,6 +128,7 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
+        onBackPressed();
         return super.onSupportNavigateUp();
     }
 }
