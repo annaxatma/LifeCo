@@ -64,7 +64,7 @@ public class SOCSChatFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 groupChatLists.clear();
                 for(DataSnapshot ds: dataSnapshot.getChildren()){
-                    if(!ds.child("Participants").child(firebaseAuth.getUid()).exists()){
+                    if(ds.child("Participants").child(firebaseAuth.getUid()).exists()){
                         ModelGroupChatList model = ds.getValue(ModelGroupChatList.class);
                         groupChatLists.add(model);
                     }
