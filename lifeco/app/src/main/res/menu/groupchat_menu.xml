@@ -15,6 +15,12 @@
         app:showAsAction="always"
         />
     <item
+        android:id="@+id/action_groupinfo"
+        android:icon="@drawable/ic_info_black"
+        android:title="Group Info"
+        app:showAsAction="always"
+        />
+    <item
         android:id="@+id/action_search_group"
         android:icon="@drawable/ic_search_black_24dp"
         android:title="Search"

@@ -24,7 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.example.LifeCo.activities.GroupParticipantAddActivity"></activity>
+        <activity android:name="com.example.LifeCo.activities.GroupInfoActivity"></activity>
+        <activity android:name="com.example.LifeCo.activities.GroupParticipantAddActivity" />
         <activity android:name="com.example.LifeCo.activities.GroupChatSOCSActivity" />
         <activity android:name="com.example.LifeCo.activities.RegistrationSOCSActivity" />
         <activity android:name="com.example.LifeCo.activities.SOCSNotesEditActivity" />

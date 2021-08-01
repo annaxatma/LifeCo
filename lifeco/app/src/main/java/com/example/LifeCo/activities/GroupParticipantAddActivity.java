@@ -3,9 +3,11 @@ package com.example.LifeCo.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.LifeCo.model.Socs;
 import com.example.lifeco.R;
@@ -23,6 +25,10 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
 
     private ActionBar actionBar;
 
+    private Toolbar toolbargroupsocs;
+
+    private TextView groupTitleTv;
+
     private FirebaseAuth fAuth;
 
     private String groupId;
@@ -36,10 +42,14 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_group_participant_add);
 
-        actionBar = getSupportActionBar();
+//        actionBar = getSupportActionBar();
 //        actionBar.setTitle("Add Participants");
 //        actionBar.setDisplayShowHomeEnabled(true);
 //        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        toolbargroupsocs = findViewById(R.id.toolbargroupsocs);
+        setSupportActionBar(toolbargroupsocs);
+        groupTitleTv = findViewById(R.id.groupTitleTv);
 
         fAuth = FirebaseAuth.getInstance();
 
@@ -97,7 +107,7 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
                     String groupIcon = "" + ds.child("groupIcon").getValue();
                     String createdBy = "" + ds.child("createdBy").getValue();
                     String timestamp = "" + ds.child("timestamp").getValue();
-//                    actionBar.setTitle("Add Participants");
+                    groupTitleTv.setText("Add Participants");
 
                     ref1.child(groupId).child("Participants").child(fAuth.getUid())
                             .addValueEventListener(new ValueEventListener() {
@@ -105,7 +115,7 @@ public class GroupParticipantAddActivity extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     if (dataSnapshot.exists()){
                                         myGroupRole = "" + dataSnapshot.child("role").getValue();
-//                                        actionBar.setTitle(groupTitle + "(" + myGroupRole + ")");
+                                        groupTitleTv.setText(groupTitle + "(" + myGroupRole + ")");
 
                                         getAllUsers();
                                     }
