@@ -140,24 +140,24 @@ public class RegistrationSOCSActivity extends AppCompatActivity {
                     reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
 //                    Users users = new Users();
-                    Socs socs = new Socs();
-                    socs.setUid(userid);
-                    socs.setName(nama);
-                    socs.setEmail(email);
-                    socs.setAccount("SOCS");
-                    socs.setPassword(password);
-                    socs.setPhoneNumber(noHP);
-
-                    reference.setValue(socs).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Log.d("New User - Realtime", "onSuccess: New User Registered for " + userid);
-                            }
-                        }
-                    });
-                    buatAkun();
-                    Intent intent = new Intent(RegistrationSOCSActivity.this, SOCSMainActivity.class);
+//                    Socs socs = new Socs();
+//                    socs.setUid(userid);
+//                    socs.setName(nama);
+//                    socs.setEmail(email);
+//                    socs.setAccount("SOCS");
+//                    socs.setPassword(password);
+//                    socs.setPhoneNumber(noHP);
+//
+//                    reference.setValue(socs).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()) {
+//                                Log.d("New User - Realtime", "onSuccess: New User Registered for " + userid);
+//                            }
+//                        }
+//                    });
+//                    buatAkun();
+                    Intent intent = new Intent(RegistrationSOCSActivity.this, welcome.class);
                     String account = "SOCS";
                     intent.putExtra("account", account);
                     startActivity(intent);

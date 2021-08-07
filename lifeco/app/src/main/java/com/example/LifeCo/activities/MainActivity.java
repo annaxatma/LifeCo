@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar_main);
 
-
         bottomNavigationView = findViewById(R.id.bottom_nav_main);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -41,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
                 switch (item.getItemId()){
-
 
                     case R.id.menu_history:
                         toolbar.setTitle(R.string.menu_history);

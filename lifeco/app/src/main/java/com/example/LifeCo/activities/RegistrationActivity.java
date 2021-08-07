@@ -317,7 +317,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
                     buatAkun();
-                    Intent intent = new Intent(RegistrationActivity.this, MainActivity.class);
+                    Intent intent = new Intent(RegistrationActivity.this, RegistrationDriverActivity.class);
                     String account = "pasien";
                     intent.putExtra("account",account);
                     startActivity(intent);

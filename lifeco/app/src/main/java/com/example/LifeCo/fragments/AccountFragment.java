@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,11 @@ import com.example.lifeco.R;
 import com.example.LifeCo.activities.SplashScreenNew;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -35,6 +41,7 @@ public class AccountFragment extends Fragment {
     String userId;
     FloatingActionButton btnEditAkun;
     Button btnLogOut;
+    DatabaseReference reference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -72,30 +79,67 @@ public class AccountFragment extends Fragment {
         userId = fAuth.getCurrentUser().getUid();
 
 
-        DocumentReference documentReference = fStore.collection("Users").document(userId);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//        DocumentReference documentReference = fStore.collection("Users").document(userId);
+//        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+//                nama.setText(documentSnapshot.getString("name"));
+//                email.setText(documentSnapshot.getString("email"));
+//                jeniskelamin.setText(documentSnapshot.getString("gender"));
+//                goldarah.setText(documentSnapshot.getString("bloodType"));
+//                alamat.setText(documentSnapshot.getString("address"));
+//                nohp.setText(documentSnapshot.getString("phoneNumber"));
+//                noktp.setText(documentSnapshot.getString("KTPNumber"));
+//                nobpjs.setText(documentSnapshot.getString("BPJSNumber"));
+//                noasuransi.setText(documentSnapshot.getString("insuranceNumber"));
+//                tanggallahir.setText(documentSnapshot.getString("birthdate"));
+//                penyakitsendiri.setText(documentSnapshot.getString("ownDisease"));
+//                penyakitkeluarga.setText(documentSnapshot.getString("geneticDisease"));
+//                keluhanutama.setText(documentSnapshot.getString("complaint"));
+//                obat.setText(documentSnapshot.getString("medicineIntake"));
+//                alergiobat.setText(documentSnapshot.getString("medicineAllergy"));
+//                alergimakanan.setText(documentSnapshot.getString("foodAllergy"));
+//                tekanandarah.setText(documentSnapshot.getString("bloodPressure"));
+//                guladarah.setText(documentSnapshot.getString("bloodSugar"));
+//            }
+//        });
+
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                nama.setText(documentSnapshot.getString("name"));
-                email.setText(documentSnapshot.getString("email"));
-                jeniskelamin.setText(documentSnapshot.getString("gender"));
-                goldarah.setText(documentSnapshot.getString("bloodType"));
-                alamat.setText(documentSnapshot.getString("address"));
-                nohp.setText(documentSnapshot.getString("phoneNumber"));
-                noktp.setText(documentSnapshot.getString("KTPNumber"));
-                nobpjs.setText(documentSnapshot.getString("BPJSNumber"));
-                noasuransi.setText(documentSnapshot.getString("insuranceNumber"));
-                tanggallahir.setText(documentSnapshot.getString("birthdate"));
-                penyakitsendiri.setText(documentSnapshot.getString("ownDisease"));
-                penyakitkeluarga.setText(documentSnapshot.getString("geneticDisease"));
-                keluhanutama.setText(documentSnapshot.getString("complaint"));
-                obat.setText(documentSnapshot.getString("medicineIntake"));
-                alergiobat.setText(documentSnapshot.getString("medicineAllergy"));
-                alergimakanan.setText(documentSnapshot.getString("foodAllergy"));
-                tekanandarah.setText(documentSnapshot.getString("bloodPressure"));
-                guladarah.setText(documentSnapshot.getString("bloodSugar"));
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Log.d("checking 1", "hi");
+                if (dataSnapshot.exists()) {
+                    Log.d("checking 2", "hi " + dataSnapshot.child("account").getValue());
+                    nama.setText((dataSnapshot.child("name").getValue()).toString());
+                    email.setText((dataSnapshot.child("email").getValue()).toString());
+                    jeniskelamin.setText((dataSnapshot.child("gender").getValue()).toString());
+                    goldarah.setText((dataSnapshot.child("bloodType").getValue()).toString());
+                    alamat.setText((dataSnapshot.child("address").getValue()).toString());
+                    nohp.setText((dataSnapshot.child("phoneNumber").getValue()).toString());
+                    noktp.setText((dataSnapshot.child("ktpnumber").getValue()).toString());
+                    nobpjs.setText((dataSnapshot.child("bpjsnumber").getValue()).toString());
+                    noasuransi.setText((dataSnapshot.child("insuranceNumber").getValue()).toString());
+                    tanggallahir.setText((dataSnapshot.child("birthdate").getValue()).toString());
+                    penyakitsendiri.setText((dataSnapshot.child("ownDisease").getValue()).toString());
+                    penyakitkeluarga.setText((dataSnapshot.child("geneticDisease").getValue()).toString());
+                    keluhanutama.setText((dataSnapshot.child("complaint").getValue()).toString());
+                    obat.setText((dataSnapshot.child("medicineIntake").getValue()).toString());
+                    alergiobat.setText((dataSnapshot.child("medicineAllergy").getValue()).toString());
+                    alergimakanan.setText((dataSnapshot.child("foodAllergy").getValue()).toString());
+                    tekanandarah.setText((dataSnapshot.child("bloodPressure").getValue()).toString());
+                    guladarah.setText((dataSnapshot.child("bloodSugar").getValue()).toString());
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Cannot get info", "Null");
             }
         });
+
 
         btnEditAkun = view.findViewById(R.id.btnEditProfile);
         btnEditAkun.setOnClickListener(new View.OnClickListener() {

@@ -119,12 +119,12 @@ public class RegistrationDriverActivity extends AppCompatActivity {
     }
     private void register(final String nama, final String email, final String password, final String noHP, final String rumahSakit) {
 
-        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                tipeakun = "ambulance";
-
-                if (task.isSuccessful()) {
+//        fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+//            @Override
+//            public void onComplete(@NonNull Task<AuthResult> task) {
+//                tipeakun = "ambulance";
+//
+//                if (task.isSuccessful()) {
                     Toast.makeText(RegistrationDriverActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
                     userID = fAuth.getCurrentUser().getUid();
                     DocumentReference documentReference = fStore.collection("Users").document(userID);
@@ -156,61 +156,64 @@ public class RegistrationDriverActivity extends AppCompatActivity {
                     final String userid = firebaseUser.getUid();
 
                     reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
+                    reference.child("hospital").setValue(rumahSakit);
+                    reference.child("phoneNumber").setValue(noHP);
 
 //                    Users users = new Users();
-                    Ambulance ambulance = new Ambulance();
-                    ambulance.setUid(userid);
-                    ambulance.setName(nama);
-                    ambulance.setEmail(email);
-                    ambulance.setAccount("ambulance");
-                    ambulance.setPassword(password);
-                    ambulance.setPhoneNumber(noHP);
-                    ambulance.setHospital(rumahSakit);
-                    ambulance.setImageURl("default");
-                    ambulance.setStatus("-");
-                    ambulance.setSearch("-");
-
-                    reference.setValue(ambulance).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                Log.d("New User - Realtime","onSuccess: New User Registered for " + userid);
-                            }
-                        }
-                    });
-                    buatAkun();
-                    Intent intent = new Intent(RegistrationDriverActivity.this, MainActivity.class);
+//                    Ambulance ambulance = new Ambulance();
+//                    ambulance.setUid(userid);
+//                    ambulance.setName(nama);
+//                    ambulance.setEmail(email);
+//                    ambulance.setAccount("ambulance");
+//                    ambulance.setPassword(password);
+//                    ambulance.setPhoneNumber(noHP);
+//                    ambulance.setHospital(rumahSakit);
+//                    ambulance.setImageURl("default");
+//                    ambulance.setStatus("-");
+//                    ambulance.setSearch("-");
+//
+//                    reference.setValue(ambulance).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                        @Override
+//                        public void onComplete(@NonNull Task<Void> task) {
+//                            if (task.isSuccessful()){
+//                                Log.d("New User - Realtime","onSuccess: New User Registered for " + userid);
+//                            }
+//                        }
+//                    });
+//                    buatAkun();
+                    //redirection
+                    Intent intent = new Intent(RegistrationDriverActivity.this, welcome.class);
                     String account = "ambulans";
                     intent.putExtra("account",account);
                     startActivity(intent);
                     finish();
 
 
-                } else {
-                    Toast.makeText(RegistrationDriverActivity.this, "Tidak dapat mendaftarkan akun.", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+//                } else {
+//                    Toast.makeText(RegistrationDriverActivity.this, "Tidak dapat mendaftarkan akun.", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//        });
 
     }
 
-
-    public void buatAkun(){
-
-        FirebaseUser firebaseUser = fAuth.getCurrentUser();
-        assert firebaseUser != null;
-        final String userid = firebaseUser.getUid();
-
-        String aktivitas = "Mendaftarkan akun";
-        String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        String waktu = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
-
-        History history = new History(aktivitas, tanggal, waktu);
-
-        histRef = fStore.collection("Users");
-
-        histRef.document(userid).collection("History").add(history);
-
-    }
+//    HISTORY
+//    public void buatAkun(){
+//
+//        FirebaseUser firebaseUser = fAuth.getCurrentUser();
+//        assert firebaseUser != null;
+//        final String userid = firebaseUser.getUid();
+//
+//        String aktivitas = "Mendaftarkan akun";
+//        String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+//        String waktu = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+//
+//        History history = new History(aktivitas, tanggal, waktu);
+//
+//        histRef = fStore.collection("Users");
+//
+//        histRef.document(userid).collection("History").add(history);
+//
+//    }
 
 }

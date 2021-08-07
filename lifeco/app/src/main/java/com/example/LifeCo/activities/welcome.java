@@ -34,21 +34,23 @@ public class welcome extends AppCompatActivity {
         ambulansButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterDriverIntent = new Intent(welcome.this,RegistrationDriverActivity.class);
+                Intent LoginRegisterDriverIntent = new Intent(welcome.this,MainActivity.class);
+                LoginRegisterDriverIntent.putExtra("account", "driver");
                 startActivity(LoginRegisterDriverIntent);
             }
         });
         pasienButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterPassengerIntent = new Intent(welcome.this,RegistrationActivity.class);
+                Intent LoginRegisterPassengerIntent = new Intent(welcome.this,MainActivity.class);
+                LoginRegisterPassengerIntent.putExtra("account", "pasien");
                 startActivity(LoginRegisterPassengerIntent);
             }
         });
         socsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterSocsIntent = new Intent(welcome.this,RegistrationSOCSActivity.class);
+                Intent LoginRegisterSocsIntent = new Intent(welcome.this,SOCSMainActivity.class);
                 startActivity(LoginRegisterSocsIntent);
             }
         });

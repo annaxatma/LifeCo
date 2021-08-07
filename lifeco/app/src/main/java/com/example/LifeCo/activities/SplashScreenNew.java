@@ -25,7 +25,6 @@ public class SplashScreenNew extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 3000;
     String userId;
     FirebaseAuth fAuth;
-    FirebaseFirestore fStore;
     DatabaseReference targetRef;
     String tipeakun;
     @Override
@@ -49,27 +48,30 @@ public class SplashScreenNew extends AppCompatActivity {
                             Log.d("checking 1", "hi");
                             if (dataSnapshot.exists()) {
                                 Log.d("checking 2", "hi " + dataSnapshot.child("account").getValue());
-                                if((dataSnapshot.child("account").getValue()).equals("patient")){
-                                    Intent intent = new Intent(SplashScreenNew.this, MainActivity.class);
-                                    String account = "pasien";
-                                    intent.putExtra("account",account);
-                                    startActivity(intent);
-                                    finish();
-                                } else if((dataSnapshot.child("account").getValue()).equals("ambulance")){
-                                    Log.d("checking account", "hi");
-                                    Intent intent = new Intent(SplashScreenNew.this, MainActivity.class);
-                                    String account = "ambulans";
-                                    intent.putExtra("account",account);
-                                    startActivity(intent);
-                                    finish();
-                                } else if ((dataSnapshot.child("account").getValue()).equals("SOCS")) {
-                                    Log.d("checking account", "hi");
-                                    Intent intent = new Intent(SplashScreenNew.this, SOCSMainActivity.class);
-                                    String account = "socs";
-                                    intent.putExtra("account", account);
-                                    startActivity(intent);
-                                    finish();
-                                }
+//                                if((dataSnapshot.child("account").getValue()).equals("patient")){
+//                                    Intent intent = new Intent(SplashScreenNew.this, MainActivity.class);
+//                                    String account = "pasien";
+//                                    intent.putExtra("account",account);
+//                                    startActivity(intent);
+//                                    finish();
+//                                } else if((dataSnapshot.child("account").getValue()).equals("ambulance")){
+//                                    Log.d("checking account", "hi");
+//                                    Intent intent = new Intent(SplashScreenNew.this, MainActivity.class);
+//                                    String account = "ambulans";
+//                                    intent.putExtra("account",account);
+//                                    startActivity(intent);
+//                                    finish();
+//                                } else if ((dataSnapshot.child("account").getValue()).equals("SOCS")) {
+//                                    Log.d("checking account", "hi");
+//                                    Intent intent = new Intent(SplashScreenNew.this, SOCSMainActivity.class);
+//                                    String account = "socs";
+//                                    intent.putExtra("account", account);
+//                                    startActivity(intent);
+//                                    finish();
+//                                }
+                                //posisi udah login
+                                Intent intent = new Intent(SplashScreenNew.this, welcome.class);
+                                startActivity(intent);
                             } else {
                                 Log.d("ERROR", "Empty snapshot");
                             }
