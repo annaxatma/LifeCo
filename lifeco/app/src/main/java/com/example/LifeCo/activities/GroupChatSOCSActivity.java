@@ -45,6 +45,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -376,7 +377,7 @@ public class GroupChatSOCSActivity extends AppCompatActivity {
 
                             groupTitleTv.setText(groupTitle);
                             try {
-//                                Picasso.get().load(groupIcon).placeholder(R.drawable.ic_baseline_group_24).into(groupIconIv);
+                                Picasso.get().load(groupIcon).placeholder(R.drawable.ic_baseline_group_24).into(groupIconIv);
                             }catch (Exception e){
                                 groupIconIv.setImageResource(R.drawable.ic_baseline_group_24);
                             }

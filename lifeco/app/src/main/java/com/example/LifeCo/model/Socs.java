@@ -10,6 +10,7 @@ public class Socs{
     String name;
     String phoneNumber;
     String account;
+    String image;
 
     public Socs(){
 
@@ -22,6 +23,7 @@ public class Socs{
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.account = account;
+        this.image = image;
     }
 
     protected Socs(Parcel in) {
@@ -31,6 +33,7 @@ public class Socs{
         name = in.readString();
         phoneNumber = in.readString();
         account = in.readString();
+        image = in.readString();
     }
 
     public String getUid() {
@@ -78,8 +81,17 @@ public class Socs{
         return account;
     }
 
+
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
 

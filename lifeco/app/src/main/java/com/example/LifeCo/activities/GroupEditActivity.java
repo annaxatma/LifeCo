@@ -19,6 +19,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,6 +41,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -85,8 +87,8 @@ public class GroupEditActivity extends AppCompatActivity {
 
         //init views
         groupChatIcon = findViewById(R.id.groupchaticon);
-        groupNameTextLayout = findViewById(R.id.groupTitle);
-        groupDescTextLayout = findViewById(R.id.groupDescription);
+        groupNameTextLayout = findViewById(R.id.groupTitleEdit);
+        groupDescTextLayout = findViewById(R.id.groupDescriptionEdit);
         updategroupbtn = findViewById(R.id.updategroupbtn);
 
         groupId = getIntent().getStringExtra("groupId");
@@ -175,8 +177,6 @@ public class GroupEditActivity extends AppCompatActivity {
                             Uri p_downloadUri = p_uriTask.getResult();
                             if (p_uriTask.isSuccessful()){
 
-
-
                                 HashMap<String, Object> hashMap = new HashMap<>();
                                 hashMap.put("groupTitle", groupTitle);
                                 hashMap.put("groupDescription", groupDescription);
@@ -237,7 +237,7 @@ public class GroupEditActivity extends AppCompatActivity {
                     toolbar.setTitle(groupTitle);
 
                     try{
-//                        Picasso.get().load(groupIcon).placeholder(R.drawable.ic_baseline_group_24).into(groupIconIv);
+                        Picasso.get().load(groupIcon).placeholder(R.drawable.ic_baseline_group_24).into(groupChatIcon);
                     }
                     catch (Exception e){
                         groupChatIcon.setImageResource(R.drawable.ic_baseline_group_24);
@@ -334,9 +334,12 @@ public class GroupEditActivity extends AppCompatActivity {
         //handle permission result
         switch (requestCode){
             case CAMERA_REQUEST_CODE:{
+                Log.d("MASOK GAK NI ", "MASOK");
                 if(grantResults.length > 0) {
                     boolean cameraAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     boolean storageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
+                    Log.d("ACCEPT NOT ACCEPT 1 = ", Boolean.toString(cameraAccepted));
+                    Log.d("ACCEPT NOT ACCEPT 2 = ", Boolean.toString(storageAccepted));
                     if(cameraAccepted && storageAccepted){
                         //permission allowed
                         pickFromCamera();

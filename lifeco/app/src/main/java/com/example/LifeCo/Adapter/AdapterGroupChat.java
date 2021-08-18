@@ -82,7 +82,7 @@ public class AdapterGroupChat extends RecyclerView.Adapter<AdapterGroupChat.Hold
             holder.messageIv.setVisibility(View.VISIBLE);
             holder.messageTv.setVisibility(View.GONE);
             try{
-//                Picasso.get().load(message).placeholder(R.drawable.ic_baseline_image_24).into(holder.messageIv);
+                Picasso.get().load(message).placeholder(R.drawable.ic_baseline_image_24).into(holder.messageIv);
             }
             catch (Exception e){
                 holder.messageIv.setImageResource(R.drawable.ic_baseline_image_24);

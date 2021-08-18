@@ -206,7 +206,7 @@ public class GroupInfoActivity extends AppCompatActivity {
                     groupTitleTv.setText(groupTitle);
 
                     try{
-//                        Picasso.get().load(groupIcon).placeholder(R.drawable.ic_baseline_group_24).into(groupIconIv);
+                        Picasso.get().load(groupIcon).placeholder(R.drawable.ic_baseline_group_24).into(groupIconIv);
                     }
                     catch (Exception e){
                         groupIconIv.setImageResource(R.drawable.ic_baseline_group_24);
