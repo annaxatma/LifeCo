@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -104,6 +105,7 @@ public class GroupInfoActivity extends AppCompatActivity {
                 String dialogDescription = "";
                 String positiveButtonTitle = "";
                 if(myGroupRole.equals("creator")){
+                    Log.d("hi","test 1");
                     dialogTitle = "Delete Group";
                     dialogDescription = "Are you sure you want to delete this group permanently?";
                     positiveButtonTitle = "DELETE";
@@ -113,12 +115,16 @@ public class GroupInfoActivity extends AppCompatActivity {
                     dialogDescription = "Are you sure you want to leave this group?";
                     positiveButtonTitle = "LEAVE GROUP";
                 }
-                AlertDialog.Builder builder = new AlertDialog.Builder(GroupInfoActivity.this);
-                builder.setTitle(dialogTitle)
-                        .setMessage(dialogDescription)
-                        .setPositiveButton(positiveButtonTitle, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
+
+                AlertDialog.Builder builder1 = new AlertDialog.Builder(GroupInfoActivity.this);
+                builder1.setTitle(dialogTitle);
+                builder1.setMessage(dialogDescription);
+                builder1.setCancelable(true);
+
+                builder1.setPositiveButton(
+                        "Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
                                 if (myGroupRole.equals("creator")){
                                     deleteGroup();
                                 }
@@ -126,13 +132,18 @@ public class GroupInfoActivity extends AppCompatActivity {
                                     leaveGroup();
                                 }
                             }
-                        })
-                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int which) {
-                                dialogInterface.dismiss();
+                        });
+
+                builder1.setNegativeButton(
+                        "CANCEL",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
                             }
                         });
+
+                AlertDialog alert11 = builder1.create();
+                alert11.show();
             }
         });
     }

@@ -1,8 +1,8 @@
 package com.example.LifeCo.activities;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.LifeCo.model.Socs;
@@ -85,104 +86,227 @@ public class AdapterParticipantAdd extends RecyclerView.Adapter<AdapterParticipa
                                     //option to display in dialog
                                     String[] options;
 
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                    builder.setTitle("Choose Option");
-                                    if (myGroupRole.equals("creator")){
-                                        if (hisPreviousRole.equals("admin")){
-                                            //im creator, he's admin
-                                            options = new String[]{"Remove Admin", "Remove User"};
-                                            builder.setItems(options, new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int which) {
-                                                    //handle item clicks
-                                                    if (which == 0){
-                                                        //remove admin clicked
-                                                        removeAdmin(modelUser);
-                                                    }else{
-                                                        //remove user clicked
-                                                        removeParticipant(modelUser);
-                                                    }
-                                                }
-                                            }). show();
+//                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                    builder.setTitle("Choose Option");
+//                                    if (myGroupRole.equals("creator")){
+//                                        if (hisPreviousRole.equals("admin")){
+//                                            //im creator, he's admin
+//                                            options = new String[]{"Remove Admin", "Remove User"};
+//                                            builder.setItems(options, new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int which) {
+//                                                    //handle item clicks
+//                                                    if (which == 0){
+//                                                        //remove admin clicked
+//                                                        removeAdmin(modelUser);
+//                                                    }else{
+//                                                        //remove user clicked
+//                                                        removeParticipant(modelUser);
+//                                                    }
+//                                                }
+//                                            }). show();
+//
+//                                        }
+//                                        else if (hisPreviousRole.equals("participants")){
+//                                            //im creator, he's participants
+//                                            options = new String[]{"Make Admin", "Remove User"};
+//                                            builder.setItems(options, new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int which) {
+//                                                    //handle item clicks
+//                                                    if (which == 0){
+//                                                        //"Make Admin clicked
+//                                                        makeAdmin(modelUser);
+//                                                    }else{
+//                                                        //remove user clicked
+//                                                        removeParticipant(modelUser);
+//                                                    }
+//                                                }
+//                                            }). show();
+//                                        }
+//                                    }
+//                                    else if (myGroupRole.equals("admin")){
+//                                        if (hisPreviousRole.equals("creator")){
+//                                            //im admin, he is creator
+//                                            Toast.makeText(context, "Creator of Group...", Toast.LENGTH_SHORT).show();
+//                                        }
+//                                        else if (hisPreviousRole.equals("admin")){
+//                                            //im admin, he is admin too
+//                                            options = new String[]{"Remove Admin", "Remove User"};
+//                                            builder.setItems(options, new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int which) {
+//                                                    //handle item clicks
+//                                                    if (which == 0){
+//                                                        //remove admin clicked
+//                                                        removeAdmin(modelUser);
+//                                                    }else{
+//                                                        //remove user clicked
+//                                                        removeParticipant(modelUser);
+//                                                    }
+//                                                }
+//                                            }). show();
+//                                        }
+//                                        else if (hisPreviousRole.equals("participants")){
+//                                            //im admin, he is participants
+//                                            options = new String[]{"Make Admin", "Remove User"};
+//                                            builder.setItems(options, new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int which) {
+//                                                    //handle item clicks
+//                                                    if (which == 0){
+//                                                        //"Make Admin clicked
+//                                                        makeAdmin(modelUser);
+//                                                    }else{
+//                                                        //remove user clicked
+//                                                        removeParticipant(modelUser);
+//                                                    }
+//                                                }
+//                                            }). show();
+//                                        }
+//                                    }
 
+                                    androidx.appcompat.app.AlertDialog.Builder participantsDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(view.getRootView().getContext());
+                                    participantsDialogBuilder.setTitle("Choose Option");
+
+                                    participantsDialogBuilder.setCancelable(true);
+
+                                    Log.d("check groupRole", myGroupRole);
+                                    if (myGroupRole.equalsIgnoreCase("creator")){
+                                        Log.d("check groupRole", "creator checked");
+                                        Log.d("check previousRolebfr", hisPreviousRole);
+                                        if (hisPreviousRole.equalsIgnoreCase("admin")){
+                                            Log.d("check previousRole", "admin");
+                                            participantsDialogBuilder.setItems(new CharSequence[]
+                                                            {"Remove Admin", "Remove User"},
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            switch (which) {
+                                                                case 0:
+                                                                    removeAdmin(modelUser);
+                                                                    break;
+                                                                case 1:
+                                                                    removeParticipant(modelUser);
+                                                                    break;
+
+                                                            }
+                                                        }
+                                                    });
                                         }
-                                        else if (hisPreviousRole.equals("participants")){
-                                            //im creator, he's participants
-                                            options = new String[]{"Make Admin", "Remove User"};
-                                            builder.setItems(options, new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int which) {
-                                                    //handle item clicks
-                                                    if (which == 0){
-                                                        //"Make Admin clicked
-                                                        makeAdmin(modelUser);
-                                                    }else{
-                                                        //remove user clicked
-                                                        removeParticipant(modelUser);
-                                                    }
-                                                }
-                                            }). show();
+                                        else if (hisPreviousRole.equalsIgnoreCase("participant")){
+                                            Log.d("check previousRole", "participant");
+                                            participantsDialogBuilder.setItems(new CharSequence[]
+                                                            {"Make Admin", "Remove User"},
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            switch (which) {
+                                                                case 0:
+                                                                    makeAdmin(modelUser);
+                                                                    break;
+                                                                case 1:
+                                                                    removeParticipant(modelUser);
+                                                                    break;
+
+                                                            }
+                                                        }
+                                                    });
                                         }
-                                    }
-                                    else if (myGroupRole.equals("admin")){
-                                        if (hisPreviousRole.equals("creator")){
-                                            //im admin, he is creator
+
+                                    } else if (myGroupRole.equalsIgnoreCase("admin")){
+                                        Log.d("check groupRole", "admin");
+                                        if (hisPreviousRole.equalsIgnoreCase("creator")){
+                                            Log.d("check previousRole", "creator");
+//                                            //im admin, he is creator
                                             Toast.makeText(context, "Creator of Group...", Toast.LENGTH_SHORT).show();
                                         }
-                                        else if (hisPreviousRole.equals("admin")){
-                                            //im admin, he is admin too
-                                            options = new String[]{"Remove Admin", "Remove User"};
-                                            builder.setItems(options, new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int which) {
-                                                    //handle item clicks
-                                                    if (which == 0){
-                                                        //remove admin clicked
-                                                        removeAdmin(modelUser);
-                                                    }else{
-                                                        //remove user clicked
-                                                        removeParticipant(modelUser);
-                                                    }
-                                                }
-                                            }). show();
+                                        else if (hisPreviousRole.equalsIgnoreCase("admin")){
+                                            Log.d("check previousRole", "admin");
+                                            participantsDialogBuilder.setItems(new CharSequence[]
+                                                            {"Remove Admin", "Remove User"},
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            switch (which) {
+                                                                case 0:
+                                                                    removeAdmin(modelUser);
+                                                                    break;
+                                                                case 1:
+                                                                    removeParticipant(modelUser);
+                                                                    break;
+
+                                                            }
+                                                        }
+                                                    });
                                         }
-                                        else if (hisPreviousRole.equals("participants")){
-                                            //im admin, he is participants
-                                            options = new String[]{"Make Admin", "Remove User"};
-                                            builder.setItems(options, new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int which) {
-                                                    //handle item clicks
-                                                    if (which == 0){
-                                                        //"Make Admin clicked
-                                                        makeAdmin(modelUser);
-                                                    }else{
-                                                        //remove user clicked
-                                                        removeParticipant(modelUser);
-                                                    }
-                                                }
-                                            }). show();
+                                        else if (hisPreviousRole.equalsIgnoreCase("participant")){
+                                            Log.d("check previousRole", "participant");
+                                            participantsDialogBuilder.setItems(new CharSequence[]
+                                                            {"Make Admin", "Remove User"},
+                                                    new DialogInterface.OnClickListener() {
+                                                        public void onClick(DialogInterface dialog, int which) {
+                                                            switch (which) {
+                                                                case 0:
+                                                                    makeAdmin(modelUser);
+                                                                    break;
+                                                                case 1:
+                                                                    removeParticipant(modelUser);
+                                                                    break;
+
+                                                            }
+                                                        }
+                                                    });
                                         }
                                     }
+
+                                    androidx.appcompat.app.AlertDialog participantAlert = participantsDialogBuilder.create();
+                                    participantAlert.show();
                                 }
                                 else{
                                     //user doesn't exists/not participant: add
-                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                                    builder.setTitle("Add Participant")
-                                            .setMessage("Add this user in this group?")
-                                            .setPositiveButton("ADD", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    //add user
-                                                    addParticipant(modelUser);
+//                                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+//                                    builder.setTitle("Add Participant")
+//                                            .setMessage("Add this user in this group?")
+//                                            .setPositiveButton("ADD", new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                                    //add user
+//                                                    addParticipant(modelUser);
+//                                                }
+//                                            })
+//                                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+//                                                @Override
+//                                                public void onClick(DialogInterface dialogInterface, int i) {
+//                                                    dialogInterface.dismiss();
+//                                                }
+//                                            }).show();
+
+                                    androidx.appcompat.app.AlertDialog.Builder addParticipantDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(view.getRootView().getContext());
+                                    addParticipantDialogBuilder.setTitle("Add Participant");
+                                    addParticipantDialogBuilder.setMessage("Add this user in this group?");
+                                    addParticipantDialogBuilder.setCancelable(true);
+
+                                    addParticipantDialogBuilder.setPositiveButton(
+                                            "ADD",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    if (myGroupRole.equals("creator")){
+                                                        addParticipant(modelUser);
+                                                    }
+                                                    else {
+                                                        dialog.cancel();
+                                                    }
                                                 }
-                                            })
-                                            .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
-                                                @Override
-                                                public void onClick(DialogInterface dialogInterface, int i) {
-                                                    dialogInterface.dismiss();
+                                            });
+
+                                    addParticipantDialogBuilder.setNegativeButton(
+                                            "CANCEL",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    dialog.cancel();
                                                 }
-                                            }).show();
+                                            });
+
+                                    AlertDialog alertAddDialog = addParticipantDialogBuilder.create();
+                                    alertAddDialog.show();
                                 }
                             }
 
@@ -227,7 +351,7 @@ public class AdapterParticipantAdd extends RecyclerView.Adapter<AdapterParticipa
         hashMap.put("role", "admin"); //Roles: participants/admin/creator
         //update role in db
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Groups");
-        ref.child(groupId).child("participants").child(modelUser.getUid()).updateChildren(hashMap)
+        ref.child(groupId).child("Participants").child(modelUser.getUid()).updateChildren(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
@@ -270,7 +394,7 @@ public class AdapterParticipantAdd extends RecyclerView.Adapter<AdapterParticipa
         hashMap.put("role", "participant"); //Roles: participant/admin/creator
         //update role in db
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Groups");
-        ref.child(groupId).child("participants").child(modelUser.getUid()).updateChildren(hashMap)
+        ref.child(groupId).child("Participants").child(modelUser.getUid()).updateChildren(hashMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
