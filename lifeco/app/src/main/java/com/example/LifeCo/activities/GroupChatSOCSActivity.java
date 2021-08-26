@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -225,6 +226,7 @@ public class GroupChatSOCSActivity extends AppCompatActivity {
 
         StorageReference storageReference = FirebaseStorage.getInstance().getReference(filenamePath);
         //upload image
+        Log.d("selected image", String.valueOf(image_uri));
         storageReference.putFile(image_uri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
@@ -426,16 +428,19 @@ public class GroupChatSOCSActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_OK){
-            if (requestCode == IMAGE_PICK_GALLERY_CODE){
-                //picked from gallery
-                image_uri = data.getData();
-                sendImageMessage();
-            }
-            if (requestCode == IMAGE_PICK_CAMERA_CODE){
-                //picked from camera
-                sendImageMessage();
-            }
+        Log.d("checkRequestCode", String.valueOf(requestCode));
+        if (requestCode == IMAGE_PICK_GALLERY_CODE){
+            //picked from gallery
+            image_uri = data.getData();
+            Log.d("from gallery","testing");
+            Log.d("from gallery", String.valueOf(image_uri));
+            sendImageMessage();
+        }
+        if (requestCode == IMAGE_PICK_CAMERA_CODE){
+            //picked from camera
+            Log.d("from camera", "testing");
+            Log.d("from camera", String.valueOf(image_uri));
+            sendImageMessage();
         }
     }
 
@@ -451,21 +456,24 @@ public class GroupChatSOCSActivity extends AppCompatActivity {
                     boolean writeStorageAccepted = grantResults[1] == PackageManager.PERMISSION_GRANTED;
 
                     if (cameraAccepted && writeStorageAccepted){
+                        Log.d("Camera Troubleshoot", "Camera accepted");
                         pickCamera();
                     }
                     else {
+                        Log.d("Camera Troubleshoot", String.valueOf(grantResults[0]) + " " + String.valueOf(grantResults[1]));
                         Toast.makeText(this, "Camera & Storage permissions are required.", Toast.LENGTH_SHORT).show();
                     }
                 }
-
                 break;
             case STORAGE_REQUEST_CODE:
                 if (grantResults.length > 0){
                     boolean writeStorageAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED;
                     if (writeStorageAccepted){
+                        Log.d("Gallery Troubleshoot", "Gallery accepted");
                         pickGallery();
                     }
                     else {
+                        Log.d("Gallery Troubleshoot", String.valueOf(PackageManager.PERMISSION_GRANTED));
                         Toast.makeText(this, "Storage permission is required.", Toast.LENGTH_SHORT).show();
                     }
                 }
