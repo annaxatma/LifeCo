@@ -20,10 +20,13 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class pptInfoActivity extends AppCompatActivity {
 
     private Toolbar pptInfo_toolbar;
-    private TextView info_title, info_desc;
+    private TextView info_title, info_desc, info_created;
     private Intent intent;
 
     private DocumentReference pptReference;
@@ -48,8 +51,13 @@ public class pptInfoActivity extends AppCompatActivity {
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 String description = documentSnapshot.getString("desc");
 
+                Date createdTimestamp = documentSnapshot.getTimestamp("created").toDate();
+                SimpleDateFormat sfd = new SimpleDateFormat("MMMM dd, yyyy");
+                String createdDate = sfd.format(createdTimestamp);
+
                 info_title.setText(documentSnapshot.getString("title"));
                 info_desc.setText(Html.fromHtml(description));
+                info_created.setText(createdDate);
             }
         });
 
@@ -69,6 +77,7 @@ public class pptInfoActivity extends AppCompatActivity {
         pptInfo_toolbar = findViewById(R.id.pptInfo_toolbar);
         info_title = findViewById(R.id.info_title);
         info_desc = findViewById(R.id.info_desc);
+        info_created = findViewById(R.id.info_created);
 
         intent = getIntent();
         pptId = intent.getStringExtra("pptId");

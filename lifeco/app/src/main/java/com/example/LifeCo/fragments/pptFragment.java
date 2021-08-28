@@ -52,7 +52,8 @@ public class pptFragment extends Fragment implements OnCardClickListener {
     }
 
     private void loadPpt() {
-        pptReference = fStore.collection("Files");
+        pptReference = fStore.collection("Files")
+        .orderBy("created", Query.Direction.DESCENDING);
 
         pptReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
