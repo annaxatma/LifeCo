@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.LifeCo.Adapter.PRVAdapter;
+import com.example.LifeCo.activities.pptInfoActivity;
 import com.example.LifeCo.model.OnCardClickListener;
 import com.example.LifeCo.model.ppt;
 import com.example.lifeco.R;
@@ -80,9 +81,9 @@ public class pptFragment extends Fragment implements OnCardClickListener {
         ppt ppt = pptList.get(position);
         String pptId = ppt.pptId;
 
-//        Intent intent = new Intent(getContext(), SOCSNotesEditActivity.class);
-//        intent.putExtra("noteId", noteId);
-//        startActivity(intent);
+        Intent intent = new Intent(getContext(), pptInfoActivity.class);
+        intent.putExtra("pptId", pptId);
+        startActivity(intent);
     }
 
     private void initialize() {
