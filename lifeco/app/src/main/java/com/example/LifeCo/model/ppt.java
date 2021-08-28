@@ -2,7 +2,7 @@ package com.example.LifeCo.model;
 
 import com.google.firebase.Timestamp;
 
-public class ppt {
+public class ppt extends pptId{
     private String title;
     private Timestamp created, updated;
 

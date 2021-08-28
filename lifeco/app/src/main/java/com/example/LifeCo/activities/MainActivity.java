@@ -17,6 +17,7 @@ import com.example.LifeCo.fragments.AccountFragment;
 import com.example.LifeCo.fragments.BarcodeFragment;
 import com.example.LifeCo.fragments.HistoryFragment;
 import com.example.LifeCo.fragments.HomeFragment;
+import com.example.LifeCo.fragments.pptFragment;
 import com.example.lifeco.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -72,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
                         toolbar.setTitle(R.string.menu_barcode);
                         setSupportActionBar(toolbar);
                         fragment = new BarcodeFragment();
+                        loadFragment(fragment);
+                        return true;
+
+                    case R.id.menu_ppt:
+                        toolbar.setTitle("PowerPoint");
+                        setSupportActionBar(toolbar);
+                        fragment = new pptFragment();
                         loadFragment(fragment);
                         return true;
                 }

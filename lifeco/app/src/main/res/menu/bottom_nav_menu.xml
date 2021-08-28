@@ -16,8 +16,15 @@
         android:id="@+id/menu_barcode"
         android:icon="@drawable/ic_baseline_qr_code_scanner_24"
         android:title="Barcode" />
+
     <item
         android:id="@+id/menu_account"
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="@string/menu_akun" />
+
+    <item
+        android:id="@+id/menu_ppt"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="ppt"/>
+
 </menu>
