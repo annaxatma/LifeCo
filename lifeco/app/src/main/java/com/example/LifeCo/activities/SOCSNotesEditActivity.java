@@ -37,6 +37,7 @@ public class SOCSNotesEditActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
+
     private String userID;
     private String noteId;
 

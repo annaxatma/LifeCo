@@ -36,7 +36,6 @@ public class pptFragment extends Fragment implements OnCardClickListener {
 
     private Query pptReference;
 
-    private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
 
     @Override
@@ -44,17 +43,12 @@ public class pptFragment extends Fragment implements OnCardClickListener {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_ppt, container, false);
 
-        mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
         initialize();
         loadPpt();
-        setListener();
 
         return view;
-    }
-
-    private void setListener() {
     }
 
     private void loadPpt() {

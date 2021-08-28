@@ -8,8 +8,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.LifeCo.fragments.pptFragment;
-import com.example.LifeCo.model.Note;
 import com.example.LifeCo.model.OnCardClickListener;
 import com.example.LifeCo.model.ppt;
 import com.example.lifeco.R;
@@ -23,7 +21,6 @@ public class PRVAdapter extends RecyclerView.Adapter<PRVAdapter.pptViewHolder> {
     private ArrayList<ppt> pptList;
     private OnCardClickListener cardListener;
 
-    private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
 
     public PRVAdapter(ArrayList<ppt> pptList, OnCardClickListener cardListener) {
@@ -37,7 +34,6 @@ public class PRVAdapter extends RecyclerView.Adapter<PRVAdapter.pptViewHolder> {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.cardview_ppt, parent, false);
 
-        mAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
 
         return new pptViewHolder(view);
@@ -56,6 +52,7 @@ public class PRVAdapter extends RecyclerView.Adapter<PRVAdapter.pptViewHolder> {
 
     public class pptViewHolder extends RecyclerView.ViewHolder {
         TextView ppt_textView_title;
+
         public pptViewHolder(@NonNull View itemView) {
             super(itemView);
 

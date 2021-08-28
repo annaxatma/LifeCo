@@ -8,6 +8,11 @@
         android:title="@string/menu_sejarah" />
 
     <item
+        android:id="@+id/menu_ppt"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="PPT"/>
+
+    <item
         android:id="@+id/menu_home"
         android:icon="@drawable/ic_priority_high_black_24dp"
         android:title="@string/menu_darurat" />
@@ -22,9 +27,6 @@
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="@string/menu_akun" />
 
-    <item
-        android:id="@+id/menu_ppt"
-        android:icon="@drawable/ic_baseline_info_24"
-        android:title="ppt"/>
+
 
 </menu>

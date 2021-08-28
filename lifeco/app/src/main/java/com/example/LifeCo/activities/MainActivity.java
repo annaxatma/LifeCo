@@ -40,12 +40,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 Fragment fragment;
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
 
                     case R.id.menu_history:
                         toolbar.setTitle(R.string.menu_history);
                         setSupportActionBar(toolbar);
                         fragment = new HistoryFragment();
+                        loadFragment(fragment);
+                        return true;
+
+                    case R.id.menu_ppt:
+                        toolbar.setTitle("PowerPoint");
+                        setSupportActionBar(toolbar);
+                        fragment = new pptFragment();
                         loadFragment(fragment);
                         return true;
 
@@ -56,19 +63,6 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         return true;
 
-                    case R.id.menu_account:
-                        toolbar.setTitle(R.string.menu_account);
-                        setSupportActionBar(toolbar);
-                        Intent i = getIntent();
-                        //what is wrooooong with this oneee
-                        if(i.getStringExtra("account").equalsIgnoreCase("pasien")){
-                            fragment = new AccountFragment();
-                        } else {
-                            fragment = new AccountDriverFragment();
-                        }
-                        loadFragment(fragment);
-                        return true;
-
                     case R.id.menu_barcode:
                         toolbar.setTitle(R.string.menu_barcode);
                         setSupportActionBar(toolbar);
@@ -76,10 +70,16 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         return true;
 
-                    case R.id.menu_ppt:
-                        toolbar.setTitle("PowerPoint");
+                    case R.id.menu_account:
+                        toolbar.setTitle(R.string.menu_account);
                         setSupportActionBar(toolbar);
-                        fragment = new pptFragment();
+                        Intent i = getIntent();
+                        //what is wrooooong with this oneee
+                        if (i.getStringExtra("account").equalsIgnoreCase("pasien")) {
+                            fragment = new AccountFragment();
+                        } else {
+                            fragment = new AccountDriverFragment();
+                        }
                         loadFragment(fragment);
                         return true;
                 }
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_main, fragment);
