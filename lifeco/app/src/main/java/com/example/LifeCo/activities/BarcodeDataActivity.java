@@ -6,11 +6,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.lifeco.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -51,23 +57,49 @@ public class BarcodeDataActivity extends AppCompatActivity {
     }
 
     private void setText() {
-        DocumentReference documentReference = fStore.collection("Users").document(userID);
-        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(userID);
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
-                barcodeData_nama.setText(documentSnapshot.getString("name"));
-                barcodeData_jeniskelamin.setText(documentSnapshot.getString("gender"));
-                barcodeData_goldarah.setText(documentSnapshot.getString("bloodType"));
-                barcodeData_penyakitsendiri.setText(documentSnapshot.getString("ownDisease"));
-                barcodeData_penyakitkeluarga.setText(documentSnapshot.getString("geneticDisease"));
-                barcodeData_keluhanutama.setText(documentSnapshot.getString("complaint"));
-                barcodeData_obat.setText(documentSnapshot.getString("medicineIntake"));
-                barcodeData_alergiobat.setText(documentSnapshot.getString("medicineAllergy"));
-                barcodeData_alergimakanan.setText(documentSnapshot.getString("foodAllergy"));
-                barcodeData_tekanandarah.setText(documentSnapshot.getString("bloodPressure"));
-                barcodeData_guladarah.setText(documentSnapshot.getString("bloodSugar"));
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    barcodeData_nama.setText(dataSnapshot.child("name").getValue().toString());
+                    barcodeData_jeniskelamin.setText(dataSnapshot.child("gender").getValue().toString());
+                    barcodeData_goldarah.setText(dataSnapshot.child("bloodType").getValue().toString());
+                    barcodeData_penyakitsendiri.setText(dataSnapshot.child("ownDisease").getValue().toString());
+                    barcodeData_penyakitkeluarga.setText(dataSnapshot.child("geneticDisease").getValue().toString());
+                    barcodeData_keluhanutama.setText(dataSnapshot.child("complaint").getValue().toString());
+                    barcodeData_obat.setText(dataSnapshot.child("medicineIntake").getValue().toString());
+                    barcodeData_alergiobat.setText(dataSnapshot.child("medicineAllergy").getValue().toString());
+                    barcodeData_alergimakanan.setText(dataSnapshot.child("foodAllergy").getValue().toString());
+                    barcodeData_tekanandarah.setText(dataSnapshot.child("bloodPressure").getValue().toString());
+                    barcodeData_guladarah.setText(dataSnapshot.child("bloodSugar").getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("Cannot get info", "Null");
             }
         });
+
+
+//        DocumentReference documentReference = fStore.collection("Users").document(userID);
+//        documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+//            @Override
+//            public void onEvent(@javax.annotation.Nullable DocumentSnapshot documentSnapshot, @javax.annotation.Nullable FirebaseFirestoreException e) {
+//                barcodeData_nama.setText(documentSnapshot.getString("name"));
+//                barcodeData_jeniskelamin.setText(documentSnapshot.getString("gender"));
+//                barcodeData_goldarah.setText(documentSnapshot.getString("bloodType"));
+//                barcodeData_penyakitsendiri.setText(documentSnapshot.getString("ownDisease"));
+//                barcodeData_penyakitkeluarga.setText(documentSnapshot.getString("geneticDisease"));
+//                barcodeData_keluhanutama.setText(documentSnapshot.getString("complaint"));
+//                barcodeData_obat.setText(documentSnapshot.getString("medicineIntake"));
+//                barcodeData_alergiobat.setText(documentSnapshot.getString("medicineAllergy"));
+//                barcodeData_alergimakanan.setText(documentSnapshot.getString("foodAllergy"));
+//                barcodeData_tekanandarah.setText(documentSnapshot.getString("bloodPressure"));
+//                barcodeData_guladarah.setText(documentSnapshot.getString("bloodSugar"));
+//            }
+//        });
     }
 
     private void initialize() {
