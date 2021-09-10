@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEFCEB"
-    tools:context="com.example.LifeCo.activities.pptInfoActivity">
+    tools:context="com.example.LifeCo.activities.informationDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/pptInfo_toolbar"
+        android:id="@+id/information_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -27,14 +27,14 @@
         android:fillViewport="true"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pptInfo_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/information_toolbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/info_title"
+                android:id="@+id/information_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
@@ -48,7 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/info_desc"
+                android:id="@+id/information_desc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -56,22 +56,22 @@
                 android:text="Description"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/info_created"
+                app:layout_constraintEnd_toEndOf="@+id/information_created"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/info_created"
+                app:layout_constraintStart_toStartOf="@+id/information_created"
                 app:layout_constraintTop_toBottomOf="@+id/divider"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:id="@+id/info_created"
+                android:id="@+id/information_created"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Created"
                 android:textSize="12sp"
-                app:layout_constraintEnd_toEndOf="@+id/info_title"
-                app:layout_constraintStart_toStartOf="@+id/info_title"
-                app:layout_constraintTop_toBottomOf="@+id/info_title" />
+                app:layout_constraintEnd_toEndOf="@+id/information_title"
+                app:layout_constraintStart_toStartOf="@+id/information_title"
+                app:layout_constraintTop_toBottomOf="@+id/information_title" />
 
             <View
                 android:id="@+id/divider"
@@ -79,9 +79,9 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintEnd_toEndOf="@+id/info_created"
-                app:layout_constraintStart_toStartOf="@+id/info_created"
-                app:layout_constraintTop_toBottomOf="@+id/info_created" />
+                app:layout_constraintEnd_toEndOf="@+id/information_created"
+                app:layout_constraintStart_toStartOf="@+id/information_created"
+                app:layout_constraintTop_toBottomOf="@+id/information_created" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 

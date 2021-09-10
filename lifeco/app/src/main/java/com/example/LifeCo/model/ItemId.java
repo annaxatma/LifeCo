@@ -4,12 +4,12 @@ import androidx.annotation.NonNull;
 
 import com.google.firebase.database.Exclude;
 
-public class pptId {
+public class ItemId {
     @Exclude
-    public String pptId;
+    public String itemId;
 
-    public <T extends pptId> T withId(@NonNull final String id) {
-        this.pptId = id;
+    public <T extends ItemId> T withId(@NonNull final String id) {
+        this.itemId = id;
         return (T) this;
     }
 }

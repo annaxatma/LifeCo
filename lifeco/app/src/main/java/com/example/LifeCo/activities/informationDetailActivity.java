@@ -11,42 +11,39 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.lifeco.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class pptInfoActivity extends AppCompatActivity {
+public class informationDetailActivity extends AppCompatActivity {
 
-    private Toolbar pptInfo_toolbar;
-    private TextView info_title, info_desc, info_created;
+    private Toolbar information_toolbar;
+    private TextView information_title, information_desc, information_created;
     private Intent intent;
 
-    private DocumentReference pptReference;
+    private DocumentReference informationReference;
 
     private FirebaseFirestore fStore;
 
-    private String pptId;
+    private String informationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ppt_info);
+        setContentView(R.layout.activity_information_detail);
 
         fStore = FirebaseFirestore.getInstance();
 
         initialize();
 
-        pptReference = fStore.collection("Files").document(pptId);
+        informationReference = fStore.collection("Files").document(informationId);
 
-        pptReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        informationReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 String description = documentSnapshot.getString("desc");
@@ -55,9 +52,9 @@ public class pptInfoActivity extends AppCompatActivity {
                 SimpleDateFormat sfd = new SimpleDateFormat("MMMM dd, yyyy");
                 String createdDate = sfd.format(createdTimestamp);
 
-                info_title.setText(documentSnapshot.getString("title"));
-                info_desc.setText(Html.fromHtml(description));
-                info_created.setText(createdDate);
+                information_title.setText(documentSnapshot.getString("title"));
+                information_desc.setText(Html.fromHtml(description));
+                information_created.setText(createdDate);
             }
         });
 
@@ -65,7 +62,7 @@ public class pptInfoActivity extends AppCompatActivity {
     }
 
     private void setListener() {
-        pptInfo_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        information_toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
@@ -74,12 +71,12 @@ public class pptInfoActivity extends AppCompatActivity {
     }
 
     private void initialize() {
-        pptInfo_toolbar = findViewById(R.id.pptInfo_toolbar);
-        info_title = findViewById(R.id.info_title);
-        info_desc = findViewById(R.id.info_desc);
-        info_created = findViewById(R.id.info_created);
+        information_toolbar = findViewById(R.id.information_toolbar);
+        information_title = findViewById(R.id.information_title);
+        information_desc = findViewById(R.id.information_desc);
+        information_created = findViewById(R.id.information_created);
 
         intent = getIntent();
-        pptId = intent.getStringExtra("pptId");
+        informationId = intent.getStringExtra("informationId");
     }
 }

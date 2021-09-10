@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEFCEB"
-    tools:context="com.example.LifeCo.fragments.pptFragment">
+    tools:context="com.example.LifeCo.fragments.informationFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/ppt_recyclerView"
+        android:id="@+id/information_recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"

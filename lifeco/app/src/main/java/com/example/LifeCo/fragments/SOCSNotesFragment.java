@@ -65,7 +65,7 @@ public class SOCSNotesFragment extends Fragment implements OnCardClickListener {
     @Override
     public void onClick(int position) {
         Note note = noteList.get(position);
-        String noteId = note.NoteId;
+        String noteId = note.itemId;
 
         Intent intent = new Intent(getContext(), SOCSNotesEditActivity.class);
         intent.putExtra("noteId", noteId);

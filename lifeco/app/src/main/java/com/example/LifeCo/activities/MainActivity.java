@@ -8,20 +8,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.LifeCo.fragments.AccountDriverFragment;
 import com.example.LifeCo.fragments.AccountFragment;
 import com.example.LifeCo.fragments.BarcodeFragment;
 import com.example.LifeCo.fragments.HistoryFragment;
 import com.example.LifeCo.fragments.HomeFragment;
-import com.example.LifeCo.fragments.pptFragment;
+import com.example.LifeCo.fragments.informationFragment;
 import com.example.lifeco.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         return true;
 
-                    case R.id.menu_ppt:
-                        toolbar.setTitle("PowerPoint");
+                    case R.id.menu_information:
+                        toolbar.setTitle("Information");
                         setSupportActionBar(toolbar);
-                        fragment = new pptFragment();
+                        fragment = new informationFragment();
                         loadFragment(fragment);
                         return true;
 

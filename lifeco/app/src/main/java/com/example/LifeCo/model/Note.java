@@ -2,7 +2,7 @@ package com.example.LifeCo.model;
 
 import com.google.firebase.Timestamp;
 
-public class Note extends NoteId {
+public class Note extends ItemId {
     private String title, description;
     private Timestamp created, updated;
 

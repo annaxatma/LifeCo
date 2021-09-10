@@ -12,12 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.LifeCo.Adapter.PRVAdapter;
-import com.example.LifeCo.activities.pptInfoActivity;
+import com.example.LifeCo.Adapter.IRVAdapter;
+import com.example.LifeCo.activities.informationDetailActivity;
 import com.example.LifeCo.model.OnCardClickListener;
-import com.example.LifeCo.model.ppt;
+import com.example.LifeCo.model.Information;
 import com.example.lifeco.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -27,43 +26,43 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class pptFragment extends Fragment implements OnCardClickListener {
+public class informationFragment extends Fragment implements OnCardClickListener {
 
     private View view;
-    private RecyclerView ppt_recyclerView;
-    private ArrayList<ppt> pptList;
-    private PRVAdapter adapter;
+    private RecyclerView information_recyclerView;
+    private ArrayList<Information> informationList;
+    private IRVAdapter adapter;
 
-    private Query pptReference;
+    private Query informationReference;
 
     private FirebaseFirestore fStore;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_ppt, container, false);
+        view = inflater.inflate(R.layout.fragment_information, container, false);
 
         fStore = FirebaseFirestore.getInstance();
 
         initialize();
-        loadPpt();
+        loadInformation();
 
         return view;
     }
 
-    private void loadPpt() {
-        pptReference = fStore.collection("Files")
+    private void loadInformation() {
+        informationReference = fStore.collection("Files")
         .orderBy("created", Query.Direction.DESCENDING);
 
-        pptReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        informationReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                pptList.clear();
+                informationList.clear();
                 for (QueryDocumentSnapshot doc : value) {
                     if (doc != null) {
                         String id = doc.getId();
-                        ppt ppt = doc.toObject(ppt.class).withId(id);
-                        pptList.add(ppt);
+                        Information Information = doc.toObject(Information.class).withId(id);
+                        informationList.add(Information);
                     }
                 }
                 adapter.notifyDataSetChanged();
@@ -73,22 +72,22 @@ public class pptFragment extends Fragment implements OnCardClickListener {
 
     @Override
     public void onClick(int position) {
-        ppt ppt = pptList.get(position);
-        String pptId = ppt.pptId;
+        Information Information = informationList.get(position);
+        String informationId = Information.itemId;
 
-        Intent intent = new Intent(getContext(), pptInfoActivity.class);
-        intent.putExtra("pptId", pptId);
+        Intent intent = new Intent(getContext(), informationDetailActivity.class);
+        intent.putExtra("informationId", informationId);
         startActivity(intent);
     }
 
     private void initialize() {
-        ppt_recyclerView = view.findViewById(R.id.ppt_recyclerView);
-        pptList = new ArrayList<ppt>();
-        adapter = new PRVAdapter(pptList, this);
+        information_recyclerView = view.findViewById(R.id.information_recyclerView);
+        informationList = new ArrayList<Information>();
+        adapter = new IRVAdapter(informationList, this);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());
-        ppt_recyclerView.setLayoutManager(manager);
-        ppt_recyclerView.setAdapter(adapter);
+        information_recyclerView.setLayoutManager(manager);
+        information_recyclerView.setAdapter(adapter);
     }
 
 }
