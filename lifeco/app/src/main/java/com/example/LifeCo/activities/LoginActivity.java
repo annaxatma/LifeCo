@@ -76,48 +76,51 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(LoginActivity.this, "User Logged In.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LoginActivity.this, welcome.class);
+                            startActivity(intent);
+                            finish();
 
-                                currentUserId = fAuth.getCurrentUser().getUid();
-                                targetRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
-                                Log.d("Logged in Id:", currentUserId);
-                                targetRef.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        Log.d("checking 1", "hi");
-                                        if (dataSnapshot.exists()) {
-                                            Log.d("checking 2", "hi " + dataSnapshot.child("account").getValue());
-                                            if((dataSnapshot.child("account").getValue()).equals("patient")){
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                String account = "pasien";
-                                                intent.putExtra("account",account);
-                                                startActivity(intent);
-                                                finish();
-                                            } else if((dataSnapshot.child("account").getValue()).equals("ambulance")){
-                                                Log.d("checking account", "hi");
-                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                String account = "ambulans";
-                                                intent.putExtra("account",account);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                            else if((dataSnapshot.child("account").getValue()).equals("SOCS")){
-                                                Log.d("checking account", "hi");
-                                                Intent intent = new Intent(LoginActivity.this, SOCSMainActivity.class);
-                                                String account = "SOCS";
-                                                intent.putExtra("account",account);
-                                                startActivity(intent);
-                                                finish();
-                                            }
-                                        } else {
-                                            Log.d("ERROR", "Empty snapshot");
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                                        Log.d("ERROR", databaseError.toString());
-                                    }
-                                });
+//                                currentUserId = fAuth.getCurrentUser().getUid();
+//                                targetRef = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserId);
+//                                Log.d("Logged in Id:", currentUserId);
+//                                targetRef.addValueEventListener(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                                        Log.d("checking 1", "hi");
+//                                        if (dataSnapshot.exists()) {
+//                                            Log.d("checking 2", "hi " + dataSnapshot.child("account").getValue());
+//                                            if((dataSnapshot.child("account").getValue()).equals("patient")){
+//                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                                String account = "pasien";
+//                                                intent.putExtra("account",account);
+//                                                startActivity(intent);
+//                                                finish();
+//                                            } else if((dataSnapshot.child("account").getValue()).equals("ambulance")){
+//                                                Log.d("checking account", "hi");
+//                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                                String account = "ambulans";
+//                                                intent.putExtra("account",account);
+//                                                startActivity(intent);
+//                                                finish();
+//                                            }
+//                                            else if((dataSnapshot.child("account").getValue()).equals("SOCS")){
+//                                                Log.d("checking account", "hi");
+//                                                Intent intent = new Intent(LoginActivity.this, SOCSMainActivity.class);
+//                                                String account = "SOCS";
+//                                                intent.putExtra("account",account);
+//                                                startActivity(intent);
+//                                                finish();
+//                                            }
+//                                        } else {
+//                                            Log.d("ERROR", "Empty snapshot");
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+//                                        Log.d("ERROR", databaseError.toString());
+//                                    }
+//                                });
 
                         }else {
                             Toast.makeText(LoginActivity.this, "Tidak dapat log in akun.", Toast.LENGTH_SHORT).show();

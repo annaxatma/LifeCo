@@ -135,98 +135,98 @@ public class RegistrationActivity extends AppCompatActivity {
                 userUsername = inpUsername.getEditText().getText().toString().trim();
 
 
-                if(TextUtils.isEmpty(userNama)){
+                if (TextUtils.isEmpty(userNama)) {
                     inpNama.setError("Silahkan isi nama Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userEmail)){
+                if (TextUtils.isEmpty(userEmail)) {
                     inpEmail.setError("Silahkan isi email Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userPassword)){
+                if (TextUtils.isEmpty(userPassword)) {
                     inpPassword.setError("Silahkan isi password Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userAlamat)){
+                if (TextUtils.isEmpty(userAlamat)) {
                     inpAlamat.setError("Silahkan isi alamat rumah Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userNoHP)){
+                if (TextUtils.isEmpty(userNoHP)) {
                     inpNoHP.setError("Silahkan isi nomor HP Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userNoBPJS)){
+                if (TextUtils.isEmpty(userNoBPJS)) {
                     inpNoBPJS.setError("Silahkan isi nomor BPJS Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userNoKTP)){
+                if (TextUtils.isEmpty(userNoKTP)) {
                     inpNoKTP.setError("Silahkan isi nomor KTP Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userTekananDarah)){
+                if (TextUtils.isEmpty(userTekananDarah)) {
                     inpTekananDarah.setError("Silahkan isi tekanan darah Anda (paling terakhir).");
                     return;
                 }
-                if(TextUtils.isEmpty(userGulaDarah)){
+                if (TextUtils.isEmpty(userGulaDarah)) {
                     inpGulaDarah.setError("Silahkan isi gula darah Anda (paling terakhir).");
                     return;
                 }
-                if(TextUtils.isEmpty(userGolDarah)){
+                if (TextUtils.isEmpty(userGolDarah)) {
                     Toast.makeText(RegistrationActivity.this, "Pilih golongan darah Anda!", Toast.LENGTH_SHORT).show();
                 }
-                if(TextUtils.isEmpty(userJenisKelamin)){
+                if (TextUtils.isEmpty(userJenisKelamin)) {
                     Toast.makeText(RegistrationActivity.this, "Pilih salah satu jenis kelamin!", Toast.LENGTH_SHORT).show();
                 }
-                if(TextUtils.isEmpty(userPenyakitSendiri)){
+                if (TextUtils.isEmpty(userPenyakitSendiri)) {
                     inpPenyakitSendiri.setError("Silahkan isi riwayat penyakit Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userPenyakitKeluarga)){
+                if (TextUtils.isEmpty(userPenyakitKeluarga)) {
                     inpPenyakitKeluarga.setError("Silahkan isi riwayat penyakit keluarga Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userKeluhanUtama)){
+                if (TextUtils.isEmpty(userKeluhanUtama)) {
                     inpKeluhanUtama.setError("Silahkan isi keluhan-keluhan utama Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userObat)){
+                if (TextUtils.isEmpty(userObat)) {
                     inpObat.setError("Silahkan isi obat-obatan yang pernah Anda konsumsi.");
                     return;
                 }
-                if(TextUtils.isEmpty(userAlergiObat)){
+                if (TextUtils.isEmpty(userAlergiObat)) {
                     inpAlergiObat.setError("Silahkan isi alergi obat yang Anda ketahui.");
                     return;
                 }
-                if(TextUtils.isEmpty(userAlergiMakanan)){
+                if (TextUtils.isEmpty(userAlergiMakanan)) {
                     inpAlergiMakanan.setError("Silahkan isi alergi makanan yang Anda ketahui.");
                     return;
                 }
-                if(TextUtils.isEmpty(userTanggalLahir)){
+                if (TextUtils.isEmpty(userTanggalLahir)) {
                     inpTanggalLahir.setError("Silahkan isi tanggal lahir Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userNoAsuransi)){
+                if (TextUtils.isEmpty(userNoAsuransi)) {
                     inpNoAsuransi.setError("Silahkan isi nomor asuransi Anda.");
                     return;
                 }
-                if(TextUtils.isEmpty(userUsername)){
+                if (TextUtils.isEmpty(userUsername)) {
                     inpUsername.setError("Silahkan isi username Anda.");
                     return;
                 }
 
-                if(userPassword.length() < 6){
+                if (userPassword.length() < 6) {
                     Toast.makeText(RegistrationActivity.this, "Password must be at least 6 characters!", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
 
                     register(userNama, userEmail, userPassword, userAlamat, userNoHP, userNoBPJS, userNoKTP, userTekananDarah, userGulaDarah, userGolDarah, userJenisKelamin, userPenyakitSendiri, userPenyakitKeluarga, userKeluhanUtama, userObat, userAlergiObat, userAlergiMakanan, userTanggalLahir, userNoAsuransi, userUsername);
                 }
-
 
 
             }
         });
 
     }
+
     private void register(final String nama, final String email, final String password, final String alamat, final String noHP, final String noBPJS, final String noKTP, final String tekananDarah, final String gulaDarah, final String golDarah, final String jenisKelamin, final String penyakitSendiri, final String penyakitKeluarga, final String keluhanUtama, final String obat, final String alergiObat, final String alergiMakanan, final String tanggalLahir, final String noAsuransi, final String username) {
 
         fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -266,12 +266,12 @@ public class RegistrationActivity extends AppCompatActivity {
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Log.d("New User","onSuccess: New User Registered for " + userID);
+                            Log.d("New User", "onSuccess: New User Registered for " + userID);
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
-                            Log.d("Failed to Register","onFailure: " + e.toString());
+                            Log.d("Failed to Register", "onFailure: " + e.toString());
                         }
                     });
 
@@ -311,18 +311,18 @@ public class RegistrationActivity extends AppCompatActivity {
                     reference.setValue(patient).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){
-                                Log.d("New User - Realtime","onSuccess: New User Registered for " + userid);
+                            if (task.isSuccessful()) {
+                                Log.d("New User - Realtime", "onSuccess: New User Registered for " + userid);
                             }
                         }
                     });
                     buatAkun();
                     Intent intent = new Intent(RegistrationActivity.this, RegistrationDriverActivity.class);
                     String account = "pasien";
-                    intent.putExtra("account",account);
+                    intent.putExtra("account", account);
                     startActivity(intent);
                     finish();
-                    
+
                 } else {
                     Toast.makeText(RegistrationActivity.this, "Tidak dapat mendaftarkan akun.", Toast.LENGTH_SHORT).show();
                 }
@@ -366,7 +366,7 @@ public class RegistrationActivity extends AppCompatActivity {
 //        });
 //    }
 
-    public void buatAkun(){
+    public void buatAkun() {
 
         FirebaseUser firebaseUser = fAuth.getCurrentUser();
         assert firebaseUser != null;

@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.LifeCo.activities.LoginActivity;
 import com.example.lifeco.R;
 import com.example.LifeCo.activities.SplashScreenNew;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -161,7 +162,8 @@ public class AccountFragment extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 FirebaseFirestore.getInstance().terminate();
                 if (FirebaseAuth.getInstance().getUid() == null) {
-                    Intent intent = new Intent(getActivity(), SplashScreenNew.class);
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     getActivity().finish();
                 }

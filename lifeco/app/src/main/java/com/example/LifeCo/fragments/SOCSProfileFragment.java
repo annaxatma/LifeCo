@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.LifeCo.activities.LoginActivity;
 import com.example.LifeCo.activities.SplashScreenNew;
 import com.example.lifeco.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -97,7 +98,8 @@ public class SOCSProfileFragment extends Fragment {
                 FirebaseAuth.getInstance().signOut();
                 FirebaseFirestore.getInstance().terminate();
                 if (FirebaseAuth.getInstance().getUid() == null) {
-                    Intent intent = new Intent(getActivity(), SplashScreenNew.class);
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     getActivity().finish();
                 }

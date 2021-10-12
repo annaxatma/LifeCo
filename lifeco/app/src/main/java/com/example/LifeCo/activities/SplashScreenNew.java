@@ -72,6 +72,7 @@ public class SplashScreenNew extends AppCompatActivity {
                                 //posisi udah login
                                 Intent intent = new Intent(SplashScreenNew.this, welcome.class);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 Log.d("ERROR", "Empty snapshot");
                             }
