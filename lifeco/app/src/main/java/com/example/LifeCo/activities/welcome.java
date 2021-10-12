@@ -22,6 +22,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 public class welcome extends AppCompatActivity {
 
     Button pasienButton, ambulansButton, socsButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +35,7 @@ public class welcome extends AppCompatActivity {
         ambulansButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterDriverIntent = new Intent(welcome.this,MainActivity.class);
+                Intent LoginRegisterDriverIntent = new Intent(welcome.this, MainActivity.class);
                 LoginRegisterDriverIntent.putExtra("account", "driver");
                 startActivity(LoginRegisterDriverIntent);
             }
@@ -42,7 +43,7 @@ public class welcome extends AppCompatActivity {
         pasienButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterPassengerIntent = new Intent(welcome.this,MainActivity.class);
+                Intent LoginRegisterPassengerIntent = new Intent(welcome.this, MainActivity.class);
                 LoginRegisterPassengerIntent.putExtra("account", "pasien");
                 startActivity(LoginRegisterPassengerIntent);
             }
@@ -50,7 +51,7 @@ public class welcome extends AppCompatActivity {
         socsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent LoginRegisterSocsIntent = new Intent(welcome.this,SOCSMainActivity.class);
+                Intent LoginRegisterSocsIntent = new Intent(welcome.this, SOCSMainActivity.class);
                 startActivity(LoginRegisterSocsIntent);
             }
         });

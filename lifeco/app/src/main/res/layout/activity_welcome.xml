@@ -57,7 +57,7 @@
         android:layout_marginEnd="32dp"
         android:background="#EF6256"
         android:fontFamily="@font/poppins_bold"
-        android:text="Vaksin COVID 19"
+        android:text="Edukasi"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
