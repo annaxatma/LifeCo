@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -41,12 +42,15 @@ public class AccountFragment extends Fragment {
     FirebaseFirestore fStore;
     String userId;
     FloatingActionButton btnEditAkun;
+    Toolbar toolbar;
     Button btnLogOut;
     DatabaseReference reference;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        toolbar = getActivity().findViewById(R.id.toolbar_main);
+        toolbar.setTitle("Account");
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account, container, false);
     }
@@ -131,7 +135,6 @@ public class AccountFragment extends Fragment {
                     alergimakanan.setText((dataSnapshot.child("foodAllergy").getValue()).toString());
                     tekanandarah.setText((dataSnapshot.child("bloodPressure").getValue()).toString());
                     guladarah.setText((dataSnapshot.child("bloodSugar").getValue()).toString());
-
                 }
             }
 

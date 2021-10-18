@@ -145,7 +145,6 @@ public class EditAkunFragment extends Fragment {
                 users.setId(userId);
 
 
-
                 DocumentReference documentReference = fStore.collection("Users").document(userId);
                 documentReference.addSnapshotListener(new EventListener<DocumentSnapshot>() {
                     @Override
@@ -172,63 +171,61 @@ public class EditAkunFragment extends Fragment {
                 DocumentReference docRef = FirebaseFirestore.getInstance().collection("Users").document(userId);
                 Map<String, Object> map = new HashMap<>();
 
-                if(userNama.length() != 0){
+                if (userNama.length() != 0) {
                     map.put("name", userNama);
                 }
-                if(userEmail.length() != 0){
+                if (userEmail.length() != 0) {
                     map.put("email", userEmail);
                 }
-                if(userPassword.length() != 0){
+                if (userPassword.length() != 0) {
                     map.put("password", userPassword);
                 }
-                if(userAlamat.length() != 0){
-                    Toast.makeText(getActivity(),userAlamat ,
-                            Toast.LENGTH_LONG).show();
+                if (userAlamat.length() != 0) {
                     map.put("address", userAlamat);
                 }
-                if(userNoHP.length() != 0){
+                if (userNoHP.length() != 0) {
                     map.put("phoneNumber", userNoHP);
                 }
-                if(userNoBPJS.length() != 0){
+                if (userNoBPJS.length() != 0) {
                     map.put("BPJSNumber", userNoBPJS);
                 }
-                if(userNoKTP.length() != 0){
+                if (userNoKTP.length() != 0) {
                     map.put("KTPNumber", userNoKTP);
                 }
-                if(userTekananDarah.length() != 0){
+                if (userTekananDarah.length() != 0) {
                     map.put("bloodPressure", userTekananDarah);
                 }
-                if(userGulaDarah.length() != 0){
+                if (userGulaDarah.length() != 0) {
                     map.put("bloodSugar", userGulaDarah);
                 }
-                if(userGolDarah.length() != 0){
+                if (userGolDarah.length() != 0) {
                     map.put("bloodType", userGolDarah);
                 }
-                if(userJenisKelamin.length() != 0){
+                if (userJenisKelamin.length() != 0) {
                     map.put("gender", userJenisKelamin);
                 }
-                if(userPenyakitSendiri.length() != 0){
+                if (userPenyakitSendiri.length() != 0) {
                     map.put("ownDisease", userPenyakitSendiri);
                 }
-                if(userPenyakitKeluarga.length() != 0){
+                if (userPenyakitKeluarga.length() != 0) {
                     map.put("geneticDisease", userPenyakitKeluarga);
                 }
-                if(userKeluhanUtama.length() != 0){
+                if (userKeluhanUtama.length() != 0) {
                     map.put("complaint", userKeluhanUtama);
                 }
-                if(userObat.length() != 0){
+                if (userObat.length() != 0) {
                     map.put("medicineIntake", userObat);
                 }
-                if(userAlergiObat.length() != 0){
+                if (userAlergiObat.length() != 0) {
                     map.put("medicineAllergy", userAlergiObat);
                 }
-                if(userAlergiMakanan.length() != 0){
+                if (userAlergiMakanan.length() != 0) {
                     map.put("foodAllergy", userAlergiMakanan);
                 }
-                if(userTanggalLahir.length() != 0){
+                if (userTanggalLahir.length() != 0) {
                     map.put("birthdate", userTanggalLahir);
                 }
-                if(userNoAsuransi.length() != 0){
+                if (userNoAsuransi.length() != 0) {
                     map.put("insuranceNumber", userNoAsuransi);
                 }
 
@@ -242,6 +239,8 @@ public class EditAkunFragment extends Fragment {
                         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                         fragmentTransaction.replace(R.id.frame_main, fragment);
                         fragmentTransaction.addToBackStack(null);
+//                         Special case for "Can not perform this action after onSaveInstanceState"
+//                        fragmentTransaction.commitAllowingStateLoss();
                         fragmentTransaction.commit();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -251,13 +250,28 @@ public class EditAkunFragment extends Fragment {
                     }
                 });
 
+                // TODO: Should update account details but this fragment needs to be changed into activity
+                //==Start of updating Realtime data
+//                DatabaseReference databaseReference = reference.child(userId);
+//                databaseReference.updateChildren(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+//                    @Override
+//                    public void onSuccess(Void unused) {
+//                        Log.d("Update Realtime", "Success");
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Log.e("Update Realtime", "Failed", e);
+//                    }
+//                });
+                //==End of updating Realtime data
             }
         });
 
     }
 
 
-    public void updateHistory(){
+    public void updateHistory() {
 
         String aktivitas = "Mengubah informasi akun";
         String tanggal = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
