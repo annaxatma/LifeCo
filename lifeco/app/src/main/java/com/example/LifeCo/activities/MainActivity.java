@@ -15,7 +15,7 @@ import com.example.LifeCo.fragments.AccountFragment;
 import com.example.LifeCo.fragments.BarcodeFragment;
 import com.example.LifeCo.fragments.HistoryFragment;
 import com.example.LifeCo.fragments.HomeFragment;
-import com.example.LifeCo.fragments.informationFragment;
+import com.example.LifeCo.fragments.MaterialFragment;
 import com.example.lifeco.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -47,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
                         loadFragment(fragment);
                         return true;
 
-                    case R.id.menu_information:
-                        toolbar.setTitle("Information");
+                    case R.id.menu_materials:
+                        toolbar.setTitle("Materials");
                         setSupportActionBar(toolbar);
-                        fragment = new informationFragment();
+                        fragment = new MaterialFragment();
                         loadFragment(fragment);
                         return true;
 

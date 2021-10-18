@@ -8,9 +8,9 @@
         android:title="@string/menu_sejarah" />
 
     <item
-        android:id="@+id/menu_information"
+        android:id="@+id/menu_materials"
         android:icon="@drawable/ic_baseline_info_24"
-        android:title="Informasi" />
+        android:title="Materi" />
 
     <item
         android:id="@+id/menu_home"

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.LifeCo.Adapter.IRVAdapter;
-import com.example.LifeCo.activities.informationDetailActivity;
+import com.example.LifeCo.activities.MaterialDetailActivity;
 import com.example.LifeCo.model.OnCardClickListener;
 import com.example.LifeCo.model.Information;
 import com.example.lifeco.R;
@@ -26,7 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class informationFragment extends Fragment implements OnCardClickListener {
+public class MaterialFragment extends Fragment implements OnCardClickListener {
 
     private View view;
     private RecyclerView information_recyclerView;
@@ -75,14 +75,14 @@ public class informationFragment extends Fragment implements OnCardClickListener
         Information Information = informationList.get(position);
         String informationId = Information.itemId;
 
-        Intent intent = new Intent(getContext(), informationDetailActivity.class);
+        Intent intent = new Intent(getContext(), MaterialDetailActivity.class);
         intent.putExtra("informationId", informationId);
         startActivity(intent);
     }
 
     private void initialize() {
         information_recyclerView = view.findViewById(R.id.information_recyclerView);
-        informationList = new ArrayList<Information>();
+        informationList = new ArrayList<>();
         adapter = new IRVAdapter(informationList, this);
 
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getContext());

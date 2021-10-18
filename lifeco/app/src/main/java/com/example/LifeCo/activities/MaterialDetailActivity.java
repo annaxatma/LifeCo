@@ -20,7 +20,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class informationDetailActivity extends AppCompatActivity {
+public class MaterialDetailActivity extends AppCompatActivity {
 
     private Toolbar information_toolbar;
     private TextView information_title, information_desc, information_created;
@@ -35,7 +35,7 @@ public class informationDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_information_detail);
+        setContentView(R.layout.activity_material_detail);
 
         fStore = FirebaseFirestore.getInstance();
 
