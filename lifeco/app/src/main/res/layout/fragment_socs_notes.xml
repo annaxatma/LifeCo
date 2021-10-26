@@ -5,8 +5,6 @@
     android:layout_height="match_parent"
     tools:context="com.example.LifeCo.fragments.SOCSNotesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/note_recyclerView"
         android:layout_width="match_parent"
