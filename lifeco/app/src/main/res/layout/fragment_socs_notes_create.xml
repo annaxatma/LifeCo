@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#FEFCEB"
-    tools:context="com.example.LifeCo.fragments.SOCSNotesCreateFragment">
+    tools:context="com.dokterkit.LifeCo.fragments.SOCSNotesCreateFragment">
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/createNote_title_textInput"

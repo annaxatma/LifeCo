@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#DFDFDF"
-    tools:context="com.example.LifeCo.activities.GroupChatSOCSActivity">
+    tools:context="com.dokterkit.LifeCo.activities.GroupChatSOCSActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbargroupsocs"

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.example.lifeco">
+    package="com.dokterkit.lifeco">
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
@@ -12,6 +12,7 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the "MyLocation" functionality.
     -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -27,21 +28,21 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity
-            android:name="com.example.LifeCo.activities.MaterialDetailActivity"
+            android:name="com.dokterkit.LifeCo.activities.MaterialDetailActivity"
             android:exported="true" />
-        <activity android:name="com.example.LifeCo.activities.GroupEditActivity" />
-        <activity android:name="com.example.LifeCo.activities.GroupInfoActivity" />
-        <activity android:name="com.example.LifeCo.activities.GroupParticipantAddActivity" />
-        <activity android:name="com.example.LifeCo.activities.GroupChatSOCSActivity" />
-        <activity android:name="com.example.LifeCo.activities.RegistrationSOCSActivity" />
-        <activity android:name="com.example.LifeCo.activities.SOCSNotesEditActivity" />
-        <activity android:name="com.example.LifeCo.activities.SOCSMainActivity" />
-        <activity android:name="com.example.LifeCo.activities.AddGroupActivity" />
-        <activity android:name="com.example.LifeCo.activities.GroupMessageActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.GroupEditActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.GroupInfoActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.GroupParticipantAddActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.GroupChatSOCSActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.RegistrationSOCSActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.SOCSNotesEditActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.SOCSMainActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.AddGroupActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.GroupMessageActivity" />
         <activity
-            android:name="com.example.LifeCo.activities.GroupChatActivity"
+            android:name="com.dokterkit.LifeCo.activities.GroupChatActivity"
             android:theme="@style/AppTheme" />
-        <activity android:name="com.example.LifeCo.activities.BarcodeDataActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.BarcodeDataActivity" />
 
         <uses-library
             android:name="com.google.android.wearable"
@@ -54,14 +55,16 @@
             android:name="com.google.android.wearable.standalone"
             android:value="true" />
 
-        <activity android:name="com.example.LifeCo.activities.SplashScreenNew">
+        <activity
+            android:name="com.dokterkit.LifeCo.activities.SplashScreenNew"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.LifeCo.activities.welcome" />
+        <activity android:name="com.dokterkit.LifeCo.activities.welcome" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -78,22 +81,22 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity
-            android:name="com.example.LifeCo.activities.DriverMapsActivity"
+            android:name="com.dokterkit.LifeCo.activities.DriverMapsActivity"
             android:label="@string/title_activity_driver_maps" />
         <activity
-            android:name="com.example.LifeCo.activities.PassengerMapsActivity"
+            android:name="com.dokterkit.LifeCo.activities.PassengerMapsActivity"
             android:label="@string/title_activity_passenger_maps" />
-        <activity android:name="com.example.LifeCo.activities.ChatMainActivity" />
-        <activity android:name="com.example.LifeCo.activities.RegistrationActivity" />
-        <activity android:name="com.example.LifeCo.activities.RegistrationDriverActivity" />
-        <activity android:name="com.example.LifeCo.activities.LoginActivity" />
-        <activity android:name="com.example.LifeCo.activities.LoginDriverActivity" />
-        <activity android:name="com.example.LifeCo.activities.DetailActivity" />
-        <activity android:name="com.example.LifeCo.activities.MainActivity" />
-        <activity android:name="com.example.LifeCo.activities.ResetPasswordActivity" />
-        <activity android:name="com.example.LifeCo.activities.MessageActivity" />
-        <activity android:name="com.example.LifeCo.activities.SplashScreenActivity" />
-        <activity android:name="com.example.LifeCo.fragments.Capture" />
+        <activity android:name="com.dokterkit.LifeCo.activities.ChatMainActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.RegistrationActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.RegistrationDriverActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.LoginActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.LoginDriverActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.DetailActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.MainActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.ResetPasswordActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.MessageActivity" />
+        <activity android:name="com.dokterkit.LifeCo.activities.SplashScreenActivity" />
+        <activity android:name="com.dokterkit.LifeCo.fragments.Capture" />
     </application>
 
 </manifest>

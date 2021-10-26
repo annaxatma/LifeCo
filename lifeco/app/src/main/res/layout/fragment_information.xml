@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEFCEB"
-    tools:context="com.example.LifeCo.fragments.MaterialFragment">
+    tools:context="com.dokterkit.LifeCo.fragments.MaterialFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/information_recyclerView"

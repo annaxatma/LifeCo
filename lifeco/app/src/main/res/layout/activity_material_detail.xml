@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEFCEB"
-    tools:context="com.example.LifeCo.activities.MaterialDetailActivity">
+    tools:context="com.dokterkit.LifeCo.activities.MaterialDetailActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/information_toolbar"

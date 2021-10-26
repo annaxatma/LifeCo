@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEFCEB"
-    tools:context="com.example.LifeCo.fragments.BarcodeFragment">
+    tools:context="com.dokterkit.LifeCo.fragments.BarcodeFragment">
 
     <ImageView
         android:id="@+id/barcode_imageView"

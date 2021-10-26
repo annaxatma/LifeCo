@@ -4,7 +4,7 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.LifeCo.fragments.SOCSChatFragment" >
+    tools:context="com.dokterkit.LifeCo.fragments.SOCSChatFragment" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupsRv"

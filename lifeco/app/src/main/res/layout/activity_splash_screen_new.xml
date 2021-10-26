@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF
 "
-    tools:context="com.example.LifeCo.activities.SplashScreenNew"
+    tools:context="com.dokterkit.LifeCo.activities.SplashScreenNew"
     tools:deviceIds="wear">
 
     <ImageView

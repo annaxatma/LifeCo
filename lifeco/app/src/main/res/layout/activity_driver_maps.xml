@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEFCEB"
-    tools:context="com.example.LifeCo.activities.DriversMapActivity">
+    tools:context="com.dokterkit.LifeCo.activities.DriversMapActivity">
 
     <Button
         android:id="@+id/btn_toChatDriver"

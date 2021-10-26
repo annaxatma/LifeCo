@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FEFCEB"
-    tools:context="com.example.LifeCo.fragments.AccountFragment">
+    tools:context="com.dokterkit.LifeCo.fragments.AccountFragment">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
