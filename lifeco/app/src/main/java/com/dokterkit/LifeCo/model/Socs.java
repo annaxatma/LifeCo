@@ -2,6 +2,9 @@ package com.dokterkit.LifeCo.model;
 
 import android.os.Parcel;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class Socs{
     String uid;
     String email;

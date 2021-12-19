@@ -3,6 +3,9 @@ package com.dokterkit.LifeCo.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class Location implements Parcelable {
     String longitude;
     String latitude;

@@ -1,7 +1,10 @@
 package com.dokterkit.LifeCo.model;
 
+import androidx.annotation.Keep;
+
 import com.google.firebase.Timestamp;
 
+@Keep
 public class Information extends ItemId {
     private String title;
     private Timestamp created;

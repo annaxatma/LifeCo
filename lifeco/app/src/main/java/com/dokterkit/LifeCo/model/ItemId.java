@@ -1,9 +1,11 @@
 package com.dokterkit.LifeCo.model;
 
+import androidx.annotation.Keep;
 import androidx.annotation.NonNull;
 
 import com.google.firebase.database.Exclude;
 
+@Keep
 public class ItemId {
     @Exclude
     public String itemId;

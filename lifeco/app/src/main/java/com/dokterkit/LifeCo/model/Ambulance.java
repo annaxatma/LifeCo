@@ -3,6 +3,9 @@ package com.dokterkit.LifeCo.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class Ambulance implements Parcelable{
     String uid;
     String email;

@@ -1,5 +1,8 @@
 package com.dokterkit.LifeCo.model;
 
+import androidx.annotation.Keep;
+
+@Keep
 public class ModelGroupChatList {
     String groupId, groupTitle, groupDescription, groupIcon, timestamp, createdBy;
 
