@@ -7,34 +7,34 @@ import androidx.annotation.Keep;
 
 @Keep
 public class Patient implements Parcelable {
-    String uid;
-    String email;
-    String password;
-    String name;
-    String gender;
-    String birthdate;
-    String bloodType;
-    String bloodPressure;
-    String bloodSugar;
-    String medicineIntake;
-    String foodAllergy;
-    String medicineAllergy;
-    String address;
-    String phoneNumber;
-    String KTPNumber;
-    String insuranceNumber;
-    String BPJSNumber;
-    String complaint;
-    String geneticDisease;
-    String ownDisease;
-    String search;
-    String status;
-    String account;
-    String g;
-    Location location;
-    String imageURL;
+    private String uid;
+    private String email;
+    private String password;
+    private String name;
+    private String gender;
+    private String birthdate;
+    private String bloodType;
+    private String bloodPressure;
+    private String bloodSugar;
+    private String medicineIntake;
+    private String foodAllergy;
+    private String medicineAllergy;
+    private String address;
+    private String phoneNumber;
+    private String KTPNumber;
+    private String insuranceNumber;
+    private String BPJSNumber;
+    private String complaint;
+    private String geneticDisease;
+    private String ownDisease;
+    private String search;
+    private String status;
+    private String account;
+    private String g;
+    private Location location;
+    private String imageURL;
 
-    public Patient(){
+    public Patient() {
 
     }
 
