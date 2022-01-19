@@ -112,24 +112,24 @@ public class RegistrationActivity extends AppCompatActivity {
                 userNama = inpNama.getEditText().getText().toString().trim();
                 userEmail = inpEmail.getEditText().getText().toString().trim();
                 userPassword = inpPassword.getEditText().getText().toString().trim();
-                userAlamat = inpAlamat.getEditText().getText().toString().trim();
-                userNoHP = inpNoHP.getEditText().getText().toString().trim();
-                userNoBPJS = inpNoBPJS.getEditText().getText().toString().trim();
-                userNoKTP = inpNoKTP.getEditText().getText().toString().trim();
-                userTekananDarah = inpTekananDarah.getEditText().getText().toString().trim();
-                userGulaDarah = inpGulaDarah.getEditText().getText().toString().trim();
-                userGolDarah = spinnerGolDarah.getSelectedItem().toString();
-                userJenisKelamin = spinnerJenisKelamin.getSelectedItem().toString();
-                userPenyakitSendiri = inpPenyakitSendiri.getText().toString().trim();
-                userPenyakitKeluarga = inpPenyakitKeluarga.getText().toString().trim();
-                userKeluhanUtama = inpKeluhanUtama.getText().toString().trim();
-                userObat = inpObat.getText().toString().trim();
-                userAlergiObat = inpAlergiObat.getText().toString().trim();
-                userAlergiMakanan = inpAlergiMakanan.getText().toString().trim();
-                userTanggalLahir = inpTanggalLahir.getText().toString().trim();
-                userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
-                userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
-                userUsername = inpUsername.getEditText().getText().toString().trim();
+//                userAlamat = inpAlamat.getEditText().getText().toString().trim();
+//                userNoHP = inpNoHP.getEditText().getText().toString().trim();
+//                userNoBPJS = inpNoBPJS.getEditText().getText().toString().trim();
+//                userNoKTP = inpNoKTP.getEditText().getText().toString().trim();
+//                userTekananDarah = inpTekananDarah.getEditText().getText().toString().trim();
+//                userGulaDarah = inpGulaDarah.getEditText().getText().toString().trim();
+//                userGolDarah = spinnerGolDarah.getSelectedItem().toString();
+//                userJenisKelamin = spinnerJenisKelamin.getSelectedItem().toString();
+//                userPenyakitSendiri = inpPenyakitSendiri.getText().toString().trim();
+//                userPenyakitKeluarga = inpPenyakitKeluarga.getText().toString().trim();
+//                userKeluhanUtama = inpKeluhanUtama.getText().toString().trim();
+//                userObat = inpObat.getText().toString().trim();
+//                userAlergiObat = inpAlergiObat.getText().toString().trim();
+//                userAlergiMakanan = inpAlergiMakanan.getText().toString().trim();
+//                userTanggalLahir = inpTanggalLahir.getText().toString().trim();
+//                userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
+//                userNoAsuransi = inpNoAsuransi.getEditText().getText().toString().trim();
+//                userUsername = inpUsername.getEditText().getText().toString().trim();
 
 
                 if (TextUtils.isEmpty(userNama)) {
@@ -144,72 +144,72 @@ public class RegistrationActivity extends AppCompatActivity {
                     inpPassword.setError("Silahkan isi password Anda.");
                     return;
                 }
-                if (TextUtils.isEmpty(userAlamat)) {
-                    inpAlamat.setError("Silahkan isi alamat rumah Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userNoHP)) {
-                    inpNoHP.setError("Silahkan isi nomor HP Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userNoBPJS)) {
-                    inpNoBPJS.setError("Silahkan isi nomor BPJS Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userNoKTP)) {
-                    inpNoKTP.setError("Silahkan isi nomor KTP Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userTekananDarah)) {
-                    inpTekananDarah.setError("Silahkan isi tekanan darah Anda (paling terakhir).");
-                    return;
-                }
-                if (TextUtils.isEmpty(userGulaDarah)) {
-                    inpGulaDarah.setError("Silahkan isi gula darah Anda (paling terakhir).");
-                    return;
-                }
-                if (TextUtils.isEmpty(userGolDarah)) {
-                    Toast.makeText(RegistrationActivity.this, "Pilih golongan darah Anda!", Toast.LENGTH_SHORT).show();
-                }
-                if (TextUtils.isEmpty(userJenisKelamin)) {
-                    Toast.makeText(RegistrationActivity.this, "Pilih salah satu jenis kelamin!", Toast.LENGTH_SHORT).show();
-                }
-                if (TextUtils.isEmpty(userPenyakitSendiri)) {
-                    inpPenyakitSendiri.setError("Silahkan isi riwayat penyakit Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userPenyakitKeluarga)) {
-                    inpPenyakitKeluarga.setError("Silahkan isi riwayat penyakit keluarga Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userKeluhanUtama)) {
-                    inpKeluhanUtama.setError("Silahkan isi keluhan-keluhan utama Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userObat)) {
-                    inpObat.setError("Silahkan isi obat-obatan yang pernah Anda konsumsi.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userAlergiObat)) {
-                    inpAlergiObat.setError("Silahkan isi alergi obat yang Anda ketahui.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userAlergiMakanan)) {
-                    inpAlergiMakanan.setError("Silahkan isi alergi makanan yang Anda ketahui.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userTanggalLahir)) {
-                    inpTanggalLahir.setError("Silahkan isi tanggal lahir Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userNoAsuransi)) {
-                    inpNoAsuransi.setError("Silahkan isi nomor asuransi Anda.");
-                    return;
-                }
-                if (TextUtils.isEmpty(userUsername)) {
-                    inpUsername.setError("Silahkan isi username Anda.");
-                    return;
-                }
+//                if (TextUtils.isEmpty(userAlamat)) {
+//                    inpAlamat.setError("Silahkan isi alamat rumah Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userNoHP)) {
+//                    inpNoHP.setError("Silahkan isi nomor HP Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userNoBPJS)) {
+//                    inpNoBPJS.setError("Silahkan isi nomor BPJS Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userNoKTP)) {
+//                    inpNoKTP.setError("Silahkan isi nomor KTP Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userTekananDarah)) {
+//                    inpTekananDarah.setError("Silahkan isi tekanan darah Anda (paling terakhir).");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userGulaDarah)) {
+//                    inpGulaDarah.setError("Silahkan isi gula darah Anda (paling terakhir).");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userGolDarah)) {
+//                    Toast.makeText(RegistrationActivity.this, "Pilih golongan darah Anda!", Toast.LENGTH_SHORT).show();
+//                }
+//                if (TextUtils.isEmpty(userJenisKelamin)) {
+//                    Toast.makeText(RegistrationActivity.this, "Pilih salah satu jenis kelamin!", Toast.LENGTH_SHORT).show();
+//                }
+//                if (TextUtils.isEmpty(userPenyakitSendiri)) {
+//                    inpPenyakitSendiri.setError("Silahkan isi riwayat penyakit Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userPenyakitKeluarga)) {
+//                    inpPenyakitKeluarga.setError("Silahkan isi riwayat penyakit keluarga Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userKeluhanUtama)) {
+//                    inpKeluhanUtama.setError("Silahkan isi keluhan-keluhan utama Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userObat)) {
+//                    inpObat.setError("Silahkan isi obat-obatan yang pernah Anda konsumsi.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userAlergiObat)) {
+//                    inpAlergiObat.setError("Silahkan isi alergi obat yang Anda ketahui.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userAlergiMakanan)) {
+//                    inpAlergiMakanan.setError("Silahkan isi alergi makanan yang Anda ketahui.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userTanggalLahir)) {
+//                    inpTanggalLahir.setError("Silahkan isi tanggal lahir Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userNoAsuransi)) {
+//                    inpNoAsuransi.setError("Silahkan isi nomor asuransi Anda.");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(userUsername)) {
+//                    inpUsername.setError("Silahkan isi username Anda.");
+//                    return;
+//                }
 
                 if (userPassword.length() < 6) {
                     Toast.makeText(RegistrationActivity.this, "Password must be at least 6 characters!", Toast.LENGTH_SHORT).show();
@@ -238,27 +238,44 @@ public class RegistrationActivity extends AppCompatActivity {
                     user.put("email", email);
                     user.put("password", password);
                     user.put("name", nama);
-                    user.put("gender", jenisKelamin);
-                    user.put("birthdate", tanggalLahir);
-                    user.put("bloodType", golDarah);
-                    user.put("bloodPressure", tekananDarah);
-                    user.put("bloodSugar", gulaDarah);
-                    user.put("medicineIntake", obat);
-                    user.put("foodAllergy", alergiMakanan);
-                    user.put("medicineAllergy", alergiObat);
-                    user.put("address", alamat);
-                    user.put("phoneNumber", noHP);
-                    user.put("KTPNumber", noKTP);
-                    user.put("insuranceNumber", noAsuransi);
-                    user.put("BPJSNumber", noBPJS);
-                    user.put("complaint", keluhanUtama);
-                    user.put("geneticDisease", penyakitKeluarga);
-                    user.put("ownDisease", penyakitSendiri);
+//                    user.put("gender", jenisKelamin);
+//                    user.put("birthdate", tanggalLahir);
+//                    user.put("bloodType", golDarah);
+//                    user.put("bloodPressure", tekananDarah);
+//                    user.put("bloodSugar", gulaDarah);
+//                    user.put("medicineIntake", obat);
+//                    user.put("foodAllergy", alergiMakanan);
+//                    user.put("medicineAllergy", alergiObat);
+//                    user.put("address", alamat);
+//                    user.put("phoneNumber", noHP);
+//                    user.put("KTPNumber", noKTP);
+//                    user.put("insuranceNumber", noAsuransi);
+//                    user.put("BPJSNumber", noBPJS);
+//                    user.put("complaint", keluhanUtama);
+//                    user.put("geneticDisease", penyakitKeluarga);
+//                    user.put("ownDisease", penyakitSendiri);
                     user.put("search", search);
                     user.put("status", status);
                     user.put("account", tipeakun);
                     user.put("imageURL", "default");
                     user.put("g", "-");
+
+                    user.put("gender", "-");
+                    user.put("birthdate", "-");
+                    user.put("bloodType", "-");
+                    user.put("bloodPressure", "-");
+                    user.put("bloodSugar", "-");
+                    user.put("medicineIntake", "-");
+                    user.put("foodAllergy", "-");
+                    user.put("medicineAllergy", "-");
+                    user.put("address", "-");
+                    user.put("phoneNumber", "-");
+                    user.put("KTPNumber", "-");
+                    user.put("insuranceNumber", "-");
+                    user.put("BPJSNumber", "-");
+                    user.put("complaint", "-");
+                    user.put("geneticDisease", "-");
+                    user.put("ownDisease", "-");
 
                     documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
@@ -284,26 +301,43 @@ public class RegistrationActivity extends AppCompatActivity {
                     patient.setName(nama);
                     patient.setEmail(email);
                     patient.setPassword(password);
-                    patient.setAddress(alamat);
-                    patient.setPhoneNumber(noHP);
-                    patient.setBPJSNumber(noBPJS);
-                    patient.setKTPNumber(noKTP);
-                    patient.setBloodPressure(tekananDarah);
-                    patient.setBloodSugar(gulaDarah);
-                    patient.setBloodType(golDarah);
-                    patient.setGender(jenisKelamin);
-                    patient.setOwnDisease(penyakitSendiri);
-                    patient.setGeneticDisease(penyakitKeluarga);
-                    patient.setComplaint(keluhanUtama);
-                    patient.setMedicineIntake(obat);
-                    patient.setMedicineAllergy(alergiObat);
-                    patient.setFoodAllergy(alergiMakanan);
-                    patient.setBirthdate(tanggalLahir);
-                    patient.setInsuranceNumber(noAsuransi);
+//                    patient.setAddress(alamat);
+//                    patient.setPhoneNumber(noHP);
+//                    patient.setBPJSNumber(noBPJS);
+//                    patient.setKTPNumber(noKTP);
+//                    patient.setBloodPressure(tekananDarah);
+//                    patient.setBloodSugar(gulaDarah);
+//                    patient.setBloodType(golDarah);
+//                    patient.setGender(jenisKelamin);
+//                    patient.setOwnDisease(penyakitSendiri);
+//                    patient.setGeneticDisease(penyakitKeluarga);
+//                    patient.setComplaint(keluhanUtama);
+//                    patient.setMedicineIntake(obat);
+//                    patient.setMedicineAllergy(alergiObat);
+//                    patient.setFoodAllergy(alergiMakanan);
+//                    patient.setBirthdate(tanggalLahir);
+//                    patient.setInsuranceNumber(noAsuransi);
                     patient.setAccount("patient");
                     patient.setImageURL("default");
                     patient.setStatus("-");
                     patient.setSearch("-");
+
+                    patient.setAddress("-");
+                    patient.setPhoneNumber("-");
+                    patient.setBPJSNumber("-");
+                    patient.setKTPNumber("-");
+                    patient.setBloodPressure("-");
+                    patient.setBloodSugar("-");
+                    patient.setBloodType("-");
+                    patient.setGender("-");
+                    patient.setOwnDisease("-");
+                    patient.setGeneticDisease("-");
+                    patient.setComplaint("-");
+                    patient.setMedicineIntake("-");
+                    patient.setMedicineAllergy("-");
+                    patient.setFoodAllergy("-");
+                    patient.setBirthdate("-");
+                    patient.setInsuranceNumber("-");
 
                     reference.setValue(patient).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -314,9 +348,10 @@ public class RegistrationActivity extends AppCompatActivity {
                         }
                     });
                     buatAkun();
-                    Intent intent = new Intent(RegistrationActivity.this, RegistrationDriverActivity.class);
-                    String account = "pasien";
-                    intent.putExtra("account", account);
+//                    Intent intent = new Intent(RegistrationActivity.this, RegistrationDriverActivity.class);
+//                    String account = "pasien";
+//                    intent.putExtra("account", account);
+                    Intent intent = new Intent(RegistrationActivity.this, welcome.class);
                     startActivity(intent);
                     finish();
 
