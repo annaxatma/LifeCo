@@ -33,6 +33,16 @@
                 app:title="@string/regis_toolbar"
                 app:titleTextColor="#FFFFFF" />
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/female"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/regisToolbarDriver" />
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,8 +68,26 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inpNamaRegis" />
+                    android:hint="@string/inpNamaRegis"
+                    android:inputType="textPersonName" />
 
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpUsernameRegis"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/inpEmailRegis"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/inpEmailRegis"
+                app:layout_constraintTop_toBottomOf="@+id/inpNameRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpUsernameRegis" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -102,8 +130,18 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/textGender"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/inpPasswordRegis"
                 app:layout_constraintTop_toBottomOf="@+id/inpPasswordRegis" />
+
+            <Spinner
+                android:id="@+id/spinnerJenisKelamin"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/textJenisKelamin"
+                app:layout_constraintEnd_toEndOf="@+id/inpPasswordRegis"
+                app:layout_constraintTop_toTopOf="@+id/textJenisKelamin" />
 
             <TextView
                 android:id="@+id/textGolDarah"
@@ -112,21 +150,15 @@
                 android:layout_marginTop="24dp"
                 android:text="@string/textGolDarah"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/textJenisKelamin"
                 app:layout_constraintTop_toBottomOf="@+id/textJenisKelamin" />
-
-            <Spinner
-                android:id="@+id/spinnerJenisKelamin"
-                android:layout_width="wrap_content"
-                android:layout_height="21dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textJenisKelamin"
-                app:layout_constraintEnd_toEndOf="@+id/inpPasswordRegis"
-                app:layout_constraintTop_toTopOf="@+id/textJenisKelamin" />
 
             <Spinner
                 android:id="@+id/spinnerGolDarah"
                 android:layout_width="wrap_content"
                 android:layout_height="26dp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@+id/textGolDarah"
                 app:layout_constraintEnd_toEndOf="@+id/spinnerJenisKelamin"
                 app:layout_constraintTop_toTopOf="@+id/textGolDarah" />
@@ -136,6 +168,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/spinnerGolDarah"
                 app:layout_constraintStart_toStartOf="@+id/textGolDarah"
                 app:layout_constraintTop_toBottomOf="@+id/textGolDarah">
@@ -151,6 +184,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpAlamatRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpAlamatRegis"
                 app:layout_constraintTop_toBottomOf="@+id/inpAlamatRegis">
@@ -163,17 +197,6 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/inpTanggalLahirRegis"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/inpTanggalFormatRegis"
-                android:inputType="date"
-                app:layout_constraintBottom_toBottomOf="@+id/textTglLahir"
-                app:layout_constraintEnd_toEndOf="@+id/inpNoHP"
-                app:layout_constraintTop_toTopOf="@+id/textTglLahir" />
-
             <TextView
                 android:id="@+id/textTglLahir"
                 android:layout_width="wrap_content"
@@ -182,14 +205,28 @@
                 android:hint="@string/inpTanggalFormatRegis"
                 android:text="@string/textTglLahirRegis"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/inpNoHP"
                 app:layout_constraintTop_toBottomOf="@+id/inpNoHP" />
+
+            <EditText
+                android:id="@+id/inpTanggalLahirRegis"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/inpTanggalFormatRegis"
+                android:inputType="date"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/textTglLahir"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoHP"
+                app:layout_constraintTop_toTopOf="@+id/textTglLahir" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inpNoBPJSRegis"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpTanggalLahirRegis"
                 app:layout_constraintStart_toStartOf="@+id/textTglLahir"
                 app:layout_constraintTop_toBottomOf="@+id/inpTanggalLahirRegis">
@@ -206,6 +243,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpNoBPJSRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpNoBPJSRegis"
                 app:layout_constraintTop_toBottomOf="@+id/inpNoBPJSRegis">
@@ -217,17 +255,22 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <EditText
-                android:id="@+id/inpPenyakitSendiriRegis"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inpNoAsuransiRegis"
                 android:layout_width="0dp"
-                android:layout_height="150dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/input_bg"
-                android:gravity="top"
-                android:inputType="text|textMultiLine"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpNoKTPRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpNoKTPRegis"
-                app:layout_constraintTop_toBottomOf="@+id/textPenyakitSendiriRegis" />
+                app:layout_constraintTop_toBottomOf="@+id/inpNoKTPRegis">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/inpNoAsuransiRegis"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/textPenyakitSendiriRegis"
@@ -236,8 +279,22 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/inpPenyakitSendiriRegis"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/inpNoKTPRegis"
                 app:layout_constraintTop_toBottomOf="@+id/inpNoAsuransiRegis" />
+
+            <EditText
+                android:id="@+id/inpPenyakitSendiriRegis"
+                android:layout_width="0dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/input_bg"
+                android:gravity="top"
+                android:inputType="text|textMultiLine"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/inpNoKTPRegis"
+                app:layout_constraintStart_toStartOf="@+id/inpNoKTPRegis"
+                app:layout_constraintTop_toBottomOf="@+id/textPenyakitSendiriRegis" />
 
             <TextView
                 android:id="@+id/textPenyakitKeluargaRegis"
@@ -246,6 +303,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/inpPenyakitKeluargaRegis"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/inpPenyakitSendiriRegis"
                 app:layout_constraintTop_toBottomOf="@+id/inpPenyakitSendiriRegis" />
 
@@ -257,6 +315,7 @@
                 android:background="@drawable/input_bg"
                 android:gravity="top"
                 android:inputType="text|textMultiLine"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpNoKTPRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpNoKTPRegis"
                 app:layout_constraintTop_toBottomOf="@+id/textPenyakitKeluargaRegis" />
@@ -268,6 +327,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/inpKeluhanUtamaRegis"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/inpPenyakitKeluargaRegis"
                 app:layout_constraintTop_toBottomOf="@+id/inpPenyakitKeluargaRegis" />
 
@@ -279,6 +339,7 @@
                 android:background="@drawable/input_bg"
                 android:gravity="top"
                 android:inputType="text|textMultiLine"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpPenyakitKeluargaRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpPenyakitSendiriRegis"
                 app:layout_constraintTop_toBottomOf="@+id/textKeluhanUtamaRegis" />
@@ -291,6 +352,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/inpObatRegis"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/inpKeluhanUtamaRegis"
                 app:layout_constraintTop_toBottomOf="@+id/inpKeluhanUtamaRegis" />
 
@@ -303,6 +365,7 @@
                 android:background="@drawable/input_bg"
                 android:gravity="top"
                 android:inputType="text|textMultiLine"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpKeluhanUtamaRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpKeluhanUtamaRegis"
                 app:layout_constraintTop_toBottomOf="@id/textObatRegis" />
@@ -314,6 +377,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/inpAlergiObatRegis"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/textPenyakitKeluargaRegis"
                 app:layout_constraintTop_toBottomOf="@+id/inpObatRegis" />
 
@@ -325,6 +389,7 @@
                 android:background="@drawable/input_bg"
                 android:gravity="top"
                 android:inputType="text|textMultiLine"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpObatRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpKeluhanUtamaRegis"
                 app:layout_constraintTop_toBottomOf="@id/textAlergiObatRegis" />
@@ -336,6 +401,7 @@
                 android:layout_marginTop="16dp"
                 android:text="@string/inpAlergiMakananRegis"
                 android:textSize="18sp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@id/inpAlergiObatRegis"
                 app:layout_constraintTop_toBottomOf="@id/inpAlergiObatRegis" />
 
@@ -347,30 +413,17 @@
                 android:background="@drawable/input_bg"
                 android:gravity="top"
                 android:inputType="text|textMultiLine"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpAlergiObatRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpAlergiObatRegis"
                 app:layout_constraintTop_toBottomOf="@id/textAlergiMakananRegis" />
-
-            <Button
-                android:id="@+id/btnDaftarAkun"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                android:background="#E56956"
-                android:fontFamily="@font/poppins_bold"
-                android:text="@string/dftrAkunRegis"
-                android:textColor="#FFFFFF"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/inpAlergiMakananRegis"
-                app:layout_constraintStart_toStartOf="@+id/inpAlergiMakananRegis"
-                app:layout_constraintTop_toBottomOf="@id/inpGulaDarah" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/inpTekananDarahRegis"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/inpAlergiMakananRegis"
                 app:layout_constraintStart_toStartOf="@+id/inpAlergiObatRegis"
                 app:layout_constraintTop_toBottomOf="@id/inpAlergiMakananRegis">
@@ -387,6 +440,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/inpTekananDarahRegis"
                 app:layout_constraintStart_toStartOf="@id/inpTekananDarahRegis"
                 app:layout_constraintTop_toBottomOf="@id/inpTekananDarahRegis">
@@ -398,47 +452,22 @@
                     android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inpNoAsuransiRegis"
+            <Button
+                android:id="@+id/btnDaftarAkun"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/inpNoKTPRegis"
-                app:layout_constraintStart_toStartOf="@+id/inpNoKTPRegis"
-                app:layout_constraintTop_toBottomOf="@+id/inpNoKTPRegis">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/inpNoAsuransiRegis"
-                    android:inputType="number" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/inpUsernameRegis"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/inpEmailRegis"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/inpEmailRegis"
-                app:layout_constraintTop_toBottomOf="@+id/inpNameRegis">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/inpUsernameRegis" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/female"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:background="#E56956"
+                android:fontFamily="@font/poppins_bold"
+                android:text="@string/dftrAkunRegis"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/regisToolbarDriver" />
+                app:layout_constraintTop_toBottomOf="@id/inpGulaDarah" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>

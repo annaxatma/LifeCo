@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/menu_history"
@@ -7,12 +8,25 @@
         android:title="@string/menu_sejarah" />
 
     <item
+        android:id="@+id/menu_materials"
+        android:icon="@drawable/ic_baseline_info_24"
+        android:title="Materi" />
+
+    <item
         android:id="@+id/menu_home"
         android:icon="@drawable/ic_priority_high_black_24dp"
         android:title="@string/menu_darurat" />
 
     <item
+        android:id="@+id/menu_barcode"
+        android:icon="@drawable/ic_baseline_qr_code_scanner_24"
+        android:title="Barcode" />
+
+    <item
         android:id="@+id/menu_account"
         android:icon="@drawable/ic_account_circle_black_24dp"
         android:title="@string/menu_akun" />
+
+
+
 </menu>

@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:740777423812:android:1afa51a0ffda3f96066a91",
         "android_client_info": {
-          "package_name": "com.example.cobanavfragment"
+          "package_name": "com.example.lifeco"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "740777423812-8pgilm0c72vsaqhvptmubsldlihup0ii.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.cobanavfragment",
+            "package_name": "com.example.lifeco",
             "certificate_hash": "efbc4ac6cfb8cef03079cad5d1561a612eb1796e"
           }
         },
